@@ -6,7 +6,7 @@ import {
 } from '@/lib/curated-itinerary';
 
 export const runtime = 'nodejs';
-export const maxDuration = 60;
+export const maxDuration = 45;
 
 type GeminiActivity = {
   id?: string;
@@ -88,8 +88,9 @@ export async function POST(request: Request) {
     console.error('[itinerary/generate] Gemini failed:', err);
   }
 
+  // Instant curated plan when Gemini is slow/unavailable (503, timeout, etc.)
   const fallback = generateCuratedItinerary(input);
-  return NextResponse.json(fallback);
+  return NextResponse.json({ ...fallback, source: 'curated' as const });
 }
 
 async function generateWithGemini(input: ItineraryInput) {
@@ -181,21 +182,17 @@ Rules:
 - Keep descriptions concise (1–2 sentences).`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`;
-
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-goog-api-key': apiKey,
+  const requestBody = JSON.stringify({
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: {
+      temperature: 0.7,
+      responseMimeType: 'application/json',
+      maxOutputTokens: 4096,
     },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.7,
-        responseMimeType: 'application/json',
-      },
-    }),
   });
+
+  // Gemini often 503s under load — one short retry, then bail to curated.
+  const res = await fetchGeminiWithRetry(url, apiKey, requestBody, 2);
 
   if (!res.ok) {
     const errText = await res.text().catch(() => '');
@@ -212,6 +209,54 @@ Rules:
 
   const parsed = JSON.parse(stripFence(text)) as GeminiItinerary;
   return normalizeItinerary(parsed, input, dayCount, budgetLabel);
+}
+
+async function fetchGeminiWithRetry(
+  url: string,
+  apiKey: string,
+  body: string,
+  attempts: number
+) {
+  let last: Response | null = null;
+
+  for (let i = 0; i < attempts; i++) {
+    const controller = new AbortController();
+    // Cap wait so the plan page never hangs on a slow/overloaded model.
+    const timer = setTimeout(() => controller.abort(), 18_000);
+
+    try {
+      last = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-goog-api-key': apiKey,
+        },
+        body,
+        signal: controller.signal,
+      });
+    } catch (err) {
+      clearTimeout(timer);
+      if (i === attempts - 1) throw err;
+      await sleep(800 * (i + 1));
+      continue;
+    } finally {
+      clearTimeout(timer);
+    }
+
+    // Retry transient overload / rate limits once.
+    if ((last.status === 503 || last.status === 429) && i < attempts - 1) {
+      await sleep(900 * (i + 1));
+      continue;
+    }
+
+    return last;
+  }
+
+  return last!;
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function stripFence(text: string) {
