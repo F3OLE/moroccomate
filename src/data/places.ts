@@ -254,13 +254,16 @@ export const PLACES: Place[] = [
   },
 ];
 
+/** Local Wikimedia photos for experience cards. */
+const xpImg = (file: string) => `/images/experiences/${file}`;
+
 export const EXPERIENCES: Experience[] = [
   {
     id: 'quad-agafay',
     title: 'Agafay Desert Quad Biking',
     location: 'Agafay Stone Desert',
     city: 'Marrakech',
-    image: unsplash('photo-1544551763-46a013bb70d5'),
+    image: xpImg('agafay.jpg'),
     price: 'From 450 MAD',
     duration: '2–4 hours',
     description: 'Throttle through Agafay’s lunar hills on a guided quad tour — sunset packages with mint tea included.',
@@ -273,7 +276,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Atlas Paragliding',
     location: 'High Atlas foothills',
     city: 'Marrakech',
-    image: unsplash('photo-1506905925346-21bda4d32df4'),
+    image: xpImg('atlas.jpg'),
     price: 'From 800 MAD',
     duration: 'Half day',
     description: 'Tandem paraglide over villages and valleys with certified instructors — photos & video add-ons available.',
@@ -286,7 +289,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Sunrise Hot Air Balloon',
     location: 'Palm groves outside Marrakech',
     city: 'Marrakech',
-    image: unsplash('photo-1507608869274-d3177c8bb4c7'),
+    image: xpImg('balloon.jpg'),
     price: 'From 1,900 MAD',
     duration: '5 hours',
     description: 'Float at sunrise over the Haouz plain, then land for a Berber breakfast.',
@@ -299,7 +302,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Merzouga Camel Trek & Camp',
     location: 'Erg Chebbi',
     city: 'Sahara',
-    image: unsplash('photo-1509316975850-ff9c5deb0cd9'),
+    image: xpImg('merzouga.jpg'),
     price: 'From 1,200 MAD',
     duration: 'Overnight',
     description: 'Camel into the dunes for sunset, dinner under the stars, and a desert camp stay.',
@@ -312,7 +315,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Essaouira Kitesurf Session',
     location: 'Essaouira Bay',
     city: 'Atlantic Coast',
-    image: unsplash('photo-1502680390469-be75c86b636f'),
+    image: xpImg('essaouira.jpg'),
     price: 'From 600 MAD',
     duration: '2–3 hours',
     description: 'Lessons or equipment hire on Morocco’s wind capital — beginner to advanced.',
@@ -325,7 +328,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Traditional Hammam & Argan Ritual',
     location: 'Marrakech spas & riads',
     city: 'Marrakech',
-    image: unsplash('photo-1540555700478-4be289fbecef'),
+    image: xpImg('hammam.jpg'),
     price: 'From 350 MAD',
     duration: '1.5–3 hours',
     description: 'Black soap scrub, steam, and argan oil massage — book partner spas through MoroccoMate.',

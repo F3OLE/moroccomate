@@ -273,7 +273,10 @@ export default function Home() {
           <Stagger className="grid md:grid-cols-3 gap-6 mb-10">
             {featuredXP.map((xp) => (
               <StaggerItem key={xp.id}>
-                <div className="card h-full border border-[#E1B168]/20 hover:border-[#D93D3D]/40 transition-colors">
+                <div
+                  className="card place-card-fade h-full border border-[#E1B168]/20 hover:border-[#D93D3D]/40 transition-colors"
+                  style={{ ['--place-photo' as string]: `url(${xp.image})` }}
+                >
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#FCE8E8] text-[#D93D3D]">
                       {xp.partnerType}

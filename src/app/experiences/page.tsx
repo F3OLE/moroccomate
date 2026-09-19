@@ -23,7 +23,10 @@ export default function ExperiencesPage() {
         <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
           {EXPERIENCES.map((xp) => (
             <StaggerItem key={xp.id}>
-              <article className="card h-full flex flex-col border border-[#E1B168]/25 hover:border-[#D93D3D]/40 transition-colors">
+              <article
+                className="card place-card-fade h-full flex flex-col border border-[#E1B168]/25 hover:border-[#D93D3D]/40 transition-colors"
+                style={{ ['--place-photo' as string]: `url(${xp.image})` }}
+              >
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div className="w-11 h-11 rounded-xl bg-[#FCE8E8] flex items-center justify-center">
                     <Mountain className="w-5 h-5 text-[#D93D3D]" />
