@@ -38,9 +38,6 @@ export interface Experience {
 /** Local Wikimedia photos matched to the actual venues / landmarks. */
 const placeImg = (file: string) => `/images/places/${file}`;
 
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=70`;
-
 export const PLACES: Place[] = [
   {
     id: 'nomad-marrakech',
