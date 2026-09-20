@@ -58,7 +58,17 @@ export async function POST(request: Request) {
         );
       }
     } else {
-      memoryBookings.push({ ...body, ...row });
+      memoryBookings.push({
+        placeId: body.placeId,
+        placeName: body.placeName,
+        city: body.city,
+        travelerName: body.travelerName,
+        travelerPhone: body.travelerPhone,
+        travelerEmail: body.travelerEmail,
+        preferredDate: body.preferredDate,
+        message: body.message,
+        channel: body.channel || 'whatsapp',
+      });
       if (memoryBookings.length > 200) memoryBookings.shift();
       console.warn(
         '[booking] Supabase not configured. Stored in memory only.'
