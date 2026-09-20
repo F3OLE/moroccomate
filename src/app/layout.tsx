@@ -25,7 +25,12 @@ export const metadata: Metadata = {
   description:
     "Discover restaurants, nightlife, shops and experiences across Morocco. Plan trips, join early access, or list your business.",
   icons: {
-    icon: "/images/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
