@@ -175,12 +175,13 @@ export default function DiscoverPage() {
                           whatsapp: p.whatsapp,
                           badge: p.badge,
                         }}
+                        className="inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-md bg-[#25D366] text-white shrink-0"
                       />
                       <a
                         href={mapsUrl(p.mapsQuery)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-[#D93D3D]"
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-[#D93D3D] shrink-0"
                       >
                         {t('google_maps')} <ExternalLink className="w-3.5 h-3.5" />
                       </a>

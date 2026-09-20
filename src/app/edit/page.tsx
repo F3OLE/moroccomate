@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -311,7 +311,7 @@ function ActivityEditForm({
             type="text"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            className="input-field"
+            className="input-field-glass"
             required
           />
         </div>
@@ -321,7 +321,7 @@ function ActivityEditForm({
             type="text"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            className="input-field"
+            className="input-field-glass"
             required
           />
         </div>
@@ -331,7 +331,7 @@ function ActivityEditForm({
             type="text"
             value={formData.duration}
             onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-            className="input-field"
+            className="input-field-glass"
           />
         </div>
         <div>
@@ -340,7 +340,7 @@ function ActivityEditForm({
             type="text"
             value={formData.cost}
             onChange={(e) => setFormData({ ...formData, cost: e.target.value })}
-            className="input-field"
+            className="input-field-glass"
           />
         </div>
         <div>
@@ -353,7 +353,7 @@ function ActivityEditForm({
                 timeSlot: e.target.value as Activity['timeSlot'],
               })
             }
-            className="input-field"
+            className="input-field-glass"
           >
             <option value="morning">Morning</option>
             <option value="afternoon">Afternoon</option>
@@ -372,7 +372,7 @@ function ActivityEditForm({
                 type: e.target.value as Activity['type'],
               })
             }
-            className="input-field"
+            className="input-field-glass"
           >
             <option value="activity">Activity</option>
             <option value="meal">Meal</option>
@@ -386,7 +386,7 @@ function ActivityEditForm({
         <textarea
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className="input-field"
+          className="input-field-glass"
           rows={3}
         />
       </div>

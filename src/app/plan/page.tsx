@@ -452,7 +452,7 @@ export default function PlanPage() {
                   rows={5}
                   disabled={isLoading}
                   readOnly={isLoading}
-                  className="input-field text-white placeholder:text-white/40 mb-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="input-field-glass mb-8 disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Vegetarian, club nights, photography spots…"
                 />
                 <div className="flex flex-col-reverse sm:flex-row sm:justify-between gap-3">
