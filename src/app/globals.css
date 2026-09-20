@@ -32,32 +32,13 @@ img, video {
 }
 
 .bg-pattern {
-  background-color: var(--background);
-  /* Soft wash + one large arch motif on each side (not a repeating tile) */
-  background-image:
-    url('/images/patterns/zellige.svg'),
-    url('/images/patterns/zellige.svg'),
-    radial-gradient(circle at 20% 30%, rgba(217, 61, 61, 0.06) 0%, transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(225, 177, 104, 0.08) 0%, transparent 45%);
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-  background-size: min(220px, 18vw) auto, min(220px, 18vw) auto, auto, auto;
-  background-position:
-    left -20px center,
-    right -20px center,
-    center,
-    center;
-  background-attachment: scroll;
-}
-
-@media (max-width: 900px) {
-  .bg-pattern {
-    /* Hide side ornaments on small screens so the form stays clean */
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(217, 61, 61, 0.06) 0%, transparent 45%),
-      radial-gradient(circle at 80% 70%, rgba(225, 177, 104, 0.08) 0%, transparent 45%);
-    background-size: auto, auto;
-    background-position: center, center;
-  }
+  background-color: #FFFAF5;
+  background-image: radial-gradient(
+    ellipse 90% 70% at 50% 0%,
+    #ffffff 0%,
+    #FFFAF5 55%,
+    #F8F0E8 100%
+  );
 }
 
 .text-gradient {
