@@ -82,7 +82,6 @@ export default function PlanPage() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Partial<TripFormData>>({});
-  const [loadStep, setLoadStep] = useState(0);
 
   const toggleInterest = (interestId: string) => {
     setSelectedInterests((prev) =>
