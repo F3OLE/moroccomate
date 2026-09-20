@@ -74,7 +74,6 @@ export default function ActivityItem({
     placeId: activity.placeId || known?.id,
     placeName: activity.title,
     city: known ? cityDisplayName(known.city) : undefined,
-    whatsapp: activity.whatsapp || known?.whatsapp,
     badge: activity.badge || known?.badge,
   };
   const accent =

@@ -172,10 +172,8 @@ export default function DiscoverPage() {
                           placeId: p.id,
                           placeName: p.name,
                           city: cityDisplayName(p.city),
-                          whatsapp: p.whatsapp,
                           badge: p.badge,
                         }}
-                        className="inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-md bg-[#25D366] text-white shrink-0"
                       />
                       <a
                         href={mapsUrl(p.mapsQuery)}

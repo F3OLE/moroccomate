@@ -13,7 +13,6 @@ export type BookablePlace = {
   placeId?: string;
   placeName: string;
   city?: string;
-  whatsapp?: string;
   badge?: 'partner' | 'verified';
 };
 
@@ -52,10 +51,8 @@ export default function BookButton({
     return null;
   }
 
-  const targetPhone = (place.whatsapp || bookingWhatsAppNumber()).replace(
-    /\D/g,
-    ''
-  );
+  // Always MoroccoMate inbox. Never route travelers to venue WhatsApp.
+  const targetPhone = bookingWhatsAppNumber();
 
   const close = () => {
     if (status === 'loading') return;
@@ -110,7 +107,6 @@ export default function BookButton({
       setNote('');
 
       if (targetPhone) {
-        // Navigate same-tab friendly on mobile; new tab on desktop
         window.location.href = whatsappUrl(targetPhone, text);
       }
     } catch {
@@ -134,8 +130,8 @@ export default function BookButton({
             >
               <div className="flex items-start justify-between gap-3 mb-4">
                 <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#25D366] mb-1">
-                    WhatsApp booking
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#D93D3D] mb-1">
+                    Book via MoroccoMate
                   </p>
                   <h3 className="text-lg font-bold text-[#2C3E50] leading-snug break-words">
                     {place.placeName}
@@ -143,6 +139,10 @@ export default function BookButton({
                   {place.city && (
                     <p className="text-sm text-[#2C3E50]/60">{place.city}</p>
                   )}
+                  <p className="text-xs text-[#2C3E50]/55 mt-2 leading-relaxed">
+                    We confirm with the venue for you. You message MoroccoMate,
+                    not the business.
+                  </p>
                 </div>
                 <button
                   type="button"
@@ -221,10 +221,13 @@ export default function BookButton({
                 ) : (
                   <>
                     <MessageCircle className="w-4 h-4" />
-                    {targetPhone ? 'Save & open WhatsApp' : 'Send request'}
+                    {targetPhone ? 'Send to MoroccoMate' : 'Send request'}
                   </>
                 )}
               </button>
+              <p className="mt-2 text-[11px] text-[#2C3E50]/45 text-center">
+                Opens WhatsApp to our team. We handle the venue.
+              </p>
             </div>
           </div>,
           document.body
@@ -240,15 +243,30 @@ export default function BookButton({
           e.stopPropagation();
           setOpen(true);
         }}
+        title="We confirm with the venue for you"
         className={
           className ||
           (compact
-            ? 'inline-flex items-center gap-1 text-xs font-bold text-[#25D366] hover:underline shrink-0'
-            : 'inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-lg bg-[#25D366] text-white hover:bg-[#1ebe57] transition-colors shrink-0')
+            ? 'inline-flex items-center gap-1 text-xs font-bold text-[#D93D3D] hover:underline shrink-0'
+            : 'inline-flex flex-col items-start gap-0.5 text-left shrink-0')
         }
       >
-        <MessageCircle className={compact ? 'w-3.5 h-3.5' : 'w-3.5 h-3.5'} />
-        WhatsApp
+        {compact ? (
+          <>
+            <MessageCircle className="w-3.5 h-3.5" />
+            Book via MM
+          </>
+        ) : (
+          <>
+            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-lg bg-[#D93D3D] text-white hover:bg-[#B83232] transition-colors">
+              <MessageCircle className="w-3.5 h-3.5" />
+              Book via MoroccoMate
+            </span>
+            <span className="text-[10px] text-[#2C3E50]/55 font-medium pl-0.5">
+              We confirm with the venue for you
+            </span>
+          </>
+        )}
       </button>
       {modal}
     </>
