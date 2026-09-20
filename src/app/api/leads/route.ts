@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       memoryLeads.push({ ...body, type, createdAt: new Date().toISOString() });
       if (memoryLeads.length > 200) memoryLeads.shift();
       console.warn(
-        '[leads] Supabase not configured — stored in memory only. Set env vars for Vercel.'
+        '[leads] Supabase not configured. Stored in memory only. Set env vars for Vercel.'
       );
     }
 
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
       ok: true,
       message:
         type === 'partner'
-          ? 'Thanks — we will review your business for featuring.'
+          ? 'Thanks. We will review your business for featuring.'
           : 'You are on the early access list. We will email you soon.',
     });
   } catch {

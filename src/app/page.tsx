@@ -138,7 +138,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ways in — editorial list, not SaaS icon cards */}
+      {/* Ways in. Editorial list, not SaaS icon cards */}
       <section className="relative py-16 md:py-24 bg-[#FFFAF5] overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D93D3D]/40 to-transparent" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -183,7 +183,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Places — no stock photos, dark-on-dark cards */}
+      {/* Places. No stock photos, dark-on-dark cards */}
       <section className="py-20 bg-[#2C3E50] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,#D93D3D,transparent_40%),radial-gradient(circle_at_80%_60%,#E1B168,transparent_35%)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

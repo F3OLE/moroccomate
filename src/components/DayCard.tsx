@@ -86,7 +86,7 @@ export default function DayCard({
           <p className="text-[10px] uppercase tracking-wider font-bold text-[#2C3E50]/45 mb-1">
             Day est.
           </p>
-          <p className="text-xl font-bold text-[#D93D3D]">${estCost || '—'}</p>
+          <p className="text-xl font-bold text-[#D93D3D]">${estCost || '-'}</p>
         </div>
       </footer>
     </section>

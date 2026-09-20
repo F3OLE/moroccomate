@@ -60,7 +60,7 @@ img, video {
   @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-200;
 }
 
-/* Soft place photo wash — photo stronger on the left, white on the right */
+/* Soft place photo wash. photo stronger on the left, white on the right */
 .place-card-fade {
   position: relative;
   overflow: hidden;
@@ -162,7 +162,7 @@ img, video {
   box-shadow: 0 0 0 3px rgba(225, 177, 104, 0.25);
 }
 
-/* ——— Liquid glass — bright frosted so blur is obvious ——— */
+/* --- Liquid glass. bright frosted so blur is obvious --- */
 .liquid-glass,
 .glass {
   position: relative;

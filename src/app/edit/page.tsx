@@ -118,7 +118,7 @@ export default function EditPage() {
               </p>
               <h1 className="text-3xl sm:text-4xl font-bold text-white">Your itinerary</h1>
               <p className="text-white/65 mt-2 text-sm sm:text-base">
-                Add, edit, or remove stops — then save.
+                Add, edit, or remove stops. Then save.
               </p>
             </div>
             <button
@@ -210,7 +210,7 @@ export default function EditPage() {
 
               {itinerary.itinerary[selectedDay].activities.length === 0 && (
                 <p className="text-white/60 text-center py-8">
-                  No stops yet — tap Add stop.
+                  No stops yet. Tap Add stop.
                 </p>
               )}
             </div>

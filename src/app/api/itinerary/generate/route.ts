@@ -196,7 +196,7 @@ Return exactly this JSON shape:
           "tips": string,
           "category": string,
           "clock": string like "09:30",
-          "bestTime": string like "Sunset · 18:30–19:30",
+          "bestTime": string like "Sunset · 18:30-19:30",
           "badge": "partner" | "verified" | omit
         }
       ]
@@ -206,13 +206,14 @@ Return exactly this JSON shape:
 
 Rules:
 - Exactly ${dayCount} days, dates sequential from startDate.
-- Each day: 3–5 activities covering morning, a meal, afternoon, evening when possible.
+- Each day: 3-5 activities covering morning, a meal, afternoon, evening when possible.
 - NEVER repeat the same place twice in one day. Prefer unique places across the whole trip.
 - Match timeSlot to the venue (no nightlife/marina-night spots in the morning).
 - Include bestTime for every stop (sunset, morning cool hours, late night, etc.).
 - Use real Marrakech/Casablanca/Rabat/Tangier venues (social-famous cafés, rooftops, corniche spots), not generic filler.
 - Match the traveler interests and budget.
-- Keep descriptions concise (1–2 sentences).`;
+- Keep descriptions concise (1-2 sentences).
+- Never use em dashes or long dashes in any text. Use commas or periods instead.`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`;
   const requestBody = JSON.stringify({
@@ -224,7 +225,7 @@ Rules:
     },
   });
 
-  // Gemini often 503s under load — one short retry, then bail to curated.
+  // Gemini often 503s under load. One short retry, then bail to curated.
   const res = await fetchGeminiWithRetry(url, apiKey, requestBody, 2);
 
   if (!res.ok) {

@@ -39,7 +39,7 @@ export default function ItineraryPage() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative bg-[#FFFAF5] rounded-sm p-8 text-center max-w-md mx-4 border-l-4 border-[#D93D3D] shadow-2xl">
           <h2 className="text-2xl font-bold text-[#2C3E50] mb-3">No itinerary yet</h2>
-          <p className="text-[#2C3E50]/70 mb-6">Build one first — takes a couple minutes.</p>
+          <p className="text-[#2C3E50]/70 mb-6">Build one first. Takes a couple minutes.</p>
           <Link href="/plan" className="btn-primary inline-flex">
             Plan your trip
           </Link>
@@ -160,7 +160,7 @@ export default function ItineraryPage() {
           </div>
         </FadeIn>
 
-        {/* Trip meta — solid panel, high contrast */}
+        {/* Trip meta. Solid panel, high contrast */}
         <FadeIn delay={0.05}>
           <div className="bg-[#FFFAF5] rounded-sm border-l-4 border-[#D93D3D] shadow-2xl mb-8 overflow-hidden">
             <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#2C3E50]/10">
@@ -181,10 +181,10 @@ export default function ItineraryPage() {
               </div>
               <div className="p-5 sm:p-6">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#D93D3D] mb-3">
-                  Est. cost
+                  Est. Cost
                 </p>
                 <p className="text-3xl sm:text-4xl font-bold text-[#2C3E50] tabular-nums">
-                  {itinerary.totalEstimatedCost || '—'}
+                  {itinerary.totalEstimatedCost || '-'}
                 </p>
                 <p className="text-sm text-[#2C3E50]/55 mt-1">across {dayCount} days</p>
               </div>
@@ -229,7 +229,7 @@ export default function ItineraryPage() {
           </FadeIn>
         )}
 
-        {/* Day switcher — editorial numbers */}
+        {/* Day switcher. Editorial numbers */}
         <div className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-1 px-1">
           {itinerary.itinerary.map((day, index) => (
             <button

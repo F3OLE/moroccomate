@@ -16,7 +16,7 @@ export async function generateItinerary(
     if (!response.ok) throw new Error('Failed to generate itinerary');
     return await response.json();
   } catch (error) {
-    console.error('API Error — using curated places fallback:', error);
+    console.error('API Error. Using curated places fallback:', error);
     return generateCuratedItinerary(data);
   }
 }

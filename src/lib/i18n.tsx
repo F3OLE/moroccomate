@@ -29,13 +29,13 @@ const messages = {
       'MoroccoMate is your travel companion: discover real spots, book thrills, plan days that actually make sense.',
     mode_plan_title: 'AI Trip Planner',
     mode_plan_text:
-      'Build a day-by-day plan with real restaurants, clubs, shops, and adventures — not vague filler.',
+      'Build a day-by-day plan with real restaurants, clubs, shops, and adventures. Not vague filler.',
     mode_discover_title: 'Discover places',
     mode_discover_text:
       'Browse cafés, nightlife, souks, and landmarks. Open any spot straight in Google Maps.',
     mode_xp_title: 'Book experiences',
     mode_xp_text:
-      'Quad tours, paragliding, balloons, desert camps, hammams — partner activities you can actually do.',
+      'Quad tours, paragliding, balloons, desert camps, hammams. Partner activities you can actually do.',
     open: 'Open',
     real_spots: 'Real spots',
     real_spots_title: 'Restaurants, clubs & shops you can open on Maps',
@@ -43,21 +43,21 @@ const messages = {
     google_maps: 'Google Maps',
     xp_title: 'Experiences partners can feature',
     xp_sub:
-      'Quad bikes, paragliding, balloons, desert camps — the stuff people actually book.',
+      'Quad bikes, paragliding, balloons, desert camps. The stuff people actually book.',
     see_all_xp: 'See all experiences',
     early_title: 'Get early access',
     early_text:
-      'Be first when we launch the full app — travelers who want Morocco done right.',
+      'Be first when we launch the full app. Travelers who want Morocco done right.',
     early_cta: 'Join the waitlist',
     partner_title: 'List your business',
     partner_text:
-      'Restaurants, clubs, shops, quad tours, parachute / paragliding operators — get featured to travelers using MoroccoMate.',
+      'Restaurants, clubs, shops, quad tours, parachute / paragliding operators. Get featured to travelers using MoroccoMate.',
     partner_cta: 'Register as a partner',
-    footer_line: 'Discover · Experience · Plan — your Morocco companion',
+    footer_line: 'Discover · Experience · Plan. Your Morocco companion',
     discover_label: 'Discover',
     discover_title: 'Places worth going',
     discover_sub:
-      'Real restaurants, clubs, shops, and landmarks. Open Google Maps for directions, hours, and reviews. We only show names and details — no fake stock photos.',
+      'Real restaurants, clubs, shops, and landmarks. Open Google Maps for directions, hours, and reviews. We only show names and details. No fake stock photos.',
     filter: 'Filter',
     all: 'All',
     all_cities: 'All cities',
@@ -71,7 +71,7 @@ const messages = {
     xp_page_label: 'Experiences',
     xp_page_title: 'Quads, sky sports, desert nights & more',
     xp_page_sub:
-      'Partner-powered activities travelers book — and a place for operators to get featured on MoroccoMate.',
+      'Partner-powered activities travelers book. And a place for operators to get featured on MoroccoMate.',
     xp_partner_cta_title: 'Run quads, jumps, tours, spas?',
     xp_partner_cta_text:
       'Register as a partner and get in front of travelers planning trips on MoroccoMate.',
@@ -80,7 +80,7 @@ const messages = {
     early_page_sub:
       "Join the waitlist for MoroccoMate. We'll email you when traveler features and the full app open up.",
     early_done_title: "You're on the list",
-    early_done_sub: "Thanks — we'll be in touch soon.",
+    early_done_sub: "Thanks. We'll be in touch soon.",
     back_home: 'Back home',
     name: 'Name',
     email: 'Email',
@@ -91,7 +91,7 @@ const messages = {
     submitting: 'Submitting…',
     partners_page_title: 'List your business',
     partners_page_sub:
-      'Get featured on MoroccoMate — restaurants, clubs, shops, quad tours, paragliding, balloons, desert camps, and more.',
+      'Get featured on MoroccoMate. Restaurants, clubs, shops, quad tours, paragliding, balloons, desert camps, and more.',
     benefit_1: 'Shown in Discover & Experiences',
     benefit_2: 'Added into AI itineraries',
     benefit_3: 'Google Maps deep-link to your location',
@@ -123,13 +123,13 @@ const messages = {
       'MoroccoMate est votre compagnon de voyage : lieux réels, expériences, plans de journée qui ont du sens.',
     mode_plan_title: 'Planificateur IA',
     mode_plan_text:
-      'Un plan jour par jour avec vrais restos, clubs, boutiques et aventures — pas du remplissage vague.',
+      'Un plan jour par jour avec vrais restos, clubs, boutiques et aventures. Pas du remplissage vague.',
     mode_discover_title: 'Découvrir des lieux',
     mode_discover_text:
       'Cafés, nightlife, souks et monuments. Ouvrez chaque spot directement dans Google Maps.',
     mode_xp_title: 'Réserver des expériences',
     mode_xp_text:
-      'Quads, parapente, montgolfières, camps du désert, hammams — des activités partenaires concrètes.',
+      'Quads, parapente, montgolfières, camps du désert, hammams. Des activités partenaires concrètes.',
     open: 'Ouvrir',
     real_spots: 'Lieux réels',
     real_spots_title: 'Restos, clubs & boutiques à ouvrir sur Maps',
@@ -137,17 +137,17 @@ const messages = {
     google_maps: 'Google Maps',
     xp_title: 'Expériences que les partenaires peuvent proposer',
     xp_sub:
-      'Quads, parapente, montgolfières, camps du désert — ce que les gens réservent vraiment.',
+      'Quads, parapente, montgolfières, camps du désert. Ce que les gens réservent vraiment.',
     see_all_xp: 'Voir toutes les expériences',
     early_title: 'Accès anticipé',
     early_text:
-      'Soyez les premiers au lancement de l’app — pour voyager au Maroc autrement.',
+      'Soyez les premiers au lancement de l’app. Pour voyager au Maroc autrement.',
     early_cta: 'Rejoindre la liste',
     partner_title: 'Référencer mon activité',
     partner_text:
-      'Restos, clubs, boutiques, quads, parapente — soyez mis en avant auprès des voyageurs MoroccoMate.',
+      'Restos, clubs, boutiques, quads, parapente. Soyez mis en avant auprès des voyageurs MoroccoMate.',
     partner_cta: 'S’inscrire comme partenaire',
-    footer_line: 'Découvrir · Expériences · Planifier — votre compagnon Maroc',
+    footer_line: 'Découvrir · Expériences · Planifier. Votre compagnon Maroc',
     discover_label: 'Découvrir',
     discover_title: 'Des lieux qui valent le détour',
     discover_sub:
@@ -165,7 +165,7 @@ const messages = {
     xp_page_label: 'Expériences',
     xp_page_title: 'Quads, sports aériens, nuits dans le désert…',
     xp_page_sub:
-      'Des activités partenaires que les voyageurs réservent — et un espace pour les opérateurs.',
+      'Des activités partenaires que les voyageurs réservent. Et un espace pour les opérateurs.',
     xp_partner_cta_title: 'Vous proposez quads, vols, tours, spas ?',
     xp_partner_cta_text:
       'Inscrivez-vous comme partenaire et apparaissez face aux voyageurs qui planifient.',
@@ -174,7 +174,7 @@ const messages = {
     early_page_sub:
       'Rejoignez la liste d’attente MoroccoMate. On vous écrira à l’ouverture.',
     early_done_title: 'Vous êtes sur la liste',
-    early_done_sub: 'Merci — on revient vers vous bientôt.',
+    early_done_sub: 'Merci. On revient vers vous bientôt.',
     back_home: 'Retour à l’accueil',
     name: 'Nom',
     email: 'E-mail',
@@ -185,7 +185,7 @@ const messages = {
     submitting: 'Envoi…',
     partners_page_title: 'Référencer mon activité',
     partners_page_sub:
-      'Apparaissez sur MoroccoMate — restos, clubs, boutiques, quads, parapente, montgolfières, camps…',
+      'Apparaissez sur MoroccoMate. Restos, clubs, boutiques, quads, parapente, montgolfières, camps…',
     benefit_1: 'Visible dans Découvrir & Expériences',
     benefit_2: 'Intégré aux itinéraires IA',
     benefit_3: 'Lien Google Maps vers votre lieu',
@@ -217,13 +217,13 @@ const messages = {
       'MoroccoMate es tu compañero de viaje: lugares reales, experiencias y planes que tienen sentido.',
     mode_plan_title: 'Planificador IA',
     mode_plan_text:
-      'Un plan día a día con restaurantes, clubs, tiendas y aventuras reales — sin relleno vacío.',
+      'Un plan día a día con restaurantes, clubs, tiendas y aventuras reales. Sin relleno vacío.',
     mode_discover_title: 'Descubrir lugares',
     mode_discover_text:
       'Cafés, nightlife, zocos y monumentos. Abre cada sitio en Google Maps.',
     mode_xp_title: 'Reservar experiencias',
     mode_xp_text:
-      'Quads, parapente, globos, campamentos del desierto, hammams — actividades de partners.',
+      'Quads, parapente, globos, campamentos del desierto, hammams. Actividades de partners.',
     open: 'Abrir',
     real_spots: 'Lugares reales',
     real_spots_title: 'Restos, clubs y tiendas para abrir en Maps',
@@ -231,17 +231,17 @@ const messages = {
     google_maps: 'Google Maps',
     xp_title: 'Experiencias que los partners pueden destacar',
     xp_sub:
-      'Quads, parapente, globos, desierto — lo que la gente reserva de verdad.',
+      'Quads, parapente, globos, desierto. Lo que la gente reserva de verdad.',
     see_all_xp: 'Ver todas las experiencias',
     early_title: 'Acceso anticipado',
     early_text:
-      'Sé de los primeros al lanzar la app — viajeros que quieren Marruecos bien hecho.',
+      'Sé de los primeros al lanzar la app. Viajeros que quieren Marruecos bien hecho.',
     early_cta: 'Unirme a la lista',
     partner_title: 'Registrar mi negocio',
     partner_text:
-      'Restaurantes, clubs, tiendas, quads, parapente — aparece ante viajeros de MoroccoMate.',
+      'Restaurantes, clubs, tiendas, quads, parapente. Aparece ante viajeros de MoroccoMate.',
     partner_cta: 'Registrarme como partner',
-    footer_line: 'Descubrir · Experiencias · Planificar — tu compañero en Marruecos',
+    footer_line: 'Descubrir · Experiencias · Planificar. Tu compañero en Marruecos',
     discover_label: 'Descubrir',
     discover_title: 'Lugares que merecen la pena',
     discover_sub:
@@ -259,7 +259,7 @@ const messages = {
     xp_page_label: 'Experiencias',
     xp_page_title: 'Quads, deportes aéreos, noches en el desierto…',
     xp_page_sub:
-      'Actividades de partners que los viajeros reservan — y un espacio para operadores.',
+      'Actividades de partners que los viajeros reservan. Y un espacio para operadores.',
     xp_partner_cta_title: '¿Haces quads, saltos, tours, spas?',
     xp_partner_cta_text:
       'Regístrate como partner y llega a viajeros que están planificando.',
@@ -268,7 +268,7 @@ const messages = {
     early_page_sub:
       'Únete a la lista de MoroccoMate. Te escribiremos cuando abramos.',
     early_done_title: 'Estás en la lista',
-    early_done_sub: 'Gracias — pronto te contactamos.',
+    early_done_sub: 'Gracias. Pronto te contactamos.',
     back_home: 'Volver al inicio',
     name: 'Nombre',
     email: 'Email',
@@ -279,7 +279,7 @@ const messages = {
     submitting: 'Enviando…',
     partners_page_title: 'Registrar mi negocio',
     partners_page_sub:
-      'Aparece en MoroccoMate — restos, clubs, tiendas, quads, parapente, globos, campamentos…',
+      'Aparece en MoroccoMate. Restos, clubs, tiendas, quads, parapente, globos, campamentos…',
     benefit_1: 'Visible en Descubrir y Experiencias',
     benefit_2: 'Incluido en itinerarios IA',
     benefit_3: 'Enlace de Google Maps a tu ubicación',

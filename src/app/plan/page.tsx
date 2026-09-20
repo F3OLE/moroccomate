@@ -35,8 +35,8 @@ const interests = [
 ];
 
 const budgetOptions = [
-  { value: 'budget', label: 'Budget', range: '$30–60 / day', num: '01' },
-  { value: 'mid-range', label: 'Mid-range', range: '$60–120 / day', num: '02' },
+  { value: 'budget', label: 'Budget', range: '$30-60 / day', num: '01' },
+  { value: 'mid-range', label: 'Mid-range', range: '$60-120 / day', num: '02' },
   { value: 'luxury', label: 'Luxury', range: '$120+ / day', num: '03' },
 ];
 
@@ -215,7 +215,7 @@ export default function PlanPage() {
             Build your days
           </h1>
           <p className="text-white/75 text-base md:text-lg mb-8 max-w-md">
-            Numbered picks. Frosted glass. Real spots on Maps — not emoji checklists.
+            Numbered picks. Frosted glass. Real spots on Maps. Not emoji checklists.
           </p>
         </FadeIn>
 
@@ -231,7 +231,7 @@ export default function PlanPage() {
         </div>
         <p className="text-white/50 text-sm mb-6">Step {currentStep} / 3</p>
 
-        {/* MAIN LIQUID PANEL — impossible to miss */}
+        {/* MAIN LIQUID PANEL. Impossible to miss */}
         <FadeIn delay={0.05}>
           <div className="liquid-glass rounded-3xl p-5 sm:p-8">
             {currentStep === 1 && (

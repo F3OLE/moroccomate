@@ -37,7 +37,7 @@ function sameDay(a: Date, b: Date) {
 }
 
 function formatShort(s: string) {
-  if (!s) return '—';
+  if (!s) return '-';
   return parseYmd(s).toLocaleDateString('en-US', {
     weekday: 'short',
     month: 'short',
