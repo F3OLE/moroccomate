@@ -243,5 +243,7 @@ function placeToActivity(place: Place, slot: Slot, dailyBudget: number) {
     mapsUrl: mapsUrl(place.mapsQuery),
     clock: clockForSlot(slot),
     badge: place.badge,
+    placeId: place.id,
+    whatsapp: place.whatsapp,
   };
 }

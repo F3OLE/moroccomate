@@ -363,6 +363,8 @@ function normalizeItinerary(
               ? placeBestTime(known)
               : undefined,
           badge,
+          placeId: known?.id,
+          whatsapp: known?.whatsapp,
         };
       });
 

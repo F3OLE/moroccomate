@@ -17,6 +17,8 @@ export interface Activity {
   clock?: string;
   bestTime?: string;
   badge?: 'partner' | 'verified';
+  placeId?: string;
+  whatsapp?: string;
 }
 
 export interface Day {

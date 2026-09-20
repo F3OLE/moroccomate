@@ -26,6 +26,8 @@ export interface Place {
   preferredSlot?: 'morning' | 'afternoon' | 'evening' | 'lunch' | 'dinner';
   /** Partner / verified listing for monetization */
   badge?: 'partner' | 'verified';
+  /** Venue WhatsApp in international digits, e.g. 2126xxxxxxxx */
+  whatsapp?: string;
 }
 
 export interface Experience {

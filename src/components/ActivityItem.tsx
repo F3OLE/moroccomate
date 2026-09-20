@@ -18,6 +18,8 @@ import {
   Sun,
 } from 'lucide-react';
 import { Activity } from '@/types';
+import BookButton from '@/components/BookButton';
+import { cityDisplayName, PLACES } from '@/data/places';
 
 interface ActivityItemProps {
   activity: Activity;
@@ -63,6 +65,18 @@ export default function ActivityItem({
 
   const Icon = getActivityIcon(activity.type, activity.timeSlot);
   const clock = activity.clock || defaultClock(activity.timeSlot);
+  const known = PLACES.find(
+    (p) =>
+      p.id === activity.placeId ||
+      p.name.toLowerCase() === activity.title.toLowerCase()
+  );
+  const bookPlace = {
+    placeId: activity.placeId || known?.id,
+    placeName: activity.title,
+    city: known ? cityDisplayName(known.city) : undefined,
+    whatsapp: activity.whatsapp || known?.whatsapp,
+    badge: activity.badge || known?.badge,
+  };
   const accent =
     activity.type === 'meal'
       ? 'border-[#E1B168]'
@@ -185,6 +199,7 @@ export default function ActivityItem({
               className={`w-3.5 h-3.5 transition-transform ${showDetails ? 'rotate-180' : ''}`}
             />
           </button>
+          <BookButton place={bookPlace} compact />
           {activity.mapsUrl && (
             <a
               href={activity.mapsUrl}

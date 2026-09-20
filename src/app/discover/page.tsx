@@ -17,9 +17,10 @@ import {
   Sun,
 } from 'lucide-react';
 import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
-import { PLACES, mapsUrl, placeBestTime, type PlaceCategory } from '@/data/places';
+import { PLACES, mapsUrl, placeBestTime, cityDisplayName, type PlaceCategory } from '@/data/places';
 import { useI18n, type MessageKey } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
+import BookButton from '@/components/BookButton';
 
 const categoryIcon: Record<PlaceCategory, typeof Utensils> = {
   restaurants: Utensils,
@@ -163,16 +164,27 @@ export default function DiscoverPage() {
                     {placeBestTime(p)}
                   </p>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">{p.description}</p>
-                  <div className="flex items-center justify-between mt-auto">
+                  <div className="flex items-center justify-between gap-2 mt-auto flex-wrap">
                     <span className="text-sm font-medium text-gray-700">{p.priceRange}</span>
-                    <a
-                      href={mapsUrl(p.mapsQuery)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-sm font-semibold text-[#D93D3D]"
-                    >
-                      {t('google_maps')} <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <BookButton
+                        place={{
+                          placeId: p.id,
+                          placeName: p.name,
+                          city: cityDisplayName(p.city),
+                          whatsapp: p.whatsapp,
+                          badge: p.badge,
+                        }}
+                      />
+                      <a
+                        href={mapsUrl(p.mapsQuery)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-[#D93D3D]"
+                      >
+                        {t('google_maps')} <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 </article>
               </StaggerItem>
