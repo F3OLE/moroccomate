@@ -20,6 +20,7 @@ import {
 import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
 import { EXPERIENCES, PLACES, mapsUrl, type PlaceCategory } from '@/data/places';
 import { useI18n } from '@/lib/i18n';
+import PartnerCta from '@/components/PartnerCta';
 
 const categoryIcon: Record<PlaceCategory, typeof Utensils> = {
   restaurants: Utensils,
@@ -180,6 +181,14 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-10 md:py-12 bg-[#FFFAF5]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <FadeIn>
+            <PartnerCta />
+          </FadeIn>
         </div>
       </section>
 

@@ -19,6 +19,7 @@ import {
 import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
 import { PLACES, mapsUrl, placeBestTime, type PlaceCategory } from '@/data/places';
 import { useI18n, type MessageKey } from '@/lib/i18n';
+import PartnerCta from '@/components/PartnerCta';
 
 const categoryIcon: Record<PlaceCategory, typeof Utensils> = {
   restaurants: Utensils,
@@ -68,7 +69,8 @@ export default function DiscoverPage() {
             {t('discover_label')}
           </p>
           <h1 className="text-4xl font-bold text-gradient mb-3">{t('discover_title')}</h1>
-          <p className="text-gray-600 max-w-2xl">{t('discover_sub')}</p>
+          <p className="text-gray-600 max-w-2xl mb-6">{t('discover_sub')}</p>
+          <PartnerCta />
         </FadeIn>
 
         <FadeIn delay={0.05} className="flex flex-col gap-4 mb-8">
@@ -178,11 +180,14 @@ export default function DiscoverPage() {
           })}
         </Stagger>
 
-        <FadeIn className="mt-12 text-center">
-          <p className="text-gray-600 mb-4">{t('want_plan')}</p>
-          <Link href="/plan" className="btn-primary inline-flex">
-            {t('build_itinerary')}
-          </Link>
+        <FadeIn className="mt-12 space-y-8">
+          <PartnerCta />
+          <div className="text-center">
+            <p className="text-gray-600 mb-4">{t('want_plan')}</p>
+            <Link href="/plan" className="btn-primary inline-flex">
+              {t('build_itinerary')}
+            </Link>
+          </div>
         </FadeIn>
       </div>
     </div>

@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -18,11 +18,13 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  Sparkles,
 } from 'lucide-react';
 import { generateItinerary } from '@/lib/api';
 import { TripFormData } from '@/types';
 import { FadeIn } from '@/components/FadeIn';
 import TripDateRange, { isValidTripRange } from '@/components/TripDateRange';
+import { cityDisplayName } from '@/data/places';
 
 const interests = [
   { id: 'food', label: 'Food & Markets', icon: Utensils },
@@ -80,6 +82,7 @@ export default function PlanPage() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Partial<TripFormData>>({});
+  const [loadStep, setLoadStep] = useState(0);
 
   const toggleInterest = (interestId: string) => {
     setSelectedInterests((prev) =>
@@ -88,6 +91,44 @@ export default function PlanPage() {
         : [...prev, interestId]
     );
   };
+
+  const [loadStep, setLoadStep] = useState(0);
+  const [loadMessages, setLoadMessages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setLoadStep(0);
+      setLoadMessages([]);
+      return;
+    }
+    const city = formData.city
+      ? cityDisplayName(formData.city)
+      : 'Morocco';
+    const msgs = [
+      `Mapping ${city} neighborhoods…`,
+      'Matching your interests to real spots…',
+    ];
+    if (selectedInterests.includes('nightlife')) {
+      msgs.push('Finding nightlife and late stops…');
+    }
+    if (selectedInterests.includes('pools')) {
+      msgs.push('Checking pools and beach clubs…');
+    }
+    if (selectedInterests.includes('food')) {
+      msgs.push('Picking cafés and restaurants…');
+    }
+    if (selectedInterests.includes('adventure')) {
+      msgs.push('Looking at day trips and adventures…');
+    }
+    msgs.push('Building your day-by-day plan…');
+    msgs.push('Almost ready…');
+    setLoadMessages(msgs);
+    setLoadStep(0);
+    const id = setInterval(() => {
+      setLoadStep((s) => s + 1);
+    }, 2200);
+    return () => clearInterval(id);
+  }, [isLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInputChange = (field: keyof TripFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -197,6 +238,34 @@ export default function PlanPage() {
   return (
     <div className="min-h-screen plan-scene relative pt-14 sm:pt-16">
       <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <div className="w-full max-w-md rounded-2xl bg-[#FFFAF5] border border-white/20 shadow-2xl p-6 sm:p-8 text-center">
+            <div className="mx-auto w-12 h-12 rounded-full bg-[#FCE8E8] flex items-center justify-center mb-4">
+              <Sparkles className="w-6 h-6 text-[#D93D3D] animate-pulse" />
+            </div>
+            <h3 className="text-xl font-bold text-[#2C3E50] mb-2">Building your trip</h3>
+            <p className="text-[#2C3E50]/75 text-sm min-h-[2.5rem] mb-5">
+              {loadMessages[Math.min(loadStep, Math.max(loadMessages.length - 1, 0))] ||
+                'Building your day-by-day plan…'}
+            </p>
+            <div className="flex gap-1.5 justify-center mb-2">
+              {(loadMessages.length ? loadMessages : ['']).map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1.5 flex-1 max-w-[2.5rem] rounded-full transition-colors ${
+                    i <= loadStep ? 'bg-[#D93D3D]' : 'bg-[#2C3E50]/15'
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="text-[11px] text-[#2C3E50]/45 mt-3">
+              Usually takes a few seconds. If AI is busy, we use curated spots.
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="relative max-w-2xl mx-auto px-3 sm:px-6 py-8 sm:py-10 md:py-14">
         <FadeIn>

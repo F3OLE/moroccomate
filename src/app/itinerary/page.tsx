@@ -103,10 +103,9 @@ export default function ItineraryPage() {
   };
 
   const dayCount = itinerary.days || itinerary.itinerary.length;
-  const source =
-    (itinerary as Itinerary & { source?: string }).source === 'gemini'
-      ? 'Crafted with AI'
-      : 'Curated stops';
+  const isAi =
+    (itinerary as Itinerary & { source?: string }).source === 'gemini';
+  const sourceLabel = isAi ? 'Crafted with AI' : 'Curated stops';
 
   return (
     <div className="min-h-screen plan-scene relative pt-14 sm:pt-16">
@@ -122,9 +121,16 @@ export default function ItineraryPage() {
             Home
           </Link>
 
+          {!isAi && (
+            <div className="mb-6 rounded-xl border border-[#E1B168]/40 bg-[#2C3E50]/80 backdrop-blur px-4 py-3 text-sm text-white/90">
+              <span className="font-semibold text-[#E1B168]">Curated plan. </span>
+              AI was busy or unavailable, so we built this from our verified spots. Still editable.
+            </div>
+          )}
+
           <div className="mb-10 md:mb-12">
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="badge badge-gold">{source}</span>
+              <span className="badge badge-gold">{sourceLabel}</span>
               <span className="text-[#E1B168]/80 text-xs tracking-[0.2em] uppercase font-bold">
                 Your Morocco days
               </span>
