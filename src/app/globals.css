@@ -34,8 +34,18 @@ img, video {
 .bg-pattern {
   background-color: var(--background);
   background-image:
-    radial-gradient(circle at 25% 25%, rgba(217, 61, 61, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(225, 177, 104, 0.12) 0%, transparent 50%);
+    /* Soft vignette so the center card stays readable */
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255, 250, 245, 0.92) 0%, rgba(255, 250, 245, 0.55) 55%, transparent 100%),
+    url('/images/patterns/zellige.svg'),
+    radial-gradient(circle at 12% 18%, rgba(217, 61, 61, 0.07) 0%, transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(225, 177, 104, 0.1) 0%, transparent 45%);
+  background-size:
+    auto,
+    120px 120px,
+    auto,
+    auto;
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center;
 }
 
 .text-gradient {

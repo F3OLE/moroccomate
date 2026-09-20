@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <!-- Soft Moroccan geometric tile (zellige-inspired) -->
+  <g stroke="#D93D3D" stroke-width="1.1" opacity="0.55">
+    <!-- Outer octagon frame -->
+    <path d="M40 8 L80 8 L112 40 L112 80 L80 112 L40 112 L8 80 L8 40 Z"/>
+    <!-- Inner diamond -->
+    <path d="M60 22 L98 60 L60 98 L22 60 Z"/>
+    <!-- 8-point star core -->
+    <path d="M60 38 L68 52 L84 52 L72 64 L76 80 L60 72 L44 80 L48 64 L36 52 L52 52 Z"/>
+    <!-- Cross axes -->
+    <path d="M60 8 V112 M8 60 H112"/>
+  </g>
+  <g stroke="#C4923A" stroke-width="0.9" opacity="0.4">
+    <circle cx="60" cy="60" r="10"/>
+    <path d="M40 8 L60 60 L80 8 M80 112 L60 60 L40 112 M8 40 L60 60 L8 80 M112 40 L60 60 L112 80"/>
+  </g>
+</svg>
