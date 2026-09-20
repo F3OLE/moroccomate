@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { PLACES, mapsUrl, normalizeCityKey } from '@/data/places';
+import { PLACES, mapsUrl, normalizeCityKey, placeBestTime } from '@/data/places';
 import {
   generateCuratedItinerary,
   type ItineraryInput,
@@ -21,6 +21,8 @@ type GeminiActivity = {
   category?: string;
   mapsUrl?: string;
   clock?: string;
+  bestTime?: string;
+  badge?: string;
 };
 
 type GeminiDay = {
@@ -193,7 +195,9 @@ Return exactly this JSON shape:
           "type": "activity" | "meal" | "transport",
           "tips": string,
           "category": string,
-          "clock": string like "09:30"
+          "clock": string like "09:30",
+          "bestTime": string like "Sunset · 18:30–19:30",
+          "badge": "partner" | "verified" | omit
         }
       ]
     }
@@ -203,6 +207,9 @@ Return exactly this JSON shape:
 Rules:
 - Exactly ${dayCount} days, dates sequential from startDate.
 - Each day: 3–5 activities covering morning, a meal, afternoon, evening when possible.
+- NEVER repeat the same place twice in one day. Prefer unique places across the whole trip.
+- Match timeSlot to the venue (no nightlife/marina-night spots in the morning).
+- Include bestTime for every stop (sunset, morning cool hours, late night, etc.).
 - Use real Marrakech/Casablanca/Rabat/Tangier venues (social-famous cafés, rooftops, corniche spots), not generic filler.
 - Match the traveler interests and budget.
 - Keep descriptions concise (1–2 sentences).`;
@@ -321,6 +328,14 @@ function normalizeItinerary(
           : 'activity';
         const title = String(a.title);
         const location = String(a.location || input.city);
+        const known = PLACES.find(
+          (p) => p.name.toLowerCase() === title.toLowerCase()
+        );
+        const badgeRaw = a.badge || known?.badge;
+        const badge =
+          badgeRaw === 'partner' || badgeRaw === 'verified'
+            ? badgeRaw
+            : undefined;
 
         return {
           id: String(a.id || `gemini_${index}_${i}_${Date.now()}`),
@@ -332,22 +347,41 @@ function normalizeItinerary(
           timeSlot,
           type,
           tips: a.tips ? String(a.tips) : undefined,
-          category: a.category ? String(a.category) : undefined,
+          category: a.category
+            ? String(a.category)
+            : known?.category,
           mapsUrl:
             a.mapsUrl ||
-            mapsUrl(`${title} ${location} ${input.city}`),
+            (known
+              ? mapsUrl(known.mapsQuery)
+              : mapsUrl(`${title} ${location} ${input.city}`)),
           clock: a.clock ? String(a.clock) : undefined,
+          bestTime: a.bestTime
+            ? String(a.bestTime)
+            : known
+              ? placeBestTime(known)
+              : undefined,
+          badge,
         };
       });
 
-    if (activities.length === 0) {
+    // Drop same-day duplicate titles
+    const seen = new Set<string>();
+    const uniqueActivities = activities.filter((a) => {
+      const key = a.title.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    if (uniqueActivities.length === 0) {
       throw new Error(`Day ${index + 1} has no activities`);
     }
 
     return {
       day: Number(day.day) || index + 1,
       date,
-      activities,
+      activities: uniqueActivities,
     };
   });
 

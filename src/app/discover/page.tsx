@@ -13,9 +13,11 @@ import {
   Mountain,
   Compass,
   Coffee,
+  BadgeCheck,
+  Sun,
 } from 'lucide-react';
 import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
-import { PLACES, mapsUrl, type PlaceCategory } from '@/data/places';
+import { PLACES, mapsUrl, placeBestTime, type PlaceCategory } from '@/data/places';
 import { useI18n, type MessageKey } from '@/lib/i18n';
 
 const categoryIcon: Record<PlaceCategory, typeof Utensils> = {
@@ -125,7 +127,21 @@ export default function DiscoverPage() {
                     </span>
                   </div>
                   <div className="flex items-start justify-between gap-2 mb-1">
-                    <h2 className="text-lg font-semibold text-gray-900">{p.name}</h2>
+                    <div className="min-w-0">
+                      <h2 className="text-lg font-semibold text-gray-900">{p.name}</h2>
+                      <div className="flex flex-wrap gap-1.5 mt-1">
+                        {p.badge === 'partner' && (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-[#D93D3D] text-white">
+                            <BadgeCheck className="w-3 h-3" /> Partner
+                          </span>
+                        )}
+                        {p.badge === 'verified' && (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-[#2C3E50] text-white">
+                            <BadgeCheck className="w-3 h-3" /> Verified
+                          </span>
+                        )}
+                      </div>
+                    </div>
                     <span className="flex items-center gap-1 text-sm text-[#D93D3D] shrink-0">
                       <Star className="w-3.5 h-3.5 fill-[#E1B168] text-[#E1B168]" />
                       {p.rating}
@@ -139,6 +155,10 @@ export default function DiscoverPage() {
                         ? 'Tangier'
                         : p.city.charAt(0).toUpperCase() + p.city.slice(1)}{' '}
                     · {p.neighborhood}
+                  </p>
+                  <p className="text-xs text-[#C4923A] font-medium mb-2 flex items-center gap-1">
+                    <Sun className="w-3.5 h-3.5" />
+                    {placeBestTime(p)}
                   </p>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">{p.description}</p>
                   <div className="flex items-center justify-between mt-auto">

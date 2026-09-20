@@ -15,6 +15,8 @@ export interface Activity {
   category?: string;
   mapsUrl?: string;
   clock?: string;
+  bestTime?: string;
+  badge?: 'partner' | 'verified';
 }
 
 export interface Day {

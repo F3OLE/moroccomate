@@ -21,6 +21,11 @@ export interface Place {
   tags: string[];
   mapsQuery: string;
   bestFor: string[];
+  /** Human hint e.g. "Sunset · 18:30–19:30" */
+  bestTime?: string;
+  preferredSlot?: 'morning' | 'afternoon' | 'evening' | 'lunch' | 'dinner';
+  /** Partner / verified listing for monetization */
+  badge?: 'partner' | 'verified';
 }
 
 export interface Experience {
@@ -56,6 +61,9 @@ export const PLACES: Place[] = [
     tags: ['rooftop', 'dinner', 'instagram'],
     mapsQuery: 'Nomad Restaurant Marrakech',
     bestFor: ['food', 'nightlife'],
+    bestTime: 'Sunset dinner · 18:30–21:00',
+    preferredSlot: 'evening',
+    badge: 'partner',
   },
   {
     id: 'le-jardin-marrakech',
@@ -116,6 +124,9 @@ export const PLACES: Place[] = [
     tags: ['club', 'DJ', 'party'],
     mapsQuery: 'Theatro Club Sofitel Marrakech',
     bestFor: ['nightlife'],
+    bestTime: 'Late night · from 23:00',
+    preferredSlot: 'evening',
+    badge: 'partner',
   },
   {
     id: 'souk-semmarine',
@@ -191,6 +202,9 @@ export const PLACES: Place[] = [
     tags: ['pool', 'beach-club', 'dj', 'tiktok', 'instagram'],
     mapsQuery: 'Nikki Beach Marrakech',
     bestFor: ['nightlife', 'adventure', 'pools'],
+    bestTime: 'Afternoon pool · 13:00–18:00',
+    preferredSlot: 'afternoon',
+    badge: 'partner',
   },
   {
     id: 'beldi-country-club',
@@ -236,6 +250,9 @@ export const PLACES: Place[] = [
     tags: ['pool', 'desert', 'sunset', 'instagram', 'tiktok'],
     mapsQuery: 'Agafay desert pool camp Marrakech',
     bestFor: ['adventure', 'pools', 'nightlife'],
+    bestTime: 'Sunset dip · 17:00–19:30',
+    preferredSlot: 'afternoon',
+    badge: 'verified',
   },
   {
     id: 'lotus-club-pool',
@@ -328,6 +345,9 @@ export const PLACES: Place[] = [
     tags: ['seafood', 'sunset', 'tiktok', 'instagram'],
     mapsQuery: 'Le Cabestan Casablanca',
     bestFor: ['food', 'nightlife'],
+    bestTime: 'Sunset · 18:30–20:30',
+    preferredSlot: 'evening',
+    badge: 'partner',
   },
   {
     id: 'basmane-casa',
@@ -372,6 +392,9 @@ export const PLACES: Place[] = [
     tags: ['rooftop', 'cocktails', 'views', 'instagram'],
     mapsQuery: 'Sky 28 Casablanca',
     bestFor: ['nightlife'],
+    bestTime: 'Night drinks · from 21:00',
+    preferredSlot: 'evening',
+    badge: 'verified',
   },
   {
     id: 'vip-club-casa',
@@ -491,6 +514,8 @@ export const PLACES: Place[] = [
     tags: ['beach', 'sunset', 'tiktok', 'walk'],
     mapsQuery: 'Corniche Ain Diab Casablanca',
     bestFor: ['nightlife', 'adventure'],
+    bestTime: 'Golden hour · 17:30–19:30',
+    preferredSlot: 'evening',
   },
 
   // ——— Rabat ———
@@ -508,6 +533,9 @@ export const PLACES: Place[] = [
     tags: ['tea', 'kasbah', 'instagram', 'tiktok'],
     mapsQuery: 'Cafe Maure Kasbah des Oudayas Rabat',
     bestFor: ['food', 'history'],
+    bestTime: 'Late afternoon tea · 16:00–18:30',
+    preferredSlot: 'afternoon',
+    badge: 'verified',
   },
   {
     id: 'dinarjat-rabat',
@@ -538,6 +566,9 @@ export const PLACES: Place[] = [
     tags: ['marina', 'dinner', 'instagram'],
     mapsQuery: 'Le Dhow Rabat',
     bestFor: ['food', 'nightlife'],
+    bestTime: 'Dinner on the water · 19:00–22:00',
+    preferredSlot: 'evening',
+    badge: 'partner',
   },
   {
     id: 'agdal-shopping',
@@ -613,6 +644,8 @@ export const PLACES: Place[] = [
     tags: ['marina', 'drinks', 'evening'],
     mapsQuery: 'Bouregreg Marina Rabat',
     bestFor: ['nightlife', 'food'],
+    bestTime: 'Evening lights · 19:30–23:00',
+    preferredSlot: 'evening',
   },
 
   // ——— Tangier ———
@@ -630,6 +663,9 @@ export const PLACES: Place[] = [
     tags: ['tea', 'sunset', 'tiktok', 'instagram', 'iconic'],
     mapsQuery: 'Cafe Hafa Tangier',
     bestFor: ['food', 'history'],
+    bestTime: 'Sunset tea · 18:00–19:30',
+    preferredSlot: 'evening',
+    badge: 'verified',
   },
   {
     id: 'petit-socco',
@@ -675,6 +711,9 @@ export const PLACES: Place[] = [
     tags: ['viewpoint', 'nature', 'tiktok', 'must-see'],
     mapsQuery: 'Cap Spartel Hercules Cave Tangier',
     bestFor: ['adventure', 'history'],
+    bestTime: 'Morning or late afternoon · 09:00–11:00 / 16:00–18:00',
+    preferredSlot: 'morning',
+    badge: 'verified',
   },
   {
     id: 'tangier-kasbah',
@@ -856,6 +895,45 @@ export function cityDisplayName(city: string) {
 export function placesForCity(city: string) {
   const key = normalizeCityKey(city);
   return PLACES.filter((p) => p.city === key);
+}
+
+export function placeBestTime(place: Place): string {
+  if (place.bestTime) return place.bestTime;
+  if (place.tags.includes('sunset')) return 'Sunset · ~18:30–19:30';
+  if (place.category === 'nightlife') return 'Night · from 22:00';
+  if (place.category === 'cafes') return 'Morning or late afternoon · 09:00–11:00 / 16:00–18:00';
+  if (place.category === 'restaurants') return 'Lunch 12:30–14:30 or dinner from 19:30';
+  if (place.category === 'shopping') return 'Late morning to evening · 10:00–19:00';
+  if (place.category === 'monuments') return 'Morning · 09:00–12:00 (cooler + fewer crowds)';
+  if (place.tags.includes('pool') || place.tags.includes('beach-club'))
+    return 'Afternoon · 13:00–18:00';
+  return 'Flexible · check hours on Maps';
+}
+
+export function placePreferredSlot(
+  place: Place
+): 'morning' | 'afternoon' | 'evening' | 'lunch' | 'dinner' {
+  if (place.preferredSlot) return place.preferredSlot;
+  if (place.category === 'nightlife') return 'evening';
+  if (place.category === 'restaurants') return 'lunch';
+  if (place.category === 'cafes') return 'morning';
+  if (place.category === 'monuments') return 'morning';
+  if (place.tags.includes('pool') || place.tags.includes('beach-club'))
+    return 'afternoon';
+  return 'afternoon';
+}
+
+export function clockForSlot(
+  slot: 'morning' | 'afternoon' | 'evening' | 'lunch' | 'dinner'
+) {
+  const map = {
+    morning: '09:30',
+    lunch: '12:30',
+    afternoon: '15:00',
+    dinner: '19:30',
+    evening: '20:30',
+  } as const;
+  return map[slot];
 }
 
 export function pickPlaces(

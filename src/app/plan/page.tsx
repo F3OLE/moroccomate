@@ -382,14 +382,17 @@ export default function PlanPage() {
                   value={formData.specialRequests || ''}
                   onChange={(e) => handleInputChange('specialRequests', e.target.value)}
                   rows={5}
-                  className="input-field text-white placeholder:text-white/40 mb-8"
+                  disabled={isLoading}
+                  readOnly={isLoading}
+                  className="input-field text-white placeholder:text-white/40 mb-8 disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Vegetarian, club nights, photography spots…"
                 />
                 <div className="flex flex-col-reverse sm:flex-row sm:justify-between gap-3">
                   <button
                     type="button"
                     onClick={() => setCurrentStep(2)}
-                    className="btn-secondary w-full sm:w-auto"
+                    className="btn-secondary w-full sm:w-auto disabled:opacity-50"
+                    disabled={isLoading}
                   >
                     Previous
                   </button>

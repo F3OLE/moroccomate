@@ -1,8 +1,11 @@
 import {
   EXPERIENCES,
+  clockForSlot,
   mapsUrl,
   normalizeCityKey,
   pickPlaces,
+  placeBestTime,
+  placePreferredSlot,
   type Place,
 } from '@/data/places';
 
@@ -15,6 +18,44 @@ export type ItineraryInput = {
   budget: number;
   specialRequests?: string;
 };
+
+type Slot = 'morning' | 'afternoon' | 'evening' | 'lunch' | 'dinner';
+
+class PlacePicker {
+  private usedGlobal = new Map<string, number>();
+  private usedToday = new Set<string>();
+
+  startDay() {
+    this.usedToday.clear();
+  }
+
+  take(candidates: Place[], dayIndex: number, fallback: Place[] = []): Place | null {
+    const tryList = [...candidates, ...fallback];
+    const ranked = tryList
+      .filter((p) => !this.usedToday.has(p.id))
+      .sort((a, b) => {
+        const la = this.usedGlobal.get(a.id) ?? -99;
+        const lb = this.usedGlobal.get(b.id) ?? -99;
+        return la - lb;
+      });
+
+    for (const p of ranked) {
+      const last = this.usedGlobal.get(p.id);
+      if (last === undefined || dayIndex - last >= 2 || ranked.length <= 3) {
+        this.usedToday.add(p.id);
+        this.usedGlobal.set(p.id, dayIndex);
+        return p;
+      }
+    }
+    const any = ranked[0];
+    if (any) {
+      this.usedToday.add(any.id);
+      this.usedGlobal.set(any.id, dayIndex);
+      return any;
+    }
+    return null;
+  }
+}
 
 export function generateCuratedItinerary(data: ItineraryInput) {
   const dayCount = Math.max(
@@ -39,7 +80,7 @@ export function generateCuratedItinerary(data: ItineraryInput) {
     ? data.interests
     : ['food', 'history', 'shopping'];
 
-  const curated = pickPlaces(data.city, interests, Math.max(8, dayCount * 4));
+  const pool = pickPlaces(data.city, interests, Math.max(12, dayCount * 4));
   const cityKey = normalizeCityKey(data.city);
   const cityHint =
     cityKey === 'marrakesh'
@@ -55,37 +96,92 @@ export function generateCuratedItinerary(data: ItineraryInput) {
       e.category === 'adventure'
   );
 
-  const dayArray = Array.from({ length: dayCount }, (_, index) => {
-    const base = index * 3;
-    const morning = curated[(base + 0) % curated.length];
-    const lunch = pickMeal(curated, base + 1);
-    const afternoon = curated[(base + 2) % curated.length] || morning;
-    const evening = pickEvening(curated, interests, base + 3);
-    const adventure =
-      interests.includes('adventure') && experiences[index % experiences.length]
-        ? experiences[index % experiences.length]
-        : null;
+  const picker = new PlacePicker();
+  const meals = pool.filter(
+    (p) => p.category === 'restaurants' || p.category === 'cafes'
+  );
+  // Never schedule nightlife / evening-only spots in the morning
+  const mornings = pool.filter(
+    (p) =>
+      p.category !== 'nightlife' &&
+      placePreferredSlot(p) !== 'evening' &&
+      (p.category === 'monuments' ||
+        p.category === 'shopping' ||
+        p.category === 'cafes' ||
+        p.category === 'experiences' ||
+        placePreferredSlot(p) === 'morning')
+  );
+  const afternoons = pool.filter(
+    (p) =>
+      p.category !== 'nightlife' &&
+      (p.category === 'experiences' ||
+        p.category === 'shopping' ||
+        p.category === 'monuments' ||
+        p.tags.includes('pool') ||
+        placePreferredSlot(p) === 'afternoon')
+  );
+  const evenings = pool.filter(
+    (p) =>
+      p.category === 'nightlife' ||
+      placePreferredSlot(p) === 'evening' ||
+      p.category === 'restaurants'
+  );
 
-    const activities = [
-      placeToActivity(morning, 'morning', '09:30', dailyBudget),
-      placeToActivity(lunch, 'lunch', '12:30', dailyBudget),
-      adventure && index % 2 === 0
-        ? {
-            id: `exp_${index}_${adventure.id}`,
-            title: adventure.title,
-            location: adventure.location,
-            duration: adventure.duration,
-            cost: adventure.price,
-            description: adventure.description,
-            timeSlot: 'afternoon' as const,
-            type: 'activity' as const,
-            tips: 'Book through MoroccoMate partners — spots fill up on weekends.',
-            category: adventure.category,
-            mapsUrl: mapsUrl(`${adventure.title} ${adventure.location}`),
-          }
-        : placeToActivity(afternoon, 'afternoon', '15:00', dailyBudget),
-      placeToActivity(evening, 'evening', '20:00', dailyBudget),
-    ];
+  const dayArray = Array.from({ length: dayCount }, (_, index) => {
+    picker.startDay();
+
+    const morning =
+      picker.take(mornings.length ? mornings : pool, index, pool) || pool[0];
+    const lunch = picker.take(meals.length ? meals : pool, index, pool) || pool[0];
+
+    const useAdventure =
+      interests.includes('adventure') &&
+      experiences.length > 0 &&
+      index % 2 === 0;
+
+    const afternoonPlace = useAdventure
+      ? null
+      : picker.take(afternoons.length ? afternoons : pool, index, pool);
+
+    const evening =
+      picker.take(evenings.length ? evenings : pool, index, pool) || pool[0];
+
+    const activities = [];
+
+    activities.push(placeToActivity(morning, 'morning', dailyBudget));
+    activities.push(placeToActivity(lunch, 'lunch', dailyBudget));
+
+    if (useAdventure) {
+      const exp = experiences[index % experiences.length];
+      activities.push({
+        id: `exp_${index}_${exp.id}`,
+        title: exp.title,
+        location: exp.location,
+        duration: exp.duration,
+        cost: exp.price,
+        description: exp.description,
+        timeSlot: 'afternoon' as const,
+        type: 'activity' as const,
+        tips: 'Book through MoroccoMate partners — spots fill up on weekends.',
+        bestTime: 'Afternoon · book morning slots in summer heat',
+        category: exp.category,
+        mapsUrl: mapsUrl(`${exp.title} ${exp.location}`),
+        clock: '15:00',
+        badge: 'partner' as const,
+      });
+    } else if (afternoonPlace) {
+      activities.push(placeToActivity(afternoonPlace, 'afternoon', dailyBudget));
+    }
+
+    activities.push(placeToActivity(evening, 'evening', dailyBudget));
+
+    const seen = new Set<string>();
+    const uniqueActivities = activities.filter((a) => {
+      const key = a.title.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 
     return {
       day: index + 1,
@@ -94,7 +190,7 @@ export function generateCuratedItinerary(data: ItineraryInput) {
       )
         .toISOString()
         .split('T')[0],
-      activities,
+      activities: uniqueActivities,
     };
   });
 
@@ -119,30 +215,7 @@ export function generateCuratedItinerary(data: ItineraryInput) {
   };
 }
 
-function pickMeal(pool: Place[], seed: number): Place {
-  const meals = pool.filter(
-    (p) => p.category === 'restaurants' || p.category === 'cafes'
-  );
-  if (meals.length) return meals[seed % meals.length];
-  return pool[seed % pool.length];
-}
-
-function pickEvening(pool: Place[], interests: string[], seed: number): Place {
-  if (interests.includes('nightlife')) {
-    const clubs = pool.filter((p) => p.category === 'nightlife');
-    if (clubs.length) return clubs[seed % clubs.length];
-  }
-  const dinners = pool.filter((p) => p.category === 'restaurants');
-  if (dinners.length) return dinners[seed % dinners.length];
-  return pool[seed % pool.length];
-}
-
-function placeToActivity(
-  place: Place,
-  timeSlot: 'morning' | 'afternoon' | 'evening' | 'lunch' | 'dinner',
-  clock: string,
-  dailyBudget: number
-) {
+function placeToActivity(place: Place, slot: Slot, dailyBudget: number) {
   const type =
     place.category === 'restaurants' || place.category === 'cafes'
       ? ('meal' as const)
@@ -156,18 +229,19 @@ function placeToActivity(
         : Math.floor(dailyBudget / 6);
 
   return {
-    id: `act_${place.id}_${timeSlot}_${Date.now()}`,
+    id: `act_${place.id}_${slot}`,
     title: place.name,
-    location: `${place.neighborhood}`,
-    duration:
-      timeSlot === 'lunch' || timeSlot === 'dinner' ? '1.5 hours' : '2–3 hours',
+    location: place.neighborhood,
+    duration: slot === 'lunch' || slot === 'dinner' ? '1.5 hours' : '2–3 hours',
     cost: `~$${costShare}`,
     description: place.description,
-    timeSlot,
+    timeSlot: slot,
     type,
     tips: `★ ${place.rating} · ${place.priceRange} · ${place.tags.join(', ')}`,
+    bestTime: placeBestTime(place),
     category: place.category,
     mapsUrl: mapsUrl(place.mapsQuery),
-    clock,
+    clock: clockForSlot(slot),
+    badge: place.badge,
   };
 }

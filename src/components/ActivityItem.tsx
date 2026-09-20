@@ -14,6 +14,8 @@ import {
   Moon,
   ExternalLink,
   ChevronDown,
+  BadgeCheck,
+  Sun,
 } from 'lucide-react';
 import { Activity } from '@/types';
 
@@ -74,7 +76,6 @@ export default function ActivityItem({
         !isLast ? 'border-b border-[#2C3E50]/08' : ''
       }`}
     >
-      {/* Time column */}
       <div className="pt-1 text-right pr-1">
         <p className="text-lg sm:text-xl font-bold text-[#D93D3D] tabular-nums leading-none">
           {clock}
@@ -84,7 +85,6 @@ export default function ActivityItem({
         </p>
       </div>
 
-      {/* Content */}
       <div className={`pl-4 sm:pl-5 border-l-2 ${accent}`}>
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-start gap-3 min-w-0">
@@ -96,6 +96,18 @@ export default function ActivityItem({
                 <h3 className="font-bold text-[#2C3E50] text-base sm:text-lg leading-snug">
                   {activity.title}
                 </h3>
+                {activity.badge === 'partner' && (
+                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-[1px] bg-[#D93D3D] text-white">
+                    <BadgeCheck className="w-3 h-3" />
+                    Partner
+                  </span>
+                )}
+                {activity.badge === 'verified' && (
+                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-[1px] bg-[#2C3E50] text-white">
+                    <BadgeCheck className="w-3 h-3" />
+                    Verified
+                  </span>
+                )}
                 <span
                   className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-[1px] ${
                     activity.type === 'meal'
@@ -120,6 +132,12 @@ export default function ActivityItem({
                   {activity.cost}
                 </span>
               </div>
+              {activity.bestTime && (
+                <p className="mt-1.5 text-xs font-medium text-[#C4923A] inline-flex items-center gap-1">
+                  <Sun className="w-3.5 h-3.5" />
+                  Best time: {activity.bestTime}
+                </p>
+              )}
             </div>
           </div>
 
