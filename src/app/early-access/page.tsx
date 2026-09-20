@@ -74,6 +74,8 @@ export default function EarlyAccessPage() {
                   <select name="city" className="input-field" defaultValue="marrakesh">
                     <option value="marrakesh">Marrakech</option>
                     <option value="casablanca">Casablanca</option>
+                    <option value="rabat">Rabat</option>
+                    <option value="tangier">Tangier</option>
                     <option value="both">{t('both_cities')}</option>
                   </select>
                 </div>

@@ -1,3 +1,5 @@
+export type PlaceCity = 'marrakesh' | 'casablanca' | 'rabat' | 'tangier' | 'nationwide';
+
 export type PlaceCategory =
   | 'restaurants'
   | 'nightlife'
@@ -10,7 +12,7 @@ export interface Place {
   id: string;
   name: string;
   category: PlaceCategory;
-  city: 'marrakesh' | 'casablanca' | 'nationwide';
+  city: PlaceCity;
   neighborhood: string;
   description: string;
   image: string;
@@ -39,14 +41,16 @@ export interface Experience {
 const placeImg = (file: string) => `/images/places/${file}`;
 
 export const PLACES: Place[] = [
+  // ——— Marrakech ———
   {
     id: 'nomad-marrakech',
     name: 'Nomad',
     category: 'restaurants',
     city: 'marrakesh',
     neighborhood: 'Medina · Rooftop',
-    description: 'Modern Moroccan plates with one of the best Medina rooftop views — mint lemonade, lamb shoulder, and sunset crowds.',
-    image: placeImg('jemaa-sunset.jpg'), // Medina / Jemaa el-Fnaa sunset rooftop view
+    description:
+      'Modern Moroccan plates with one of the best Medina rooftop views — mint lemonade, lamb shoulder, and sunset crowds.',
+    image: placeImg('jemaa-sunset.jpg'),
     rating: 4.6,
     priceRange: '$$$',
     tags: ['rooftop', 'dinner', 'instagram'],
@@ -59,8 +63,9 @@ export const PLACES: Place[] = [
     category: 'restaurants',
     city: 'marrakesh',
     neighborhood: 'Souk El Jeld',
-    description: 'Hidden courtyard restaurant under banana trees — great for lunch after souk shopping.',
-    image: placeImg('le-jardin.jpg'), // Marrakech riad / garden courtyard
+    description:
+      'Hidden courtyard restaurant under banana trees — great for lunch after souk shopping.',
+    image: placeImg('le-jardin.jpg'),
     rating: 4.5,
     priceRange: '$$',
     tags: ['garden', 'lunch', 'calm'],
@@ -73,8 +78,9 @@ export const PLACES: Place[] = [
     category: 'cafes',
     city: 'marrakesh',
     neighborhood: 'Rahba Kedima',
-    description: 'Classic spice-square café for people-watching, fresh juices, and light Moroccan bites.',
-    image: placeImg('cafe-des-epices.jpg'), // Café des Épices, Marrakech
+    description:
+      'Classic spice-square café for people-watching, fresh juices, and light Moroccan bites.',
+    image: placeImg('cafe-des-epices.jpg'),
     rating: 4.4,
     priceRange: '$',
     tags: ['cafe', 'juice', 'viewpoint'],
@@ -87,8 +93,9 @@ export const PLACES: Place[] = [
     category: 'nightlife',
     city: 'marrakesh',
     neighborhood: 'Hivernage',
-    description: 'Dinner-show venue with belly dance, DJ energy, and a late-night crowd — classic Marrakech night out.',
-    image: placeImg('sofitel-marrakech.jpg'), // Hivernage / Sofitel nightlife district
+    description:
+      'Dinner-show venue with belly dance, DJ energy, and a late-night crowd — classic Marrakech night out.',
+    image: placeImg('sofitel-marrakech.jpg'),
     rating: 4.3,
     priceRange: '$$$',
     tags: ['club', 'show', 'late-night'],
@@ -101,8 +108,9 @@ export const PLACES: Place[] = [
     category: 'nightlife',
     city: 'marrakesh',
     neighborhood: 'Hotel Sofitel · Hivernage',
-    description: 'One of Marrakech’s main party spots — international DJs, bottle service, and a dressy scene.',
-    image: placeImg('sofitel-marrakech.jpg'), // Sofitel Marrakech (Theatro is inside)
+    description:
+      'One of Marrakech’s main party spots — international DJs, bottle service, and a dressy scene.',
+    image: placeImg('sofitel-marrakech.jpg'),
     rating: 4.2,
     priceRange: '$$$$',
     tags: ['club', 'DJ', 'party'],
@@ -115,8 +123,9 @@ export const PLACES: Place[] = [
     category: 'shopping',
     city: 'marrakesh',
     neighborhood: 'Medina Souks',
-    description: 'Main covered souk lane for leather, lanterns, carpets, and spices — bargain hard, stay polite.',
-    image: placeImg('souk-semmarine.jpg'), // Covered Souk Semmarine
+    description:
+      'Main covered souk lane for leather, lanterns, carpets, and spices — bargain hard, stay polite.',
+    image: placeImg('souk-semmarine.jpg'),
     rating: 4.7,
     priceRange: '$$',
     tags: ['souk', 'souvenirs', 'crafts'],
@@ -129,8 +138,9 @@ export const PLACES: Place[] = [
     category: 'shopping',
     city: 'marrakesh',
     neighborhood: 'Near Bab Doukkala',
-    description: 'Fixed-price artisan co-op for quality leather, ceramics, and textiles without aggressive haggling.',
-    image: placeImg('ensemble-artisanal.jpg'), // Ensemble Artisanal Marrakech
+    description:
+      'Fixed-price artisan co-op for quality leather, ceramics, and textiles without aggressive haggling.',
+    image: placeImg('ensemble-artisanal.jpg'),
     rating: 4.5,
     priceRange: '$$',
     tags: ['crafts', 'fixed-price', 'gifts'],
@@ -143,8 +153,9 @@ export const PLACES: Place[] = [
     category: 'monuments',
     city: 'marrakesh',
     neighborhood: 'Medina',
-    description: '19th-century palace with painted cedar ceilings, riad courtyards, and mosaic gardens.',
-    image: placeImg('bahia-palace.jpg'), // Bahia Palace courtyard
+    description:
+      '19th-century palace with painted cedar ceilings, riad courtyards, and mosaic gardens.',
+    image: placeImg('bahia-palace.jpg'),
     rating: 4.6,
     priceRange: '$',
     tags: ['palace', 'history', 'photo'],
@@ -157,25 +168,29 @@ export const PLACES: Place[] = [
     category: 'monuments',
     city: 'marrakesh',
     neighborhood: 'Gueliz',
-    description: 'Yves Saint Laurent’s cobalt-blue garden oasis — book timed tickets ahead.',
-    image: placeImg('jardin-majorelle.jpg'), // Jardin Majorelle studio / garden
+    description:
+      'Yves Saint Laurent’s cobalt-blue garden oasis — book timed tickets ahead.',
+    image: placeImg('jardin-majorelle.jpg'),
     rating: 4.8,
     priceRange: '$$',
     tags: ['garden', 'museum', 'must-see'],
     mapsQuery: 'Jardin Majorelle Marrakech',
     bestFor: ['history', 'arts'],
   },
+
+  // ——— Casablanca (social / vibe-heavy) ———
   {
     id: 'rick-cafe',
     name: "Rick's Café",
     category: 'restaurants',
     city: 'casablanca',
     neighborhood: 'Old Medina / Port',
-    description: 'Casablanca classic inspired by the film — cocktails, live piano, and Atlantic evenings.',
-    image: placeImg('ricks-cafe.jpg'), // Rick's Café Casablanca
+    description:
+      'Casablanca classic inspired by the film — cocktails, live piano, and Atlantic evenings.',
+    image: placeImg('ricks-cafe.jpg'),
     rating: 4.4,
     priceRange: '$$$',
-    tags: ['dinner', 'cocktails', 'iconic'],
+    tags: ['dinner', 'cocktails', 'iconic', 'instagram'],
     mapsQuery: "Rick's Cafe Casablanca",
     bestFor: ['food', 'nightlife'],
   },
@@ -185,27 +200,58 @@ export const PLACES: Place[] = [
     category: 'restaurants',
     city: 'casablanca',
     neighborhood: 'Near Port',
-    description: 'Garden restaurant inside an old fortress — excellent breakfast and traditional lunch.',
-    image: placeImg('la-sqala.jpg'), // La Sqala fortress stairs / walls
+    description:
+      'Garden restaurant inside an old fortress — excellent breakfast and traditional lunch.',
+    image: placeImg('la-sqala.jpg'),
     rating: 4.5,
     priceRange: '$$',
-    tags: ['garden', 'breakfast', 'local'],
+    tags: ['garden', 'breakfast', 'local', 'instagram'],
     mapsQuery: 'La Sqala Casablanca',
     bestFor: ['food'],
   },
   {
-    id: 'morocco-mall',
-    name: 'Morocco Mall',
-    category: 'shopping',
+    id: 'cabestan',
+    name: 'Le Cabestan',
+    category: 'restaurants',
     city: 'casablanca',
-    neighborhood: 'Ain Diab',
-    description: 'Huge coastal mall with global brands, an aquarium, and seaside dining.',
-    image: placeImg('morocco-mall.jpg'), // Morocco Mall Casablanca
-    rating: 4.3,
+    neighborhood: 'El Hank · Corniche',
+    description:
+      'Cliffside seafood & cocktails over the Atlantic — heavy on TikTok sunsets and dressy dinners.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.5,
+    priceRange: '$$$$',
+    tags: ['seafood', 'sunset', 'tiktok', 'instagram'],
+    mapsQuery: 'Le Cabestan Casablanca',
+    bestFor: ['food', 'nightlife'],
+  },
+  {
+    id: 'basmane-casa',
+    name: 'Basmane',
+    category: 'restaurants',
+    city: 'casablanca',
+    neighborhood: 'Gauthier',
+    description:
+      'Trendy Gauthier spot for sharing plates and late dinners — always in Casa food reels.',
+    image: placeImg('ricks-cafe.jpg'),
+    rating: 4.4,
     priceRange: '$$$',
-    tags: ['mall', 'shopping', 'family'],
-    mapsQuery: 'Morocco Mall Casablanca',
-    bestFor: ['shopping'],
+    tags: ['gauthier', 'dinner', 'tiktok'],
+    mapsQuery: 'Basmane Restaurant Casablanca',
+    bestFor: ['food'],
+  },
+  {
+    id: 'orange-mecanique',
+    name: "L'Orange Mécanique",
+    category: 'nightlife',
+    city: 'casablanca',
+    neighborhood: 'Maarif',
+    description: 'Cult Casa nightlife address — loud, late, and packed on weekends.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.2,
+    priceRange: '$$$',
+    tags: ['club', 'party', 'tiktok'],
+    mapsQuery: "L'Orange Mecanique Casablanca",
+    bestFor: ['nightlife'],
   },
   {
     id: 'sky-28',
@@ -213,27 +259,74 @@ export const PLACES: Place[] = [
     category: 'nightlife',
     city: 'casablanca',
     neighborhood: 'Kenzi Tower Hotel',
-    description: 'Sky-high lounge with city views, cocktails, and a dressy late crowd.',
-    image: placeImg('casablanca-skyline.jpg'), // Casablanca skyline / high views
+    description:
+      'Sky-high lounge with city views, cocktails, and a dressy late crowd.',
+    image: placeImg('casablanca-skyline.jpg'),
     rating: 4.4,
     priceRange: '$$$$',
-    tags: ['rooftop', 'cocktails', 'views'],
+    tags: ['rooftop', 'cocktails', 'views', 'instagram'],
     mapsQuery: 'Sky 28 Casablanca',
     bestFor: ['nightlife'],
   },
   {
-    id: 'hassan-ii',
-    name: 'Hassan II Mosque',
-    category: 'monuments',
+    id: 'vip-club-casa',
+    name: 'VIP Club',
+    category: 'nightlife',
     city: 'casablanca',
-    neighborhood: 'Corniche',
-    description: 'One of the world’s largest mosques, built over the Atlantic — timed interior tours available.',
-    image: placeImg('hassan-ii.jpg'), // Hassan II Mosque plaza
-    rating: 4.9,
+    neighborhood: 'Ain Diab',
+    description:
+      'Corniche club energy — bottle service, guest DJs, dress code nights.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.1,
+    priceRange: '$$$$',
+    tags: ['club', 'corniche', 'party'],
+    mapsQuery: 'VIP Club Ain Diab Casablanca',
+    bestFor: ['nightlife'],
+  },
+  {
+    id: 'gauthier-brunch',
+    name: 'Gauthier Café Hop',
+    category: 'cafes',
+    city: 'casablanca',
+    neighborhood: 'Gauthier',
+    description:
+      'Walk the tree-lined streets for specialty coffee, matcha, and pastry spots blowing up on IG.',
+    image: placeImg('cafe-des-epices.jpg'),
+    rating: 4.3,
     priceRange: '$$',
-    tags: ['mosque', 'landmark', 'must-see'],
-    mapsQuery: 'Hassan II Mosque Casablanca',
-    bestFor: ['history'],
+    tags: ['cafe', 'brunch', 'instagram', 'tiktok'],
+    mapsQuery: 'Gauthier Casablanca cafes',
+    bestFor: ['food'],
+  },
+  {
+    id: 'anfa-place',
+    name: 'Anfa Place Mall',
+    category: 'shopping',
+    city: 'casablanca',
+    neighborhood: 'Anfa / Corniche',
+    description:
+      'Oceanfront mall with fashion, cinema, and terrace dining — easy half-day hang.',
+    image: placeImg('morocco-mall.jpg'),
+    rating: 4.2,
+    priceRange: '$$$',
+    tags: ['mall', 'corniche', 'family'],
+    mapsQuery: 'Anfa Place Mall Casablanca',
+    bestFor: ['shopping'],
+  },
+  {
+    id: 'morocco-mall',
+    name: 'Morocco Mall',
+    category: 'shopping',
+    city: 'casablanca',
+    neighborhood: 'Ain Diab',
+    description:
+      'Huge coastal mall with global brands, an aquarium, and seaside dining.',
+    image: placeImg('morocco-mall.jpg'),
+    rating: 4.3,
+    priceRange: '$$$',
+    tags: ['mall', 'shopping', 'family'],
+    mapsQuery: 'Morocco Mall Casablanca',
+    bestFor: ['shopping'],
   },
   {
     id: 'twin-center',
@@ -242,12 +335,301 @@ export const PLACES: Place[] = [
     city: 'casablanca',
     neighborhood: 'Maarif',
     description: 'Maarif’s shopping spine — boutiques, cafés, and evening strolls.',
-    image: placeImg('twin-center.jpg'), // Twin Center Casablanca
+    image: placeImg('twin-center.jpg'),
     rating: 4.2,
     priceRange: '$$',
-    tags: ['boutiques', 'cafes', 'urban'],
+    tags: ['boutiques', 'cafes', 'urban', 'instagram'],
     mapsQuery: 'Twin Center Casablanca',
     bestFor: ['shopping'],
+  },
+  {
+    id: 'habous-quarter',
+    name: 'Habous Quarter',
+    category: 'shopping',
+    city: 'casablanca',
+    neighborhood: 'Nouvelle Medina',
+    description:
+      'Neo-traditional souk for spices, babouches, and olives — photogenic arches everywhere.',
+    image: placeImg('souk-semmarine.jpg'),
+    rating: 4.6,
+    priceRange: '$$',
+    tags: ['souk', 'crafts', 'instagram'],
+    mapsQuery: 'Quartier Habous Casablanca',
+    bestFor: ['shopping', 'arts', 'history'],
+  },
+  {
+    id: 'hassan-ii',
+    name: 'Hassan II Mosque',
+    category: 'monuments',
+    city: 'casablanca',
+    neighborhood: 'Corniche',
+    description:
+      'One of the world’s largest mosques, built over the Atlantic — timed interior tours available.',
+    image: placeImg('hassan-ii.jpg'),
+    rating: 4.9,
+    priceRange: '$$',
+    tags: ['mosque', 'landmark', 'must-see', 'instagram'],
+    mapsQuery: 'Hassan II Mosque Casablanca',
+    bestFor: ['history'],
+  },
+  {
+    id: 'corniche-ain-diab',
+    name: 'Corniche Ain Diab Walk',
+    category: 'experiences',
+    city: 'casablanca',
+    neighborhood: 'Ain Diab',
+    description:
+      'Beach promenade for sunset rides, ice cream, and beach-club energy — Casa’s social strip.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.5,
+    priceRange: '$$',
+    tags: ['beach', 'sunset', 'tiktok', 'walk'],
+    mapsQuery: 'Corniche Ain Diab Casablanca',
+    bestFor: ['nightlife', 'adventure'],
+  },
+
+  // ——— Rabat ———
+  {
+    id: 'cafe-maure-oudayas',
+    name: 'Café Maure · Oudayas',
+    category: 'cafes',
+    city: 'rabat',
+    neighborhood: 'Kasbah des Oudayas',
+    description:
+      'Mint tea with ocean views inside the blue-and-white kasbah — Rabat’s most posted terrace.',
+    image: placeImg('cafe-des-epices.jpg'),
+    rating: 4.7,
+    priceRange: '$',
+    tags: ['tea', 'kasbah', 'instagram', 'tiktok'],
+    mapsQuery: 'Cafe Maure Kasbah des Oudayas Rabat',
+    bestFor: ['food', 'history'],
+  },
+  {
+    id: 'dinarjat-rabat',
+    name: 'Dinarjat',
+    category: 'restaurants',
+    city: 'rabat',
+    neighborhood: 'Medina',
+    description:
+      'Traditional Moroccan feast in a restored riad — live music some nights.',
+    image: placeImg('le-jardin.jpg'),
+    rating: 4.5,
+    priceRange: '$$$',
+    tags: ['riad', 'dinner', 'traditional'],
+    mapsQuery: 'Dinarjat Restaurant Rabat',
+    bestFor: ['food'],
+  },
+  {
+    id: 'le-dhow-rabat',
+    name: 'Le Dhow',
+    category: 'restaurants',
+    city: 'rabat',
+    neighborhood: 'Bouregreg Marina',
+    description:
+      'Dinner on a wooden boat at the marina — lights on the water, very reel-friendly.',
+    image: placeImg('ricks-cafe.jpg'),
+    rating: 4.4,
+    priceRange: '$$$',
+    tags: ['marina', 'dinner', 'instagram'],
+    mapsQuery: 'Le Dhow Rabat',
+    bestFor: ['food', 'nightlife'],
+  },
+  {
+    id: 'agdal-shopping',
+    name: 'Agdal & Hay Riad',
+    category: 'shopping',
+    city: 'rabat',
+    neighborhood: 'Agdal',
+    description:
+      'Modern Rabat shopping — malls, boutiques, and café culture away from the medina.',
+    image: placeImg('twin-center.jpg'),
+    rating: 4.2,
+    priceRange: '$$',
+    tags: ['mall', 'boutiques', 'urban'],
+    mapsQuery: 'Agdal Rabat shopping',
+    bestFor: ['shopping'],
+  },
+  {
+    id: 'kasbah-oudayas',
+    name: 'Kasbah des Oudayas',
+    category: 'monuments',
+    city: 'rabat',
+    neighborhood: 'Oudayas',
+    description:
+      'Andalusian-style kasbah gates, blue alleys, and Atlantic overlooks.',
+    image: placeImg('bahia-palace.jpg'),
+    rating: 4.8,
+    priceRange: '$',
+    tags: ['kasbah', 'photo', 'must-see', 'instagram'],
+    mapsQuery: 'Kasbah des Oudayas Rabat',
+    bestFor: ['history', 'arts'],
+  },
+  {
+    id: 'hassan-tower',
+    name: 'Hassan Tower & Mausoleum',
+    category: 'monuments',
+    city: 'rabat',
+    neighborhood: 'Hassan',
+    description:
+      'Iconic unfinished minaret paired with the Mohammed V mausoleum — guard ceremony photo ops.',
+    image: placeImg('hassan-ii.jpg'),
+    rating: 4.7,
+    priceRange: '$',
+    tags: ['landmark', 'history', 'instagram'],
+    mapsQuery: 'Tour Hassan Rabat',
+    bestFor: ['history'],
+  },
+  {
+    id: 'chellah-rabat',
+    name: 'Chellah Necropolis',
+    category: 'monuments',
+    city: 'rabat',
+    neighborhood: 'Chellah',
+    description:
+      'Roman + Merinid ruins with stork nests and gardens — quiet golden-hour walks.',
+    image: placeImg('jardin-majorelle.jpg'),
+    rating: 4.6,
+    priceRange: '$',
+    tags: ['ruins', 'garden', 'photo'],
+    mapsQuery: 'Chellah Rabat',
+    bestFor: ['history', 'adventure'],
+  },
+  {
+    id: 'bouregreg-marina',
+    name: 'Bouregreg Marina Night',
+    category: 'nightlife',
+    city: 'rabat',
+    neighborhood: 'Salé side / Marina',
+    description:
+      'Waterfront bars and restaurants with soft nightlife — less chaotic than Casa clubs.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.3,
+    priceRange: '$$$',
+    tags: ['marina', 'drinks', 'evening'],
+    mapsQuery: 'Bouregreg Marina Rabat',
+    bestFor: ['nightlife', 'food'],
+  },
+
+  // ——— Tangier ———
+  {
+    id: 'cafe-hafa',
+    name: 'Café Hafa',
+    category: 'cafes',
+    city: 'tangier',
+    neighborhood: 'Kasbah cliff',
+    description:
+      'Legendary cliff café overlooking the Strait — mint tea, sunset, and endless TikToks.',
+    image: placeImg('cafe-des-epices.jpg'),
+    rating: 4.8,
+    priceRange: '$',
+    tags: ['tea', 'sunset', 'tiktok', 'instagram', 'iconic'],
+    mapsQuery: 'Cafe Hafa Tangier',
+    bestFor: ['food', 'history'],
+  },
+  {
+    id: 'petit-socco',
+    name: 'Petit Socco Cafés',
+    category: 'cafes',
+    city: 'tangier',
+    neighborhood: 'Medina',
+    description:
+      'Historic square for people-watching — Gran Café de Paris energy and medina buzz.',
+    image: placeImg('cafe-des-epices.jpg'),
+    rating: 4.4,
+    priceRange: '$$',
+    tags: ['medina', 'cafe', 'instagram'],
+    mapsQuery: 'Petit Socco Tangier',
+    bestFor: ['food', 'history'],
+  },
+  {
+    id: 'restaurant-hamadi',
+    name: 'Restaurant Hamadi',
+    category: 'restaurants',
+    city: 'tangier',
+    neighborhood: 'Medina',
+    description:
+      'Classic Tangier Moroccan kitchen — couscous, pastilla, and old-school hospitality.',
+    image: placeImg('le-jardin.jpg'),
+    rating: 4.3,
+    priceRange: '$$',
+    tags: ['traditional', 'dinner', 'local'],
+    mapsQuery: 'Restaurant Hamadi Tangier',
+    bestFor: ['food'],
+  },
+  {
+    id: 'cap-spartel',
+    name: 'Cap Spartel & Hercules Cave',
+    category: 'experiences',
+    city: 'tangier',
+    neighborhood: 'Cap Spartel',
+    description:
+      'Where Atlantic meets Mediterranean — lighthouse views and the Africa-shaped cave.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.7,
+    priceRange: '$$',
+    tags: ['viewpoint', 'nature', 'tiktok', 'must-see'],
+    mapsQuery: 'Cap Spartel Hercules Cave Tangier',
+    bestFor: ['adventure', 'history'],
+  },
+  {
+    id: 'tangier-kasbah',
+    name: 'Kasbah Museum & Medina',
+    category: 'monuments',
+    city: 'tangier',
+    neighborhood: 'Kasbah',
+    description:
+      'Whitewashed alleys, palace museum, and rooftop viewpoints over the port.',
+    image: placeImg('bahia-palace.jpg'),
+    rating: 4.6,
+    priceRange: '$',
+    tags: ['kasbah', 'museum', 'photo', 'instagram'],
+    mapsQuery: 'Kasbah Museum Tangier',
+    bestFor: ['history', 'arts'],
+  },
+  {
+    id: 'tangier-beach',
+    name: 'Tangier Beach & Corniche',
+    category: 'nightlife',
+    city: 'tangier',
+    neighborhood: 'Malabata / Beach',
+    description:
+      'Beach clubs, evening walks, and summer nightlife along the bay.',
+    image: placeImg('casablanca-skyline.jpg'),
+    rating: 4.3,
+    priceRange: '$$$',
+    tags: ['beach', 'clubs', 'summer', 'tiktok'],
+    mapsQuery: 'Tangier beach corniche',
+    bestFor: ['nightlife', 'adventure'],
+  },
+  {
+    id: 'grand-socco-souk',
+    name: 'Grand Socco & Medina Souks',
+    category: 'shopping',
+    city: 'tangier',
+    neighborhood: 'Medina',
+    description:
+      'Spices, textiles, and vintage finds between Grand Socco and the old town lanes.',
+    image: placeImg('souk-semmarine.jpg'),
+    rating: 4.5,
+    priceRange: '$$',
+    tags: ['souk', 'crafts', 'shopping'],
+    mapsQuery: 'Grand Socco Tangier souk',
+    bestFor: ['shopping', 'arts'],
+  },
+  {
+    id: 'cinema-rif',
+    name: 'Cinémathèque de Tanger',
+    category: 'cafes',
+    city: 'tangier',
+    neighborhood: 'Grand Socco',
+    description:
+      'Iconic art-house cinema café on the square — film, books, and creative crowd.',
+    image: placeImg('ensemble-artisanal.jpg'),
+    rating: 4.5,
+    priceRange: '$$',
+    tags: ['cinema', 'culture', 'instagram'],
+    mapsQuery: 'Cinematheque de Tanger',
+    bestFor: ['arts', 'history'],
   },
 ];
 
@@ -263,7 +645,8 @@ export const EXPERIENCES: Experience[] = [
     image: xpImg('agafay.jpg'),
     price: 'From 450 MAD',
     duration: '2–4 hours',
-    description: 'Throttle through Agafay’s lunar hills on a guided quad tour — sunset packages with mint tea included.',
+    description:
+      'Throttle through Agafay’s lunar hills on a guided quad tour — sunset packages with mint tea included.',
     category: 'adventure',
     included: ['Helmet & guide', 'Hotel pickup options', 'Tea stop'],
     partnerType: 'Adventure operator',
@@ -276,7 +659,8 @@ export const EXPERIENCES: Experience[] = [
     image: xpImg('atlas.jpg'),
     price: 'From 800 MAD',
     duration: 'Half day',
-    description: 'Tandem paraglide over villages and valleys with certified instructors — photos & video add-ons available.',
+    description:
+      'Tandem paraglide over villages and valleys with certified instructors — photos & video add-ons available.',
     category: 'sky',
     included: ['Tandem flight', 'Instructor', 'Transport from city'],
     partnerType: 'Sky sports',
@@ -289,7 +673,8 @@ export const EXPERIENCES: Experience[] = [
     image: xpImg('balloon.jpg'),
     price: 'From 1,900 MAD',
     duration: '5 hours',
-    description: 'Float at sunrise over the Haouz plain, then land for a Berber breakfast.',
+    description:
+      'Float at sunrise over the Haouz plain, then land for a Berber breakfast.',
     category: 'sky',
     included: ['Flight', 'Breakfast', 'Certificate'],
     partnerType: 'Balloon operator',
@@ -302,7 +687,8 @@ export const EXPERIENCES: Experience[] = [
     image: xpImg('merzouga.jpg'),
     price: 'From 1,200 MAD',
     duration: 'Overnight',
-    description: 'Camel into the dunes for sunset, dinner under the stars, and a desert camp stay.',
+    description:
+      'Camel into the dunes for sunset, dinner under the stars, and a desert camp stay.',
     category: 'desert',
     included: ['Camel trek', 'Dinner & breakfast', 'Camp night'],
     partnerType: 'Desert camp',
@@ -315,7 +701,8 @@ export const EXPERIENCES: Experience[] = [
     image: xpImg('essaouira.jpg'),
     price: 'From 600 MAD',
     duration: '2–3 hours',
-    description: 'Lessons or equipment hire on Morocco’s wind capital — beginner to advanced.',
+    description:
+      'Lessons or equipment hire on Morocco’s wind capital — beginner to advanced.',
     category: 'adventure',
     included: ['Gear', 'Instructor option', 'Beach access'],
     partnerType: 'Water sports',
@@ -328,7 +715,8 @@ export const EXPERIENCES: Experience[] = [
     image: xpImg('hammam.jpg'),
     price: 'From 350 MAD',
     duration: '1.5–3 hours',
-    description: 'Black soap scrub, steam, and argan oil massage — book partner spas through MoroccoMate.',
+    description:
+      'Black soap scrub, steam, and argan oil massage — book partner spas through MoroccoMate.',
     category: 'culture',
     included: ['Hammam access', 'Scrub', 'Tea'],
     partnerType: 'Wellness / spa',
@@ -339,8 +727,29 @@ export function mapsUrl(query: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
+export function normalizeCityKey(city: string): PlaceCity {
+  const c = city.toLowerCase();
+  if (c.includes('casa')) return 'casablanca';
+  if (c.includes('rabat')) return 'rabat';
+  if (c.includes('tang') || c.includes('tanger')) return 'tangier';
+  if (c.includes('marr')) return 'marrakesh';
+  return 'marrakesh';
+}
+
+export function cityDisplayName(city: string) {
+  const key = normalizeCityKey(city);
+  const names: Record<PlaceCity, string> = {
+    marrakesh: 'Marrakech',
+    casablanca: 'Casablanca',
+    rabat: 'Rabat',
+    tangier: 'Tangier',
+    nationwide: 'Morocco',
+  };
+  return names[key];
+}
+
 export function placesForCity(city: string) {
-  const key = city.toLowerCase().includes('casa') ? 'casablanca' : 'marrakesh';
+  const key = normalizeCityKey(city);
   return PLACES.filter((p) => p.city === key);
 }
 
@@ -358,6 +767,7 @@ export function pickPlaces(
         (interests.includes('food') && p.category === 'restaurants' ? 2 : 0) +
         (interests.includes('nightlife') && p.category === 'nightlife' ? 3 : 0) +
         (interests.includes('shopping') && p.category === 'shopping' ? 3 : 0) +
+        (p.tags.includes('tiktok') || p.tags.includes('instagram') ? 1.5 : 0) +
         Math.random(),
     }))
     .sort((a, b) => b.score - a.score)

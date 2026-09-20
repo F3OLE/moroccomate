@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 
-const MAX_TRIP_DAYS = 14;
+const MAX_TRIP_DAYS = 21;
 const MAX_AHEAD_MONTHS = 12;
 
 function toYmd(d: Date) {
@@ -198,8 +198,9 @@ export default function TripDateRange({
       <div className="flex flex-wrap gap-1.5 mb-3">
         {[
           { label: '3 days', n: 2 },
-          { label: '5 days', n: 4 },
           { label: '1 week', n: 6 },
+          { label: '2 weeks', n: 13 },
+          { label: '3 weeks', n: 20 },
         ].map((p) => (
           <button
             key={p.label}

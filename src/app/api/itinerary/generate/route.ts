@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { PLACES, mapsUrl } from '@/data/places';
+import { PLACES, mapsUrl, normalizeCityKey } from '@/data/places';
 import {
   generateCuratedItinerary,
   type ItineraryInput,
@@ -96,12 +96,12 @@ export async function POST(request: Request) {
     start < today ||
     start > maxAhead ||
     end > maxAhead ||
-    daySpan > 13
+    daySpan > 20
   ) {
     return NextResponse.json(
       {
         error:
-          'Dates must be from today within 12 months, and trips max 14 days.',
+          'Dates must be from today within 12 months, and trips max 3 weeks.',
       },
       { status: 400 }
     );
@@ -143,15 +143,13 @@ async function generateWithGemini(input: ItineraryInput) {
         ? 'mid-range'
         : 'luxury';
 
-  const cityKey = input.city.toLowerCase().includes('casa')
-    ? 'casablanca'
-    : 'marrakesh';
+  const cityKey = normalizeCityKey(input.city);
 
   const placeHints = PLACES.filter((p) => p.city === cityKey)
     .map((p) => `${p.name} (${p.category}, ${p.neighborhood})`)
     .join('; ');
 
-  const prompt = `You are MoroccoMate, an expert Morocco trip planner for Marrakech and Casablanca.
+  const prompt = `You are MoroccoMate, an expert Morocco trip planner for Marrakech, Casablanca, Rabat, and Tangier.
 
 Create a realistic day-by-day itinerary as JSON only (no markdown).
 
@@ -165,7 +163,7 @@ Trip:
 - budget level: ${budgetLabel} (total trip budget roughly $${input.budget})
 - specialRequests: ${input.specialRequests || 'none'}
 
-Prefer these real places when relevant: ${placeHints}
+Prefer these real places (many are popular on Instagram/TikTok) when relevant: ${placeHints}
 
 Return exactly this JSON shape:
 {
@@ -205,7 +203,7 @@ Return exactly this JSON shape:
 Rules:
 - Exactly ${dayCount} days, dates sequential from startDate.
 - Each day: 3–5 activities covering morning, a meal, afternoon, evening when possible.
-- Use real Marrakech/Casablanca venues, not generic filler.
+- Use real Marrakech/Casablanca/Rabat/Tangier venues (social-famous cafés, rooftops, corniche spots), not generic filler.
 - Match the traveler interests and budget.
 - Keep descriptions concise (1–2 sentences).`;
 
@@ -215,7 +213,7 @@ Rules:
     generationConfig: {
       temperature: 0.7,
       responseMimeType: 'application/json',
-      maxOutputTokens: 4096,
+      maxOutputTokens: 8192,
     },
   });
 

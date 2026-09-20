@@ -55,8 +55,20 @@ const cities = [
   {
     value: 'casablanca',
     label: 'Casablanca',
-    description: 'Corniche, Hassan II, nightlife',
+    description: 'Corniche, Gauthier, nightlife',
     num: '02',
+  },
+  {
+    value: 'rabat',
+    label: 'Rabat',
+    description: 'Oudayas, marina, capital vibes',
+    num: '03',
+  },
+  {
+    value: 'tangier',
+    label: 'Tangier',
+    description: 'Café Hafa, kasbah, Cap Spartel',
+    num: '04',
   },
 ];
 
@@ -109,7 +121,7 @@ export default function PlanPage() {
       return;
     }
     if (!isValidTripRange(formData.startDate, formData.endDate)) {
-      alert('Pick a trip within the next year, up to 14 days.');
+      alert('Pick a trip within the next year, up to 3 weeks.');
       return;
     }
 
@@ -257,7 +269,7 @@ export default function PlanPage() {
                     type="button"
                     onClick={() => {
                       if (!isValidTripRange(formData.startDate, formData.endDate)) {
-                        alert('Pick check-in and check-out (max 14 days, from today).');
+                        alert('Pick check-in and check-out (max 3 weeks, from today).');
                         return;
                       }
                       setCurrentStep(2);

@@ -1,4 +1,10 @@
-import { EXPERIENCES, mapsUrl, pickPlaces, type Place } from '@/data/places';
+import {
+  EXPERIENCES,
+  mapsUrl,
+  normalizeCityKey,
+  pickPlaces,
+  type Place,
+} from '@/data/places';
 
 export type ItineraryInput = {
   city: string;
@@ -34,11 +40,17 @@ export function generateCuratedItinerary(data: ItineraryInput) {
     : ['food', 'history', 'shopping'];
 
   const curated = pickPlaces(data.city, interests, Math.max(8, dayCount * 4));
+  const cityKey = normalizeCityKey(data.city);
+  const cityHint =
+    cityKey === 'marrakesh'
+      ? 'marrakech'
+      : cityKey === 'casablanca'
+        ? 'casa'
+        : cityKey;
+
   const experiences = EXPERIENCES.filter(
     (e) =>
-      e.city.toLowerCase().includes(
-        data.city.toLowerCase().startsWith('casa') ? 'casa' : 'marrakech'
-      ) ||
+      e.city.toLowerCase().includes(cityHint) ||
       e.category === 'desert' ||
       e.category === 'adventure'
   );
@@ -100,7 +112,7 @@ export function generateCuratedItinerary(data: ItineraryInput) {
       'Open any stop in Google Maps from the itinerary for directions & hours.',
       'Book clubs and popular restaurants ahead on weekends.',
       'Carry small cash for souks; cards work at malls and many restaurants.',
-      'Dress smart for rooftop clubs like Theatro or Sky 28.',
+      'Dress smart for rooftop clubs and Corniche nights.',
     ],
     itinerary: dayArray,
     source: 'curated' as const,

@@ -16,6 +16,7 @@ import {
 import { Itinerary } from '@/types';
 import DayCard from '@/components/DayCard';
 import { FadeIn } from '@/components/FadeIn';
+import { cityDisplayName } from '@/data/places';
 
 export default function ItineraryPage() {
   const router = useRouter();
@@ -61,10 +62,7 @@ export default function ItineraryPage() {
       day: 'numeric',
     });
 
-  const getCityDisplayName = (city: string) => {
-    if (city.toLowerCase().startsWith('marr')) return 'Marrakech';
-    return city.charAt(0).toUpperCase() + city.slice(1);
-  };
+  const getCityDisplayName = (city: string) => cityDisplayName(city);
 
   const getBudgetDisplay = (budget: string) => {
     const budgets: Record<string, string> = {

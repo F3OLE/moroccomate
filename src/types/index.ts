@@ -45,7 +45,7 @@ export interface Itinerary {
 }
 
 export interface TripFormData {
-  city: 'marrakesh' | 'casablanca';
+  city: 'marrakesh' | 'casablanca' | 'rabat' | 'tangier';
   startDate: string;
   endDate: string;
   groupSize: 'solo' | 'couple' | 'family' | 'friends';

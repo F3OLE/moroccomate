@@ -45,6 +45,8 @@ export default function DiscoverPage() {
     { id: 'all', labelKey: 'all_cities' as MessageKey },
     { id: 'marrakesh', label: 'Marrakech' },
     { id: 'casablanca', label: 'Casablanca' },
+    { id: 'rabat', label: 'Rabat' },
+    { id: 'tangier', label: 'Tangier' },
   ];
 
   const places = useMemo(() => {
@@ -130,7 +132,12 @@ export default function DiscoverPage() {
                   </div>
                   <p className="text-sm text-gray-500 mb-2 flex items-center gap-1 capitalize">
                     <MapPin className="w-3.5 h-3.5" />
-                    {p.city.replace('marrakesh', 'Marrakech')} · {p.neighborhood}
+                    {p.city === 'marrakesh'
+                      ? 'Marrakech'
+                      : p.city === 'tangier'
+                        ? 'Tangier'
+                        : p.city.charAt(0).toUpperCase() + p.city.slice(1)}{' '}
+                    · {p.neighborhood}
                   </p>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">{p.description}</p>
                   <div className="flex items-center justify-between mt-auto">
