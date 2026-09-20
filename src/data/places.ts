@@ -177,6 +177,111 @@ export const PLACES: Place[] = [
     mapsQuery: 'Jardin Majorelle Marrakech',
     bestFor: ['history', 'arts'],
   },
+  {
+    id: 'nikki-beach-marrakech',
+    name: 'Nikki Beach Marrakech',
+    category: 'experiences',
+    city: 'marrakesh',
+    neighborhood: 'Route d’Ourika',
+    description:
+      'The big pool-club day: cabanas, DJs, champagne, and Instagram floats — Marrakech’s beach without the ocean.',
+    image: placeImg('sofitel-marrakech.jpg'),
+    rating: 4.4,
+    priceRange: '$$$$',
+    tags: ['pool', 'beach-club', 'dj', 'tiktok', 'instagram'],
+    mapsQuery: 'Nikki Beach Marrakech',
+    bestFor: ['nightlife', 'adventure', 'pools'],
+  },
+  {
+    id: 'beldi-country-club',
+    name: 'Beldi Country Club',
+    category: 'experiences',
+    city: 'marrakesh',
+    neighborhood: 'Route de Barrage',
+    description:
+      'Palm-lined pools, hammam, and garden lounging — calmer day-pass energy than the party clubs.',
+    image: placeImg('jardin-majorelle.jpg'),
+    rating: 4.6,
+    priceRange: '$$$',
+    tags: ['pool', 'garden', 'day-pass', 'instagram'],
+    mapsQuery: 'Beldi Country Club Marrakech',
+    bestFor: ['adventure', 'pools'],
+  },
+  {
+    id: 'oasiria',
+    name: 'Oasiria Water Park',
+    category: 'experiences',
+    city: 'marrakesh',
+    neighborhood: 'Route d’Amiizmiz',
+    description:
+      'Slides, wave pool, and lazy river — best family / friends pool day when you want actual water rides.',
+    image: placeImg('le-jardin.jpg'),
+    rating: 4.3,
+    priceRange: '$$',
+    tags: ['pool', 'waterpark', 'family', 'tiktok'],
+    mapsQuery: 'Oasiria Marrakech',
+    bestFor: ['adventure', 'pools'],
+  },
+  {
+    id: 'agafay-pool-camp',
+    name: 'Agafay Desert Pool Camp',
+    category: 'experiences',
+    city: 'marrakesh',
+    neighborhood: 'Agafay Stone Desert',
+    description:
+      'Infinity pool in the stone desert — sunset dips, camel selfies, and dinner under the stars.',
+    image: '/images/experiences/agafay.jpg',
+    rating: 4.7,
+    priceRange: '$$$$',
+    tags: ['pool', 'desert', 'sunset', 'instagram', 'tiktok'],
+    mapsQuery: 'Agafay desert pool camp Marrakech',
+    bestFor: ['adventure', 'pools', 'nightlife'],
+  },
+  {
+    id: 'lotus-club-pool',
+    name: 'Lotus Club Pool Day',
+    category: 'nightlife',
+    city: 'marrakesh',
+    neighborhood: 'Palmerie / outskirts',
+    description:
+      'Pool party Sundays — house music, bottle service, and the classic Kech club-by-day vibe.',
+    image: placeImg('sofitel-marrakech.jpg'),
+    rating: 4.2,
+    priceRange: '$$$',
+    tags: ['pool', 'party', 'dj', 'tiktok'],
+    mapsQuery: 'Lotus Club Marrakech pool',
+    bestFor: ['nightlife', 'pools'],
+  },
+  {
+    id: 'mamounia-pool',
+    name: 'La Mamounia Garden Pool',
+    category: 'experiences',
+    city: 'marrakesh',
+    neighborhood: 'Bab Jdid',
+    description:
+      'Iconic hotel pool set in centuries-old gardens — dressy, photogenic, book a day table if you can.',
+    image: placeImg('le-jardin.jpg'),
+    rating: 4.8,
+    priceRange: '$$$$',
+    tags: ['pool', 'luxury', 'garden', 'instagram'],
+    mapsQuery: 'La Mamounia pool Marrakech',
+    bestFor: ['pools', 'food'],
+  },
+  {
+    id: 'ourika-river-day',
+    name: 'Ourika Valley River Pools',
+    category: 'experiences',
+    city: 'marrakesh',
+    neighborhood: 'Ourika Valley · Atlas',
+    description:
+      'Day trip into the foothills — riverside cafés, cold mountain pools, and waterfall walks.',
+    image: '/images/experiences/atlas.jpg',
+    rating: 4.5,
+    priceRange: '$$',
+    tags: ['river', 'nature', 'day-trip', 'instagram'],
+    mapsQuery: 'Ourika Valley waterfalls Marrakech',
+    bestFor: ['adventure', 'pools'],
+  },
 
   // ——— Casablanca (social / vibe-heavy) ———
   {
@@ -767,6 +872,10 @@ export function pickPlaces(
         (interests.includes('food') && p.category === 'restaurants' ? 2 : 0) +
         (interests.includes('nightlife') && p.category === 'nightlife' ? 3 : 0) +
         (interests.includes('shopping') && p.category === 'shopping' ? 3 : 0) +
+        (interests.includes('pools') &&
+        (p.tags.includes('pool') || p.tags.includes('beach-club'))
+          ? 4
+          : 0) +
         (p.tags.includes('tiktok') || p.tags.includes('instagram') ? 1.5 : 0) +
         Math.random(),
     }))

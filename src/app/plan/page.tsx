@@ -13,6 +13,7 @@ import {
   Mountain,
   ShoppingBag,
   Moon,
+  Waves,
   DollarSign,
   ArrowLeft,
   ArrowRight,
@@ -30,6 +31,7 @@ const interests = [
   { id: 'adventure', label: 'Adventure & Nature', icon: Mountain },
   { id: 'shopping', label: 'Shopping', icon: ShoppingBag },
   { id: 'nightlife', label: 'Nightlife', icon: Moon },
+  { id: 'pools', label: 'Pools & Beach Clubs', icon: Waves },
 ];
 
 const budgetOptions = [

@@ -32,13 +32,14 @@ export default function DiscoverPage() {
   const [category, setCategory] = useState<PlaceCategory | 'all'>('all');
   const [city, setCity] = useState('all');
 
-  const filters: { id: PlaceCategory | 'all'; labelKey: MessageKey }[] = [
+  const filters: { id: PlaceCategory | 'all'; labelKey?: MessageKey; label?: string }[] = [
     { id: 'all', labelKey: 'all' },
     { id: 'restaurants', labelKey: 'restaurants' },
     { id: 'nightlife', labelKey: 'nightlife' },
     { id: 'shopping', labelKey: 'shopping' },
     { id: 'cafes', labelKey: 'cafes' },
     { id: 'monuments', labelKey: 'landmarks' },
+    { id: 'experiences', label: 'Pools & days out' },
   ];
 
   const cities = [
@@ -100,7 +101,7 @@ export default function DiscoverPage() {
                     : 'bg-white border border-gray-200 text-gray-700 hover:border-[#D93D3D]'
                 }`}
               >
-                {t(f.labelKey)}
+                {f.labelKey ? t(f.labelKey) : f.label}
               </button>
             ))}
           </div>
