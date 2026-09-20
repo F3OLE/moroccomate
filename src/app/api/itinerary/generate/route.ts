@@ -79,6 +79,34 @@ export async function POST(request: Request) {
       : undefined,
   };
 
+  const start = new Date(input.startDate + 'T12:00:00');
+  const end = new Date(input.endDate + 'T12:00:00');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const maxAhead = new Date(today);
+  maxAhead.setMonth(maxAhead.getMonth() + 12);
+  const daySpan = Math.ceil(
+    (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  if (
+    Number.isNaN(start.getTime()) ||
+    Number.isNaN(end.getTime()) ||
+    end < start ||
+    start < today ||
+    start > maxAhead ||
+    end > maxAhead ||
+    daySpan > 13
+  ) {
+    return NextResponse.json(
+      {
+        error:
+          'Dates must be from today within 12 months, and trips max 14 days.',
+      },
+      { status: 400 }
+    );
+  }
+
   try {
     const gemini = await generateWithGemini(input);
     if (gemini) {

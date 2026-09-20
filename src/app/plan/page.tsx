@@ -21,6 +21,7 @@ import {
 import { generateItinerary } from '@/lib/api';
 import { TripFormData } from '@/types';
 import { FadeIn } from '@/components/FadeIn';
+import TripDateRange, { isValidTripRange } from '@/components/TripDateRange';
 
 const interests = [
   { id: 'food', label: 'Food & Markets', icon: Utensils },
@@ -78,6 +79,10 @@ export default function PlanPage() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleDatesChange = (start: string, end: string) => {
+    setFormData((prev) => ({ ...prev, startDate: start, endDate: end }));
+  };
+
   const getGroupSizeNumber = (groupSize: string) => {
     const sizeMap: Record<string, number> = {
       solo: 1,
@@ -101,6 +106,10 @@ export default function PlanPage() {
       !formData.budget
     ) {
       alert('Please fill in all required fields');
+      return;
+    }
+    if (!isValidTripRange(formData.startDate, formData.endDate)) {
+      alert('Pick a trip within the next year, up to 14 days.');
       return;
     }
 
@@ -231,40 +240,33 @@ export default function PlanPage() {
                   )}
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-white/55 mb-2">
-                      <Calendar className="w-3.5 h-3.5 inline mr-1" />
-                      Check-in
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.startDate || ''}
-                      onChange={(e) => handleInputChange('startDate', e.target.value)}
-                      className="input-field text-white placeholder:text-white/40 [&::-webkit-calendar-picker-indicator]:invert"
-                      min={new Date().toISOString().split('T')[0]}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-white/55 mb-2">
-                      Check-out
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.endDate || ''}
-                      onChange={(e) => handleInputChange('endDate', e.target.value)}
-                      className="input-field text-white [&::-webkit-calendar-picker-indicator]:invert"
-                      min={formData.startDate || new Date().toISOString().split('T')[0]}
-                    />
-                  </div>
+                <div className="mb-8">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-white/55 mb-2">
+                    <Calendar className="w-3.5 h-3.5 inline mr-1" />
+                    Travel dates
+                  </label>
+                  <TripDateRange
+                    startDate={formData.startDate}
+                    endDate={formData.endDate}
+                    onChange={handleDatesChange}
+                  />
                 </div>
 
                 <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
                   <button
                     type="button"
-                    onClick={() => setCurrentStep(2)}
+                    onClick={() => {
+                      if (!isValidTripRange(formData.startDate, formData.endDate)) {
+                        alert('Pick check-in and check-out (max 14 days, from today).');
+                        return;
+                      }
+                      setCurrentStep(2);
+                    }}
                     className="btn-primary inline-flex items-center justify-center gap-2 w-full sm:w-auto"
-                    disabled={!formData.city || !formData.startDate || !formData.endDate}
+                    disabled={
+                      !formData.city ||
+                      !isValidTripRange(formData.startDate, formData.endDate)
+                    }
                   >
                     Next <ArrowRight className="w-4 h-4" />
                   </button>
