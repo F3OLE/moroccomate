@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import SiteNav, { NavSpacer } from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 import { Providers } from "@/components/Providers";
 import {
   DEFAULT_DESCRIPTION,
@@ -119,6 +120,7 @@ export default function RootLayout({
           <SiteNav />
           <NavSpacer />
           {children}
+          <SiteFooter />
         </Providers>
       </body>
     </html>

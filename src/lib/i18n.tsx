@@ -54,6 +54,7 @@ const messages = {
       'Restaurants, clubs, shops, quad tours, parachute / paragliding operators. Get featured to travelers using MoroccoMate.',
     partner_cta: 'Register as a partner',
     footer_line: 'Discover · Experience · Plan. Your Morocco companion',
+    follow_us: 'Follow us',
     discover_label: 'Discover',
     discover_title: 'Places worth going',
     discover_sub:
@@ -148,6 +149,7 @@ const messages = {
       'Restos, clubs, boutiques, quads, parapente. Soyez mis en avant auprès des voyageurs MoroccoMate.',
     partner_cta: 'S’inscrire comme partenaire',
     footer_line: 'Découvrir · Expériences · Planifier. Votre compagnon Maroc',
+    follow_us: 'Suivez-nous',
     discover_label: 'Découvrir',
     discover_title: 'Des lieux qui valent le détour',
     discover_sub:
@@ -242,6 +244,7 @@ const messages = {
       'Restaurantes, clubs, tiendas, quads, parapente. Aparece ante viajeros de MoroccoMate.',
     partner_cta: 'Registrarme como partner',
     footer_line: 'Descubrir · Experiencias · Planificar. Tu compañero en Marruecos',
+    follow_us: 'Síguenos',
     discover_label: 'Descubrir',
     discover_title: 'Lugares que merecen la pena',
     discover_sub:

@@ -341,35 +341,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#1a2632] text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <Image src="/images/logo.png" alt="" width={40} height={40} />
-            <span className="text-xl font-bold">MoroccoMate</span>
-          </div>
-          <p className="text-[#E1B168] mb-2" dir="rtl" lang="ar">
-            رحلتك تبدأ هنا
-          </p>
-          <p className="text-white/60 text-sm mb-6">{t('footer_line')}</p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-white/70">
-            <Link href="/discover" className="hover:text-white">
-              {t('nav_discover')}
-            </Link>
-            <Link href="/experiences" className="hover:text-white">
-              {t('nav_experiences')}
-            </Link>
-            <Link href="/plan" className="hover:text-white">
-              {t('nav_plan')}
-            </Link>
-            <Link href="/early-access" className="hover:text-white">
-              {t('nav_early')}
-            </Link>
-            <Link href="/partners" className="hover:text-white">
-              {t('nav_partners')}
-            </Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

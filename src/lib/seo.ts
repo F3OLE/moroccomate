@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { socialSameAs } from '@/lib/social';
 
 /** Canonical site URL. Override with NEXT_PUBLIC_SITE_URL in production. */
 export const SITE_URL = (
@@ -109,7 +110,7 @@ export function organizationJsonLd() {
     url: SITE_URL,
     logo: absoluteUrl('/images/icon-512.png'),
     description: DEFAULT_DESCRIPTION,
-    sameAs: [] as string[],
+    sameAs: socialSameAs(),
   };
 }
 
