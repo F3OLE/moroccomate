@@ -80,8 +80,8 @@ const messages = {
     early_page_title: 'Early access',
     early_page_sub:
       "Join the waitlist for MoroccoMate. We'll email you when traveler features and the full app open up.",
-    early_done_title: "You're on the list",
-    early_done_sub: "Thanks. We'll be in touch soon.",
+    early_done_title: 'Choukran bazaf 😉',
+    early_done_sub: "You're on the list. We'll be in touch soon.",
     back_home: 'Back home',
     name: 'Name',
     email: 'Email',
@@ -175,8 +175,8 @@ const messages = {
     early_page_title: 'Accès anticipé',
     early_page_sub:
       'Rejoignez la liste d’attente MoroccoMate. On vous écrira à l’ouverture.',
-    early_done_title: 'Vous êtes sur la liste',
-    early_done_sub: 'Merci. On revient vers vous bientôt.',
+    early_done_title: 'Choukran bazaf 😉',
+    early_done_sub: 'Vous êtes sur la liste. On revient vers vous bientôt.',
     back_home: 'Retour à l’accueil',
     name: 'Nom',
     email: 'E-mail',
@@ -270,8 +270,8 @@ const messages = {
     early_page_title: 'Acceso anticipado',
     early_page_sub:
       'Únete a la lista de MoroccoMate. Te escribiremos cuando abramos.',
-    early_done_title: 'Estás en la lista',
-    early_done_sub: 'Gracias. Pronto te contactamos.',
+    early_done_title: 'Choukran bazaf 😉',
+    early_done_sub: 'Estás en la lista. Pronto te contactamos.',
     back_home: 'Volver al inicio',
     name: 'Nombre',
     email: 'Email',
