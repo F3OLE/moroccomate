@@ -76,7 +76,7 @@ export default function SocialLinks({ className = '', size = 'md' }: Props) {
           return (
             <li key={link.id}>
               <span
-                className={`${baseClass} border-white/20 text-white/35 cursor-default`}
+                className={`${baseClass} border-white/30 text-white/55 cursor-default`}
                 title={`${link.label} — coming soon`}
                 aria-label={`${link.label} (coming soon)`}
               >
@@ -92,7 +92,7 @@ export default function SocialLinks({ className = '', size = 'md' }: Props) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${baseClass} border-white/25 text-white/80 hover:text-[#E1B168] hover:border-[#E1B168]/60 hover:bg-white/5`}
+              className={`${baseClass} border-white/35 text-white hover:text-[#E1B168] hover:border-[#E1B168]/70 hover:bg-white/5`}
               aria-label={link.label}
               title={link.label}
             >
