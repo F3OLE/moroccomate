@@ -29,8 +29,9 @@ export default function EarlyAccessPage() {
       const existing = JSON.parse(localStorage.getItem('mm_early_access') || '[]');
       existing.push({ ...payload, at: new Date().toISOString() });
       localStorage.setItem('mm_early_access', JSON.stringify(existing));
+      // Do not call e.currentTarget.reset() after await — React clears
+      // currentTarget, which threw and showed a false error after success.
       setStatus('done');
-      e.currentTarget.reset();
     } catch (err) {
       setStatus('error');
       setError(err instanceof Error ? err.message : 'Something went wrong');
