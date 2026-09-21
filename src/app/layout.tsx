@@ -2,6 +2,17 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import SiteNav, { NavSpacer } from "@/components/SiteNav";
 import { Providers } from "@/components/Providers";
+import {
+  DEFAULT_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+  absoluteUrl,
+  organizationJsonLd,
+  travelAppJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,9 +32,54 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "MoroccoMate - Your Journey Through Morocco",
-  description:
-    "Discover restaurants, nightlife, shops and experiences across Morocco. Plan trips, join early access, or list your business.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} - ${SITE_TAGLINE}`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "travel",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${SITE_NAME} - ${SITE_TAGLINE}`,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: absoluteUrl("/images/welcomebackground.png"),
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — Morocco travel companion`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} - ${SITE_TAGLINE}`,
+    description: DEFAULT_DESCRIPTION,
+    images: [absoluteUrl("/images/welcomebackground.png")],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -46,8 +102,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = [organizationJsonLd(), websiteJsonLd(), travelAppJsonLd()];
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoArabic.variable} antialiased`}
       >
