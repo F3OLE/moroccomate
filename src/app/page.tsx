@@ -232,7 +232,7 @@ export default function Home() {
                   src={p.image}
                   alt={p.name}
                   tone="dark"
-                  className="py-6 border-b border-white/12 -mx-1 sm:-mx-2"
+                  className="min-h-[7.5rem] py-6 border-b border-white/12 -mx-1 sm:-mx-2"
                 >
                   <article className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
                     <div className="flex-1 min-w-0">
@@ -290,7 +290,7 @@ export default function Home() {
                   src={xp.image}
                   alt={xp.title}
                   tone="light"
-                  className="py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
+                  className="min-h-[7.5rem] py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div className="min-w-0">
