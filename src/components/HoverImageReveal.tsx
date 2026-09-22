@@ -1,117 +1,52 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useState,
-  type ReactNode,
-  type MouseEvent,
-} from 'react';
-import { createPortal } from 'react-dom';
+import type { ReactNode } from 'react';
 
 type Props = {
   src: string;
   alt: string;
   children: ReactNode;
   className?: string;
+  /** Dark rows (ink section) vs light rows (paper section). */
+  tone?: 'dark' | 'light';
 };
 
 /**
- * Editorial hover: floating place photo follows the cursor on desktop.
- * On coarse pointers (touch), a small thumbnail stays visible in the row.
+ * Image fades in inside the hovered row — not a floating popup.
  */
 export default function HoverImageReveal({
   src,
   alt,
   children,
   className = '',
+  tone = 'dark',
 }: Props) {
-  const [mounted, setMounted] = useState(false);
-  const [active, setActive] = useState(false);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const onEnter = useCallback((e: MouseEvent) => {
-    setActive(true);
-    setPos({ x: e.clientX, y: e.clientY });
-  }, []);
-
-  const onMove = useCallback((e: MouseEvent) => {
-    setPos({ x: e.clientX, y: e.clientY });
-  }, []);
-
-  const onLeave = useCallback(() => {
-    setActive(false);
-  }, []);
-
-  // Keep preview inside the viewport
-  const previewW = 280;
-  const previewH = 200;
-  const pad = 18;
-  const left =
-    typeof window !== 'undefined'
-      ? Math.min(
-          Math.max(pad, pos.x + 24),
-          window.innerWidth - previewW - pad
-        )
-      : pos.x + 24;
-  const top =
-    typeof window !== 'undefined'
-      ? Math.min(
-          Math.max(pad, pos.y - previewH / 2),
-          window.innerHeight - previewH - pad
-        )
-      : pos.y - previewH / 2;
+  const wash =
+    tone === 'dark'
+      ? 'from-[rgba(21,32,43,0.55)] via-[rgba(21,32,43,0.72)] to-[rgba(21,32,43,0.9)]'
+      : 'from-[rgba(243,239,232,0.4)] via-[rgba(243,239,232,0.78)] to-[rgba(243,239,232,0.94)]';
 
   return (
     <div
-      className={`group/hover-img relative ${className}`}
-      onMouseEnter={onEnter}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+      className={`group/hover-img relative isolate overflow-hidden rounded-md ${className}`}
     >
-      <div className="flex items-start gap-4">
-        {/* Touch / small screens: always show a thumb */}
-        <div className="sm:hidden w-[4.5rem] h-[4.5rem] shrink-0 overflow-hidden rounded-md bg-[var(--paper-deep)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="min-w-0 flex-1">{children}</div>
+      {/* Photo fills the row; fades in on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 opacity-0 scale-[1.04] transition-[opacity,transform] duration-500 ease-out group-hover/hover-img:opacity-100 group-hover/hover-img:scale-100 group-focus-within/hover-img:opacity-100 group-focus-within/hover-img:scale-100"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          draggable={false}
+        />
+        <div className={`absolute inset-0 bg-gradient-to-r ${wash}`} />
       </div>
 
-      {mounted &&
-        active &&
-        createPortal(
-          <div
-            aria-hidden
-            className="pointer-events-none fixed z-[80] hidden sm:block overflow-hidden rounded-md border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.45)] transition-opacity duration-150"
-            style={{
-              left,
-              top,
-              width: previewW,
-              height: previewH,
-              opacity: active ? 1 : 0,
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={alt}
-              className="w-full h-full object-cover"
-              draggable={false}
-            />
-            <div className="absolute inset-0 ring-1 ring-inset ring-black/10" />
-          </div>,
-          document.body
-        )}
+      <div className="relative z-10 px-1 sm:px-2">{children}</div>
     </div>
   );
 }

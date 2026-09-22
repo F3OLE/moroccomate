@@ -33,7 +33,7 @@ export default function SiteFooter() {
           <Image src="/images/logo.png" alt="" width={36} height={36} />
           <span className="font-display text-xl font-bold tracking-tight">MoroccoMate</span>
         </div>
-        <p className="text-[var(--saffron)] mb-2" dir="rtl" lang="ar">
+        <p className="text-[var(--saffron)] text-xl sm:text-2xl mb-2" dir="rtl" lang="ar">
           رحلتك تبدأ هنا
         </p>
         <p className="text-white/55 text-sm mb-6">{t('footer_line')}</p>

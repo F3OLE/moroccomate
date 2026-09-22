@@ -94,7 +94,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.28 }}
-            className="text-[var(--saffron)] text-base sm:text-lg mb-10"
+            className="text-[var(--saffron)] text-2xl sm:text-3xl md:text-4xl font-medium mb-10"
             dir="rtl"
             lang="ar"
           >
@@ -231,7 +231,8 @@ export default function Home() {
                 <HoverImageReveal
                   src={p.image}
                   alt={p.name}
-                  className="py-6 border-b border-white/12"
+                  tone="dark"
+                  className="py-6 border-b border-white/12 -mx-1 sm:-mx-2"
                 >
                   <article className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
                     <div className="flex-1 min-w-0">
@@ -288,7 +289,8 @@ export default function Home() {
                 <HoverImageReveal
                   src={xp.image}
                   alt={xp.title}
-                  className="py-6 border-b border-[var(--ink)]/12"
+                  tone="light"
+                  className="py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div className="min-w-0">
