@@ -11,12 +11,12 @@ import { useI18n } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
 
 const featuredIds = [
-  'le-jardin-marrakech',
   'cafe-des-epices',
+  'cafe-hafa',
   'souk-semmarine',
-  'ensemble-artisanale',
   'bahia-palace',
   'rick-cafe',
+  'jardin-majorelle',
 ];
 const featured = featuredIds
   .map((id) => PLACES.find((p) => p.id === id))
