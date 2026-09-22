@@ -27,30 +27,30 @@ export default function SiteFooter() {
   ];
 
   return (
-    <footer className="bg-[#1a2632] text-white py-12 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 text-center">
+    <footer className="bg-[var(--ink)] text-white py-14 mt-auto border-t border-white/5">
+      <div className="max-w-4xl mx-auto px-4 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
-          <Image src="/images/logo.png" alt="" width={40} height={40} />
-          <span className="text-xl font-bold">MoroccoMate</span>
+          <Image src="/images/logo.png" alt="" width={36} height={36} />
+          <span className="font-display text-xl font-bold tracking-tight">MoroccoMate</span>
         </div>
-        <p className="text-[#E1B168] mb-2" dir="rtl" lang="ar">
+        <p className="text-[var(--saffron)] mb-2" dir="rtl" lang="ar">
           رحلتك تبدأ هنا
         </p>
-        <p className="text-white/60 text-sm mb-4">{t('footer_line')}</p>
+        <p className="text-white/55 text-sm mb-6">{t('footer_line')}</p>
 
-        <p className="text-white/45 text-xs uppercase tracking-wider mb-3">
+        <p className="text-white/40 text-xs uppercase tracking-[0.18em] mb-3">
           {t('follow_us')}
         </p>
         <SocialLinks className="mb-8" />
 
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-white/70 mb-6">
+        <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-white/65 mb-6">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-white">
               {l.label}
             </Link>
           ))}
         </div>
-        <div className="flex flex-wrap justify-center gap-3 text-sm text-white/55">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-white/45">
           <Link href="/marrakech" className="hover:text-white">
             Marrakech
           </Link>

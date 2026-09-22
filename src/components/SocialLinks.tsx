@@ -70,7 +70,7 @@ export default function SocialLinks({ className = '', size = 'md' }: Props) {
             <Lucide className="w-5 h-5" strokeWidth={1.75} />
           ) : null;
 
-        const baseClass = `${box} inline-flex items-center justify-center rounded-full border transition-colors`;
+        const baseClass = `${box} inline-flex items-center justify-center rounded-md border transition-colors`;
 
         if (!link.href) {
           return (
@@ -92,7 +92,7 @@ export default function SocialLinks({ className = '', size = 'md' }: Props) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${baseClass} border-white/35 text-white hover:text-[#E1B168] hover:border-[#E1B168]/70 hover:bg-white/5`}
+              className={`${baseClass} border-white/35 text-white hover:text-[var(--saffron)] hover:border-[var(--saffron)]/70`}
               aria-label={link.label}
               title={link.label}
             >
