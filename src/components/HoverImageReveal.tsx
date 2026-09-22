@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 
 type Props = {
   src: string;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 /**
- * Image fades in inside the hovered row — not a floating popup.
+ * Place photo fades in inside the hovered row (fills the rectangle).
  */
 export default function HoverImageReveal({
   src,
@@ -21,19 +21,32 @@ export default function HoverImageReveal({
   className = '',
   tone = 'dark',
 }: Props) {
+  const [on, setOn] = useState(false);
+
   const wash =
     tone === 'dark'
-      ? 'from-[rgba(21,32,43,0.55)] via-[rgba(21,32,43,0.72)] to-[rgba(21,32,43,0.9)]'
-      : 'from-[rgba(243,239,232,0.4)] via-[rgba(243,239,232,0.78)] to-[rgba(243,239,232,0.94)]';
+      ? 'linear-gradient(90deg, rgba(21,32,43,0.35) 0%, rgba(21,32,43,0.55) 45%, rgba(21,32,43,0.78) 100%)'
+      : 'linear-gradient(90deg, rgba(243,239,232,0.25) 0%, rgba(243,239,232,0.55) 45%, rgba(243,239,232,0.82) 100%)';
 
   return (
     <div
-      className={`group/hover-img relative isolate overflow-hidden rounded-md ${className}`}
+      className={`relative isolate overflow-hidden rounded-md ${className}`}
+      onMouseEnter={() => setOn(true)}
+      onMouseLeave={() => setOn(false)}
+      onFocusCapture={() => setOn(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setOn(false);
+        }
+      }}
     >
-      {/* Photo fills the row; fades in on hover */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 opacity-0 scale-[1.04] transition-[opacity,transform] duration-500 ease-out group-hover/hover-img:opacity-100 group-hover/hover-img:scale-100 group-focus-within/hover-img:opacity-100 group-focus-within/hover-img:scale-100"
+        className="pointer-events-none absolute inset-0 z-0 transition-[opacity,transform] duration-500 ease-out"
+        style={{
+          opacity: on ? 1 : 0,
+          transform: on ? 'scale(1)' : 'scale(1.06)',
+        }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -43,10 +56,16 @@ export default function HoverImageReveal({
           loading="lazy"
           draggable={false}
         />
-        <div className={`absolute inset-0 bg-gradient-to-r ${wash}`} />
+        <div className="absolute inset-0" style={{ background: wash }} />
       </div>
 
-      <div className="relative z-10 px-1 sm:px-2">{children}</div>
+      <div
+        className={`relative z-10 px-2 sm:px-3 transition-colors duration-300 ${
+          on && tone === 'dark' ? 'drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)]' : ''
+        }`}
+      >
+        {children}
+      </div>
     </div>
   );
 }
