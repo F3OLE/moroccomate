@@ -45,7 +45,6 @@ export default function SiteNav() {
     { href: '/discover', label: t('nav_discover') },
     { href: '/experiences', label: t('nav_experiences') },
     { href: '/plan', label: t('nav_plan') },
-    { href: '/blog', label: t('nav_blog') },
     { href: '/early-access', label: t('nav_early') },
     { href: '/partners', label: t('nav_partners') },
   ];
@@ -62,8 +61,8 @@ export default function SiteNav() {
         WebkitBackdropFilter: 'blur(24px) saturate(180%)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
-        <Link href="/" className="flex items-center gap-2 shrink-0 min-w-0">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 shrink-0 min-w-0 justify-self-start">
           <Image
             src="/images/logo.png"
             alt="MoroccoMate"
@@ -80,7 +79,7 @@ export default function SiteNav() {
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-5">
+        <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -96,13 +95,16 @@ export default function SiteNav() {
               {l.label}
             </Link>
           ))}
+        </nav>
+
+        <div className="hidden lg:flex items-center justify-self-end gap-3">
           <LanguageSwitcher dark={lightChrome} />
           <Link href="/plan" className="btn-primary !py-2 !px-4 text-sm">
             {t('nav_start')}
           </Link>
-        </nav>
+        </div>
 
-        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden justify-self-end">
           <LanguageSwitcher dark={lightChrome} compact />
           <button
             type="button"
