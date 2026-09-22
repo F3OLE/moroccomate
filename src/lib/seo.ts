@@ -41,6 +41,9 @@ export const SITE_KEYWORDS = [
   'AI travel planner Morocco',
   'Morocco travel app',
   'best places Morocco',
+  'Morocco travel blog',
+  'how to avoid scams in Morocco',
+  'things to do in Marrakech',
 ];
 
 type PageMetaInput = {

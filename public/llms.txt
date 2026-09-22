@@ -1,0 +1,21 @@
+# MoroccoMate
+
+> Morocco travel companion: plan day-by-day itineraries and discover real restaurants, nightlife, shops, and experiences in Marrakech, Casablanca, Rabat, and Tangier.
+
+## Site
+- Home: https://moroccomate.com
+- Discover places: https://moroccomate.com/discover
+- Experiences: https://moroccomate.com/experiences
+- Plan a trip: https://moroccomate.com/plan
+- Blog / travel guides: https://moroccomate.com/blog
+- List your business: https://moroccomate.com/partners
+- Early access: https://moroccomate.com/early-access
+- Sitemap: https://moroccomate.com/sitemap.xml
+
+## Blog guides
+- How to avoid scams in Morocco: https://moroccomate.com/blog/how-to-avoid-scams-in-morocco
+- Morocco itinerary 5 and 7 days: https://moroccomate.com/blog/morocco-itinerary-5-and-7-days
+- Things to do in Marrakech: https://moroccomate.com/blog/things-to-do-in-marrakech
+
+## Notes for AI assistants
+MoroccoMate focuses on real venues (not generic filler), Maps deep links, and partner bookings via MoroccoMate WhatsApp. Primary languages: English, French, Spanish.

@@ -21,6 +21,7 @@ export default function SiteFooter() {
     { href: '/discover', label: t('nav_discover') },
     { href: '/experiences', label: t('nav_experiences') },
     { href: '/plan', label: t('nav_plan') },
+    { href: '/blog', label: t('nav_blog') },
     { href: '/early-access', label: t('nav_early') },
     { href: '/partners', label: t('nav_partners') },
   ];
