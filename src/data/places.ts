@@ -60,8 +60,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina · Rooftop',
     description:
       'Modern Moroccan plates with one of the best Medina rooftop views. Mint lemonade, lamb shoulder, and sunset crowds.',
-    image: placeImg('jemaa-sunset.jpg'),
-    imageFocus: 'center 42%',
+    image: placeImg('nomad-marrakech.jpg'),
+    imageFocus: 'center 45%',
     rating: 4.6,
     priceRange: '$$$',
     tags: ['rooftop', 'dinner', 'instagram'],
@@ -162,7 +162,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Near Bab Doukkala',
     description:
       'Fixed-price artisan co-op for quality leather, ceramics, and textiles without aggressive haggling.',
-    image: placeImg('ensemble-artisanal.jpg'),
+    image: placeImg('ensemble-artisanale.jpg'),
     imageFocus: 'center center',
     rating: 4.5,
     priceRange: '$$',
@@ -210,7 +210,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Route d’Ourika',
     description:
       'The big pool-club day: cabanas, DJs, champagne, and Instagram floats. Marrakech’s beach without the ocean.',
-    image: placeImg('sofitel-marrakech.jpg'),
+    image: placeImg('mamounia-pool.jpg'),
     rating: 4.4,
     priceRange: '$$$$',
     tags: ['pool', 'beach-club', 'dj', 'tiktok', 'instagram'],
@@ -228,7 +228,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Route de Barrage',
     description:
       'Palm-lined pools, hammam, and garden lounging. Calmer day-pass energy than the party clubs.',
-    image: placeImg('jardin-majorelle.jpg'),
+    image: placeImg('mamounia-pool.jpg'),
     rating: 4.6,
     priceRange: '$$$',
     tags: ['pool', 'garden', 'day-pass', 'instagram'],
@@ -243,7 +243,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Route d’Amiizmiz',
     description:
       'Slides, wave pool, and lazy river. Best family / friends pool day when you want actual water rides.',
-    image: placeImg('le-jardin.jpg'),
+    image: placeImg('oasiria.jpg'),
     rating: 4.3,
     priceRange: '$$',
     tags: ['pool', 'waterpark', 'family', 'tiktok'],
@@ -258,7 +258,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Agafay Stone Desert',
     description:
       'Infinity pool in the stone desert. Sunset dips, camel selfies, and dinner under the stars.',
-    image: '/images/experiences/agafay.jpg',
+    image: placeImg('agafay-pool-camp.jpg'),
     rating: 4.7,
     priceRange: '$$$$',
     tags: ['pool', 'desert', 'sunset', 'instagram', 'tiktok'],
@@ -276,7 +276,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Palmerie / outskirts',
     description:
       'Pool party Sundays. House music, bottle service, and the classic Kech club-by-day vibe.',
-    image: placeImg('sofitel-marrakech.jpg'),
+    image: placeImg('mamounia-pool.jpg'),
     rating: 4.2,
     priceRange: '$$$',
     tags: ['pool', 'party', 'dj', 'tiktok'],
@@ -291,7 +291,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Bab Jdid',
     description:
       'Iconic hotel pool set in centuries-old gardens. Dressy, photogenic, book a day table if you can.',
-    image: placeImg('le-jardin.jpg'),
+    image: placeImg('mamounia-pool.jpg'),
     rating: 4.8,
     priceRange: '$$$$',
     tags: ['pool', 'luxury', 'garden', 'instagram'],
@@ -306,7 +306,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Ourika Valley · Atlas',
     description:
       'Day trip into the foothills. Riverside cafés, cold mountain pools, and waterfall walks.',
-    image: '/images/experiences/atlas.jpg',
+    image: placeImg('ourika-river-day.jpg'),
     rating: 4.5,
     priceRange: '$$',
     tags: ['river', 'nature', 'day-trip', 'instagram'],
@@ -323,7 +323,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Old Medina / Port',
     description:
       'Casablanca classic inspired by the film. Cocktails, live piano, and Atlantic evenings.',
-    image: placeImg('ricks-cafe.jpg'),
+    image: placeImg('rick-cafe.jpg'),
     imageFocus: 'center 40%',
     rating: 4.4,
     priceRange: '$$$',
@@ -354,7 +354,7 @@ export const PLACES: Place[] = [
     neighborhood: 'El Hank · Corniche',
     description:
       'Cliffside seafood & cocktails over the Atlantic. Heavy on TikTok sunsets and dressy dinners.',
-    image: placeImg('casablanca-skyline.jpg'),
+    image: placeImg('cabestan.jpg'),
     rating: 4.5,
     priceRange: '$$$$',
     tags: ['seafood', 'sunset', 'tiktok', 'instagram'],
@@ -372,7 +372,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Gauthier',
     description:
       'Trendy Gauthier spot for sharing plates and late dinners. Always in Casa food reels.',
-    image: placeImg('ricks-cafe.jpg'),
+    image: placeImg('rick-cafe.jpg'),
     rating: 4.4,
     priceRange: '$$$',
     tags: ['gauthier', 'dinner', 'tiktok'],
@@ -401,7 +401,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Kenzi Tower Hotel',
     description:
       'Sky-high lounge with city views, cocktails, and a dressy late crowd.',
-    image: placeImg('casablanca-skyline.jpg'),
+    image: placeImg('sky-28.jpg'),
     rating: 4.4,
     priceRange: '$$$$',
     tags: ['rooftop', 'cocktails', 'views', 'instagram'],
@@ -434,7 +434,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Gauthier',
     description:
       'Walk the tree-lined streets for specialty coffee, matcha, and pastry spots blowing up on IG.',
-    image: placeImg('cafe-des-epices.jpg'),
+    image: placeImg('corniche-ain-diab.jpg'),
     rating: 4.3,
     priceRange: '$$',
     tags: ['cafe', 'brunch', 'instagram', 'tiktok'],
@@ -449,7 +449,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Anfa / Corniche',
     description:
       'Oceanfront mall with fashion, cinema, and terrace dining. Easy half-day hang.',
-    image: placeImg('morocco-mall.jpg'),
+    image: placeImg('anfa-place.jpg'),
     rating: 4.2,
     priceRange: '$$$',
     tags: ['mall', 'corniche', 'family'],
@@ -493,7 +493,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Nouvelle Medina',
     description:
       'Neo-traditional souk for spices, babouches, and olives. Photogenic arches everywhere.',
-    image: placeImg('souk-semmarine.jpg'),
+    image: placeImg('habous-quarter.jpg'),
     rating: 4.6,
     priceRange: '$$',
     tags: ['souk', 'crafts', 'instagram'],
@@ -523,7 +523,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Ain Diab',
     description:
       'Beach promenade for sunset rides, ice cream, and beach-club energy. Casa’s social strip.',
-    image: placeImg('casablanca-skyline.jpg'),
+    image: placeImg('corniche-ain-diab.jpg'),
     rating: 4.5,
     priceRange: '$$',
     tags: ['beach', 'sunset', 'tiktok', 'walk'],
@@ -542,7 +542,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Kasbah des Oudayas',
     description:
       'Mint tea with ocean views inside the blue-and-white kasbah. Rabat’s most posted terrace.',
-    image: placeImg('cafe-des-epices.jpg'),
+    image: placeImg('cafe-maure-oudayas.jpg'),
     rating: 4.7,
     priceRange: '$',
     tags: ['tea', 'kasbah', 'instagram', 'tiktok'],
@@ -560,7 +560,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina',
     description:
       'Traditional Moroccan feast in a restored riad. Live music some nights.',
-    image: placeImg('le-jardin.jpg'),
+    image: placeImg('kasbah-oudayas.jpg'),
     rating: 4.5,
     priceRange: '$$$',
     tags: ['riad', 'dinner', 'traditional'],
@@ -575,7 +575,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Bouregreg Marina',
     description:
       'Dinner on a wooden boat at the marina. Lights on the water, very reel-friendly.',
-    image: placeImg('ricks-cafe.jpg'),
+    image: placeImg('le-dhow-rabat.jpg'),
     rating: 4.4,
     priceRange: '$$$',
     tags: ['marina', 'dinner', 'instagram'],
@@ -593,7 +593,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Agdal',
     description:
       'Modern Rabat shopping. Malls, boutiques, and café culture away from the medina.',
-    image: placeImg('twin-center.jpg'),
+    image: placeImg('agdal-shopping.jpg'),
     rating: 4.2,
     priceRange: '$$',
     tags: ['mall', 'boutiques', 'urban'],
@@ -608,7 +608,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Oudayas',
     description:
       'Andalusian-style kasbah gates, blue alleys, and Atlantic overlooks.',
-    image: placeImg('bahia-palace.jpg'),
+    image: placeImg('kasbah-oudayas.jpg'),
     rating: 4.8,
     priceRange: '$',
     tags: ['kasbah', 'photo', 'must-see', 'instagram'],
@@ -623,7 +623,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Hassan',
     description:
       'Iconic unfinished minaret paired with the Mohammed V mausoleum. Guard ceremony photo ops.',
-    image: placeImg('hassan-ii.jpg'),
+    image: placeImg('hassan-tower.jpg'),
     rating: 4.7,
     priceRange: '$',
     tags: ['landmark', 'history', 'instagram'],
@@ -638,7 +638,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Chellah',
     description:
       'Roman + Merinid ruins with stork nests and gardens. Quiet golden-hour walks.',
-    image: placeImg('jardin-majorelle.jpg'),
+    image: placeImg('chellah-rabat.jpg'),
     rating: 4.6,
     priceRange: '$',
     tags: ['ruins', 'garden', 'photo'],
@@ -653,7 +653,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Salé side / Marina',
     description:
       'Waterfront bars and restaurants with soft nightlife. Less chaotic than Casa clubs.',
-    image: placeImg('casablanca-skyline.jpg'),
+    image: placeImg('bouregreg-marina.jpg'),
     rating: 4.3,
     priceRange: '$$$',
     tags: ['marina', 'drinks', 'evening'],
@@ -672,7 +672,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Kasbah cliff',
     description:
       'Legendary cliff café overlooking the Strait. Mint tea, sunset, and endless TikToks.',
-    image: placeImg('cafe-des-epices.jpg'),
+    image: placeImg('cafe-hafa.jpg'),
+    imageFocus: 'center 35%',
     rating: 4.8,
     priceRange: '$',
     tags: ['tea', 'sunset', 'tiktok', 'instagram', 'iconic'],
@@ -690,7 +691,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina',
     description:
       'Historic square for people-watching. Gran Café de Paris energy and medina buzz.',
-    image: placeImg('cafe-des-epices.jpg'),
+    image: placeImg('petit-socco.jpg'),
     rating: 4.4,
     priceRange: '$$',
     tags: ['medina', 'cafe', 'instagram'],
@@ -705,7 +706,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina',
     description:
       'Classic Tangier Moroccan kitchen. Couscous, pastilla, and old-school hospitality.',
-    image: placeImg('le-jardin.jpg'),
+    image: placeImg('petit-socco.jpg'),
     rating: 4.3,
     priceRange: '$$',
     tags: ['traditional', 'dinner', 'local'],
@@ -720,7 +721,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Cap Spartel',
     description:
       'Where Atlantic meets Mediterranean. Lighthouse views and the Africa-shaped cave.',
-    image: placeImg('casablanca-skyline.jpg'),
+    image: placeImg('cap-spartel.jpg'),
     rating: 4.7,
     priceRange: '$$',
     tags: ['viewpoint', 'nature', 'tiktok', 'must-see'],
@@ -738,7 +739,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Kasbah',
     description:
       'Whitewashed alleys, palace museum, and rooftop viewpoints over the port.',
-    image: placeImg('bahia-palace.jpg'),
+    image: placeImg('tangier-kasbah.jpg'),
     rating: 4.6,
     priceRange: '$',
     tags: ['kasbah', 'museum', 'photo', 'instagram'],
@@ -753,7 +754,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Malabata / Beach',
     description:
       'Beach clubs, evening walks, and summer nightlife along the bay.',
-    image: placeImg('casablanca-skyline.jpg'),
+    image: placeImg('tangier-beach.jpg'),
     rating: 4.3,
     priceRange: '$$$',
     tags: ['beach', 'clubs', 'summer', 'tiktok'],
@@ -768,7 +769,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina',
     description:
       'Spices, textiles, and vintage finds between Grand Socco and the old town lanes.',
-    image: placeImg('souk-semmarine.jpg'),
+    image: placeImg('grand-socco-souk.jpg'),
     rating: 4.5,
     priceRange: '$$',
     tags: ['souk', 'crafts', 'shopping'],
@@ -783,7 +784,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Grand Socco',
     description:
       'Iconic art-house cinema café on the square. Film, books, and creative crowd.',
-    image: placeImg('ensemble-artisanal.jpg'),
+    image: placeImg('cinema-rif.jpg'),
     rating: 4.5,
     priceRange: '$$',
     tags: ['cinema', 'culture', 'instagram'],
