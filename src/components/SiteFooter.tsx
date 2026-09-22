@@ -43,12 +43,26 @@ export default function SiteFooter() {
         </p>
         <SocialLinks className="mb-8" />
 
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-white/70">
+        <div className="flex flex-wrap justify-center gap-4 text-sm text-white/70 mb-6">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-white">
               {l.label}
             </Link>
           ))}
+        </div>
+        <div className="flex flex-wrap justify-center gap-3 text-sm text-white/55">
+          <Link href="/marrakech" className="hover:text-white">
+            Marrakech
+          </Link>
+          <Link href="/casablanca" className="hover:text-white">
+            Casablanca
+          </Link>
+          <Link href="/rabat" className="hover:text-white">
+            Rabat
+          </Link>
+          <Link href="/tangier" className="hover:text-white">
+            Tangier
+          </Link>
         </div>
       </div>
     </footer>

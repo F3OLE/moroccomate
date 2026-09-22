@@ -184,6 +184,46 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="py-16 md:py-20 bg-[#FFFAF5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="mb-8">
+            <p className="text-[#D93D3D] text-sm font-bold tracking-[0.2em] uppercase mb-3">
+              Destinations
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E50]">
+              Explore by city
+            </h2>
+            <p className="mt-3 text-[#2C3E50]/70 text-lg max-w-xl">
+              City guides with real places, experiences, and a path to plan your days.
+            </p>
+          </FadeIn>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { href: '/marrakech', name: 'Marrakech', line: 'Medina, rooftops, Agafay' },
+              { href: '/casablanca', name: 'Casablanca', line: 'Corniche nights, dining' },
+              { href: '/rabat', name: 'Rabat', line: 'Kasbah, capital calm' },
+              { href: '/tangier', name: 'Tangier', line: 'Strait views, cafés' },
+            ].map((c, i) => (
+              <FadeIn key={c.href} delay={i * 0.05}>
+                <Link
+                  href={c.href}
+                  className="group block rounded-2xl border border-[#2C3E50]/10 bg-white p-6 hover:border-[#D93D3D]/40 transition-colors h-full"
+                >
+                  <h3 className="text-xl font-bold text-[#2C3E50] group-hover:text-[#D93D3D] transition-colors mb-1">
+                    {c.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">{c.line}</p>
+                  <span className="inline-flex items-center gap-1 text-[#D93D3D] font-semibold text-sm">
+                    Open guide
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-10 md:py-12 bg-[#FFFAF5]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <FadeIn>

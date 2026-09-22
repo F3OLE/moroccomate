@@ -12,6 +12,12 @@
 - Early access: https://moroccomate.com/early-access
 - Sitemap: https://moroccomate.com/sitemap.xml
 
+## City guides
+- Marrakech: https://moroccomate.com/marrakech
+- Casablanca: https://moroccomate.com/casablanca
+- Rabat: https://moroccomate.com/rabat
+- Tangier: https://moroccomate.com/tangier
+
 ## Blog guides
 - How to avoid scams in Morocco: https://moroccomate.com/blog/how-to-avoid-scams-in-morocco
 - Morocco itinerary 5 and 7 days: https://moroccomate.com/blog/morocco-itinerary-5-and-7-days

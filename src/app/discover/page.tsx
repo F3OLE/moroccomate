@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   ExternalLink,
@@ -31,10 +31,19 @@ const categoryIcon: Record<PlaceCategory, typeof Utensils> = {
   cafes: Coffee,
 };
 
+const CITY_IDS = ['marrakesh', 'casablanca', 'rabat', 'tangier'] as const;
+
 export default function DiscoverPage() {
   const { t } = useI18n();
   const [category, setCategory] = useState<PlaceCategory | 'all'>('all');
   const [city, setCity] = useState('all');
+
+  useEffect(() => {
+    const c = new URLSearchParams(window.location.search).get('city');
+    if (c && (CITY_IDS as readonly string[]).includes(c)) {
+      setCity(c);
+    }
+  }, []);
 
   const filters: { id: PlaceCategory | 'all'; labelKey?: MessageKey; label?: string }[] = [
     { id: 'all', labelKey: 'all' },
@@ -48,10 +57,10 @@ export default function DiscoverPage() {
 
   const cities = [
     { id: 'all', labelKey: 'all_cities' as MessageKey },
-    { id: 'marrakesh', label: 'Marrakech' },
-    { id: 'casablanca', label: 'Casablanca' },
-    { id: 'rabat', label: 'Rabat' },
-    { id: 'tangier', label: 'Tangier' },
+    { id: 'marrakesh', label: 'Marrakech', hub: '/marrakech' },
+    { id: 'casablanca', label: 'Casablanca', hub: '/casablanca' },
+    { id: 'rabat', label: 'Rabat', hub: '/rabat' },
+    { id: 'tangier', label: 'Tangier', hub: '/tangier' },
   ];
 
   const places = useMemo(() => {
@@ -93,6 +102,20 @@ export default function DiscoverPage() {
                 {'labelKey' in c && c.labelKey ? t(c.labelKey) : c.label}
               </button>
             ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500">
+            <span>City guides:</span>
+            {cities
+              .filter((c) => 'hub' in c && c.hub)
+              .map((c) => (
+                <Link
+                  key={c.hub}
+                  href={c.hub!}
+                  className="text-[#D93D3D] font-medium hover:underline"
+                >
+                  {c.label}
+                </Link>
+              ))}
           </div>
           <div className="flex flex-wrap gap-2">
             {filters.map((f) => (
