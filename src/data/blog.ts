@@ -14,59 +14,95 @@ export type BlogPost = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'how-to-avoid-scams-in-morocco',
-    title: 'How to Avoid Scams in Morocco (Local Tips)',
+    title: "How to Avoid Scams in Morocco: A Local's Honest Guide (2027)",
     description:
-      'Practical scam warnings for Marrakech, Casablanca, and beyond. Fake guides, taxi tricks, souk overcharging, and what locals actually do.',
+      'A Marrakech medina local\'s cheat sheet: fake guides, souk prices, taxis, henna hustles, restaurant bill tricks, and real MAD price ranges so you can enjoy Morocco without getting ripped off.',
     publishedAt: '2026-09-22',
+    updatedAt: '2026-09-22',
     city: 'Morocco',
-    tags: ['safety', 'tips', 'marrakech', 'first-timers'],
+    tags: ['safety', 'tips', 'marrakech', 'first-timers', 'scams'],
     sections: [
       {
         paragraphs: [
-          'Morocco is welcoming and safe for most travelers. Still, tourist areas attract hustles. Knowing the common ones saves money and stress, especially in Marrakech medina and near major landmarks.',
-          'This is written for first-timers. Not fear-mongering. Just what to watch for and how to handle it calmly.',
+          'Morocco is one of the safest and most rewarding countries you will ever visit. But like any major tourist destination, there are people who make a living off visitors who do not know the rules. This is not a scare piece. It is a cheat sheet from someone who was born and raised in the Marrakech medina so you can relax and enjoy your trip without getting ripped off.',
         ],
       },
       {
-        heading: 'Fake “guides” and “closed today” stories',
+        heading: 'The "Friendly Local" Who Walks You Somewhere',
         paragraphs: [
-          'Near Jemaa el-Fnaa, Bahia Palace, or Majorelle, someone may say the entrance is closed and offer to show you a better route. Often they want a commission from a shop or a tip you did not agree to.',
-          'What to do: smile, say no thanks, and keep walking. Official sites have tickets and hours posted. If you want a guide, book a licensed one or go through a riad you trust.',
+          'This is the most common one, especially in Marrakech and Fes. Someone approaches you with perfect English, starts a friendly conversation, then offers to walk you to wherever you are going. "Oh, the tanneries? I\'ll show you, it\'s on my way." It is never on their way.',
+          'At the end they will demand payment. Usually 100 to 200 MAD for a 5 minute walk. If you refuse, they get loud.',
+          'How to handle it: A firm "la shukran" (no thank you) and keep walking. Do not engage in conversation. Do not explain where you are going. If someone is already walking with you and you did not ask for help, stop, say "I\'m fine, thank you," and wait for them to leave. Use Google Maps or MoroccoMate for navigation instead.',
+          'The real price if you do want a guide: Licensed guides wear official badges and charge 200 to 400 MAD for a half day tour. That is reasonable. A random person walking you 5 minutes to a shop is not a guide.',
         ],
       },
       {
-        heading: 'Taxi tricks',
+        heading: 'The Souk Price Game',
         paragraphs: [
-          'Petit taxis should use the meter in cities like Marrakech and Casablanca. Some drivers claim the meter is broken and quote a tourist price.',
-          'What to do: ask for the meter before you get in. If they refuse, take the next taxi. At night or from the airport, agree on a price before the ride if there is no meter culture for that trip. Save Careem / inDrive where available as a backup.',
+          'Nothing in a Moroccan souk has a price tag. That is by design. The starting price a vendor gives you is anywhere from 3x to 10x what they will actually accept.',
+          'Real price examples so you know what things actually cost:',
+          'A leather bag: 80 to 200 MAD (they will start at 500 to 800). Moroccan slippers (babouches): 40 to 80 MAD (they will start at 200 to 300). A small tagine pot (decorative): 30 to 60 MAD (they will start at 150 to 250). Argan oil (1 liter, cosmetic): 150 to 250 MAD (they will start at 500+). Spices (100g bag): 10 to 30 MAD (they will start at 80 to 150). A scarf or pashmina: 30 to 80 MAD (they will start at 200 to 400).',
+          'How to handle it: Start at 30 to 40% of their asking price and negotiate from there. Walk away if they will not come down. Walking away is the strongest negotiation tool you have because 9 times out of 10 they will call you back with a lower number. Never feel bad about negotiating. It is expected. It is cultural. A vendor who does not want to negotiate will tell you.',
+          'Pro tip: Buy from the smaller stalls deeper inside the souk, not the big shops on the main tourist paths. The deeper you go, the lower the starting prices.',
         ],
       },
       {
-        heading: 'Souk overcharging and the “free gift” loop',
+        heading: 'The Spice Shop "Tour"',
         paragraphs: [
-          'Haggling is normal in souks. Starting prices for tourists can be several times local prices. That is negotiation, not always a scam. Pressure and guilt trips are the problem.',
-          'What to do: decide your max price before you talk. Walk away if it feels wrong. You do not owe anyone a purchase because they poured you tea. Fixed-price places like Ensemble Artisanal exist when you want zero haggling.',
+          'Someone will offer to show you a spice shop or a "Berber pharmacy." The tour is actually a high-pressure sales pitch in a back room where they rub oils on your hands, pile up products, and then give you a bill for 500 to 2,000 MAD for items worth maybe 50 MAD total.',
+          'How to handle it: If you want spices, buy them from the open-air vendors in the souk. You can see the product, negotiate openly, and walk away without pressure. Avoid any shop someone "guides" you to because that person is getting a commission and the prices are inflated to cover it.',
         ],
       },
       {
-        heading: 'Currency and card tips',
+        heading: 'The Restaurant Menu Trick',
         paragraphs: [
-          'Exchange at banks or reputable offices. Avoid random street money changers. Count your notes before you leave the counter.',
-          'Cards work in malls and many restaurants. Carry small cash for taxis, tips, and medina shops. Do not flash thick wads of cash in crowded lanes.',
+          'Some restaurants near Jemaa el-Fna and other tourist spots have two prices. The menu price and the bill price. Your bill arrives 30 to 50% higher than what the menu said. They will add bread you did not order, water you did not ask for, or just inflate the numbers and hope you do not check.',
+          'How to handle it: Always check the bill against the menu before paying. Take a photo of the menu when you sit down if it is a handwritten one. If the bill does not match, point it out calmly. They will correct it. Better yet, eat where locals eat. Ask your riad host where they personally go for lunch. Those places do not play games because they would lose their local customers.',
+          'Restaurants locals actually eat at in Marrakech: Chez Lamine for tanjia (a Marrakech specialty most tourists never try). Snack stalls on Rue Bab Agnaou for 15 to 25 MAD meals. Cafe Clock in the Kasbah for a mix of Moroccan and modern. Al Bahriya for fresh fish if you want something different.',
         ],
       },
       {
-        heading: 'Quick rules that work',
+        heading: 'The Taxi Without a Meter',
         paragraphs: [
-          'Be polite and firm. “La, shukran” (no, thank you) ends most pitches.',
-          'Use Google Maps for walking routes instead of following strangers “shortcuts.”',
-          'Book popular restaurants and clubs ahead on weekends so you are not steered into commission spots.',
-          'If something feels off, leave. Morocco has plenty of great places that do not need a hard sell.',
+          'Petit taxis (the small colored ones) in Marrakech are legally required to use the meter. Many drivers will refuse to turn it on and quote you a flat rate of 50 to 100 MAD for a ride that should cost 10 to 20 MAD on the meter.',
+          'How to handle it: Before getting in, say "compteur" (meter) or point at the meter. If they refuse, close the door and wait for the next one. There is always another taxi in under a minute. The meter rate is about 1.50 MAD per kilometer plus a small starting fee. A ride across central Marrakech should rarely exceed 20 to 30 MAD on the meter.',
+          'After midnight: Meters run at 50% higher (tarif de nuit). That is legal. A 20 MAD daytime ride becomes 30 MAD. Still nowhere near the 100 MAD they will try to charge without the meter.',
+        ],
+      },
+      {
+        heading: 'The Henna "Gift"',
+        paragraphs: [
+          'Women near Jemaa el-Fna will grab your hand and start applying henna before you agree to anything. Then they will demand 200 to 500 MAD. The henna is often low quality and uses black henna (which can cause chemical burns on sensitive skin).',
+          'How to handle it: Pull your hand back immediately and say no. Do not feel guilty. This is not a cultural experience, it is a hustle. If you actually want henna, go to a salon or ask your riad to arrange someone. Real henna artists charge 50 to 150 MAD for a proper design with natural brown henna.',
+        ],
+      },
+      {
+        heading: 'The "Closed Mosque" Redirect',
+        paragraphs: [
+          'Someone near a mosque or palace will tell you "it\'s closed today" or "you need to enter from the other side" and then offer to lead you there. The destination is usually a carpet shop or a leather store where they get commission.',
+          'How to handle it: Check the actual opening hours on Google or MoroccoMate before you go. Mosques in Morocco are closed to non-Muslims (except Hassan II in Casablanca), but palaces, museums, and gardens have fixed hours. If someone says a public attraction is closed, they are probably lying. Walk to the entrance yourself and check.',
+        ],
+      },
+      {
+        heading: 'Money and ATM Safety',
+        paragraphs: [
+          'Morocco uses the dirham (MAD). You cannot buy dirhams outside Morocco, so you will exchange when you arrive.',
+          'Avoid: Exchanging money at the airport (worst rates). Exchanging at hotel front desks (second worst). Exchanging with random people on the street (illegal and you will get scammed or robbed).',
+          'Do: Use ATMs from major banks (Attijariwafa, BMCE, Banque Populaire). They give the best exchange rate. Withdraw larger amounts to minimize the per-transaction fee. Keep small bills (20 and 50 MAD notes) for taxis and small purchases because vendors often "don\'t have change" for 200 MAD notes.',
+        ],
+      },
+      {
+        heading: 'The Bottom Line',
+        paragraphs: [
+          'Morocco is not a scam. Morocco is a country of incredibly warm, generous, funny people who will invite you into their home and feed you without expecting anything. The overwhelming majority of interactions you will have are genuine.',
+          'The scams above exist in a very specific zone: the tourist corridors of the biggest cities. Once you step outside that zone, or once you know the playbook, they disappear entirely.',
+          'Three rules that solve 90% of problems: (1) If you did not ask for it, you do not owe for it (unsolicited guides, henna, "gifts"). (2) The first price is never the real price (negotiate everything in the souk). (3) If someone is steering you somewhere, they are getting paid to do it (shop commissions).',
+          'Know these three things and you will have the trip of a lifetime.',
         ],
       },
     ],
     cta: {
-      label: 'Plan a trip with real spots',
+      label: 'Plan your trip on MoroccoMate',
       href: '/plan',
     },
   },
