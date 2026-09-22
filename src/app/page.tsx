@@ -10,7 +10,17 @@ import { EXPERIENCES, PLACES, mapsUrl } from '@/data/places';
 import { useI18n } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
 
-const featured = PLACES.slice(0, 6);
+const featuredIds = [
+  'le-jardin-marrakech',
+  'cafe-des-epices',
+  'souk-semmarine',
+  'ensemble-artisanale',
+  'bahia-palace',
+  'rick-cafe',
+];
+const featured = featuredIds
+  .map((id) => PLACES.find((p) => p.id === id))
+  .filter((p): p is (typeof PLACES)[number] => Boolean(p));
 const featuredXP = EXPERIENCES.slice(0, 3);
 
 const cities = [
@@ -232,7 +242,8 @@ export default function Home() {
                   src={p.image}
                   alt={p.name}
                   tone="dark"
-                  className="py-6 border-b border-white/12 -mx-1 sm:-mx-2"
+                  focus={p.imageFocus || 'center center'}
+                  className="min-h-[7.5rem] py-6 border-b border-white/12 -mx-1 sm:-mx-2"
                 >
                   <article className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
                     <div className="flex-1 min-w-0">
@@ -290,7 +301,8 @@ export default function Home() {
                   src={xp.image}
                   alt={xp.title}
                   tone="light"
-                  className="py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
+                  focus={xp.imageFocus || 'center center'}
+                  className="min-h-[7.5rem] py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div className="min-w-0">
