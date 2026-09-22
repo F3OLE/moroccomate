@@ -103,6 +103,14 @@ video {
   background-position: center;
   opacity: 0.45;
   pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.45s ease;
+  transform: scale(1.02);
+}
+
+.place-card-fade:hover::before,
+.place-card-fade:focus-within::before {
+  opacity: 0.85;
+  transform: scale(1);
 }
 
 .place-card-fade::after {
@@ -117,6 +125,12 @@ video {
     rgba(243, 239, 232, 0.96) 100%
   );
   pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.place-card-fade:hover::after,
+.place-card-fade:focus-within::after {
+  opacity: 0.35;
 }
 
 .place-card-fade > * {
@@ -140,6 +154,14 @@ video {
   background-position: center;
   opacity: 0.4;
   pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.45s ease;
+  transform: scale(1.02);
+}
+
+.place-card-fade-dark:hover::before,
+.place-card-fade-dark:focus-within::before {
+  opacity: 0.8;
+  transform: scale(1);
 }
 
 .place-card-fade-dark::after {
@@ -154,6 +176,12 @@ video {
     rgba(21, 32, 43, 0.94) 100%
   );
   pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.place-card-fade-dark:hover::after,
+.place-card-fade-dark:focus-within::after {
+  opacity: 0.45;
 }
 
 .place-card-fade-dark > * {

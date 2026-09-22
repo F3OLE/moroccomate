@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, MapPin, Star } from 'lucide-react';
 import { FadeIn } from '@/components/FadeIn';
+import HoverImageReveal from '@/components/HoverImageReveal';
 import { EXPERIENCES, PLACES, mapsUrl } from '@/data/places';
 import { useI18n } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
@@ -227,37 +228,45 @@ export default function Home() {
           <div className="border-t border-white/15">
             {featured.map((p, i) => (
               <FadeIn key={p.id} delay={i * 0.04}>
-                <article className="py-6 border-b border-white/12 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
-                      <h3 className="font-display text-xl font-bold text-white">{p.name}</h3>
-                      <span className="text-xs uppercase tracking-wider text-white/45">
-                        {p.category}
-                      </span>
+                <HoverImageReveal
+                  src={p.image}
+                  alt={p.name}
+                  className="py-6 border-b border-white/12"
+                >
+                  <article className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
+                        <h3 className="font-display text-xl font-bold text-white group-hover/hover-img:text-[var(--saffron)] transition-colors">
+                          {p.name}
+                        </h3>
+                        <span className="text-xs uppercase tracking-wider text-white/45">
+                          {p.category}
+                        </span>
+                      </div>
+                      <p className="text-white/50 text-sm mb-2 flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
+                        {p.neighborhood}
+                      </p>
+                      <p className="text-white/75 text-sm leading-relaxed max-w-2xl line-clamp-2">
+                        {p.description}
+                      </p>
                     </div>
-                    <p className="text-white/50 text-sm mb-2 flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 shrink-0" />
-                      {p.neighborhood}
-                    </p>
-                    <p className="text-white/75 text-sm leading-relaxed max-w-2xl line-clamp-2">
-                      {p.description}
-                    </p>
-                  </div>
-                  <div className="flex sm:flex-col items-center sm:items-end gap-3 shrink-0">
-                    <span className="inline-flex items-center gap-1 text-sm text-[var(--saffron)]">
-                      <Star className="w-3.5 h-3.5 fill-[var(--saffron)]" />
-                      {p.rating}
-                    </span>
-                    <a
-                      href={mapsUrl(p.mapsQuery)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-sm font-semibold text-white/80 hover:text-[var(--saffron)]"
-                    >
-                      {t('google_maps')} <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                </article>
+                    <div className="flex sm:flex-col items-center sm:items-end gap-3 shrink-0">
+                      <span className="inline-flex items-center gap-1 text-sm text-[var(--saffron)]">
+                        <Star className="w-3.5 h-3.5 fill-[var(--saffron)]" />
+                        {p.rating}
+                      </span>
+                      <a
+                        href={mapsUrl(p.mapsQuery)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-white/80 hover:text-[var(--saffron)]"
+                      >
+                        {t('google_maps')} <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </article>
+                </HoverImageReveal>
               </FadeIn>
             ))}
           </div>
@@ -276,25 +285,31 @@ export default function Home() {
           <div className="border-t border-[var(--ink)]/15 mb-10">
             {featuredXP.map((xp, i) => (
               <FadeIn key={xp.id} delay={i * 0.05}>
-                <div className="py-6 border-b border-[var(--ink)]/12 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-[var(--zellige)] mb-1">
-                      {xp.partnerType}
-                    </p>
-                    <h3 className="font-display text-xl font-bold text-[var(--ink)] mb-1">
-                      {xp.title}
-                    </h3>
-                    <p className="text-sm text-[var(--ink-soft)] mb-2">
-                      {xp.location} · {xp.duration}
-                    </p>
-                    <p className="text-sm text-[var(--ink-soft)] line-clamp-2 max-w-xl">
-                      {xp.description}
+                <HoverImageReveal
+                  src={xp.image}
+                  alt={xp.title}
+                  className="py-6 border-b border-[var(--ink)]/12"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-xs uppercase tracking-wider text-[var(--zellige)] mb-1">
+                        {xp.partnerType}
+                      </p>
+                      <h3 className="font-display text-xl font-bold text-[var(--ink)] mb-1 group-hover/hover-img:text-[var(--brand)] transition-colors">
+                        {xp.title}
+                      </h3>
+                      <p className="text-sm text-[var(--ink-soft)] mb-2">
+                        {xp.location} · {xp.duration}
+                      </p>
+                      <p className="text-sm text-[var(--ink-soft)] line-clamp-2 max-w-xl">
+                        {xp.description}
+                      </p>
+                    </div>
+                    <p className="font-display text-lg font-bold text-[var(--brand)] shrink-0">
+                      {xp.price}
                     </p>
                   </div>
-                  <p className="font-display text-lg font-bold text-[var(--brand)] shrink-0">
-                    {xp.price}
-                  </p>
-                </div>
+                </HoverImageReveal>
               </FadeIn>
             ))}
           </div>
