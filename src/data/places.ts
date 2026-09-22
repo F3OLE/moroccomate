@@ -16,6 +16,8 @@ export interface Place {
   neighborhood: string;
   description: string;
   image: string;
+  /** CSS object-position so the right part of the photo shows in wide hover rows */
+  imageFocus?: string;
   rating: number;
   priceRange: string;
   tags: string[];
@@ -36,6 +38,7 @@ export interface Experience {
   location: string;
   city: string;
   image: string;
+  imageFocus?: string;
   price: string;
   duration: string;
   description: string;
@@ -58,6 +61,7 @@ export const PLACES: Place[] = [
     description:
       'Modern Moroccan plates with one of the best Medina rooftop views. Mint lemonade, lamb shoulder, and sunset crowds.',
     image: placeImg('jemaa-sunset.jpg'),
+    imageFocus: 'center 42%',
     rating: 4.6,
     priceRange: '$$$',
     tags: ['rooftop', 'dinner', 'instagram'],
@@ -76,6 +80,7 @@ export const PLACES: Place[] = [
     description:
       'Hidden courtyard restaurant under banana trees. Great for lunch after souk shopping.',
     image: placeImg('le-jardin.jpg'),
+    imageFocus: 'center center',
     rating: 4.5,
     priceRange: '$$',
     tags: ['garden', 'lunch', 'calm'],
@@ -91,6 +96,7 @@ export const PLACES: Place[] = [
     description:
       'Classic spice-square café for people-watching, fresh juices, and light Moroccan bites.',
     image: placeImg('cafe-des-epices.jpg'),
+    imageFocus: 'center 22%',
     rating: 4.4,
     priceRange: '$',
     tags: ['cafe', 'juice', 'viewpoint'],
@@ -105,7 +111,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Hivernage',
     description:
       'Dinner-show venue with belly dance, DJ energy, and a late-night crowd. Classic Marrakech night out.',
-    image: placeImg('sofitel-marrakech.jpg'),
+    image: placeImg('riad-courtyard.jpg'),
+    imageFocus: 'center 70%',
     rating: 4.3,
     priceRange: '$$$',
     tags: ['club', 'show', 'late-night'],
@@ -121,6 +128,7 @@ export const PLACES: Place[] = [
     description:
       'One of Marrakech’s main party spots. International DJs, bottle service, and a dressy scene.',
     image: placeImg('sofitel-marrakech.jpg'),
+    imageFocus: 'center 55%',
     rating: 4.2,
     priceRange: '$$$$',
     tags: ['club', 'DJ', 'party'],
@@ -139,6 +147,7 @@ export const PLACES: Place[] = [
     description:
       'Main covered souk lane for leather, lanterns, carpets, and spices. Bargain hard, stay polite.',
     image: placeImg('souk-semmarine.jpg'),
+    imageFocus: 'center 45%',
     rating: 4.7,
     priceRange: '$$',
     tags: ['souk', 'souvenirs', 'crafts'],
@@ -154,6 +163,7 @@ export const PLACES: Place[] = [
     description:
       'Fixed-price artisan co-op for quality leather, ceramics, and textiles without aggressive haggling.',
     image: placeImg('ensemble-artisanal.jpg'),
+    imageFocus: 'center center',
     rating: 4.5,
     priceRange: '$$',
     tags: ['crafts', 'fixed-price', 'gifts'],
@@ -169,6 +179,7 @@ export const PLACES: Place[] = [
     description:
       '19th-century palace with painted cedar ceilings, riad courtyards, and mosaic gardens.',
     image: placeImg('bahia-palace.jpg'),
+    imageFocus: 'center 40%',
     rating: 4.6,
     priceRange: '$',
     tags: ['palace', 'history', 'photo'],
@@ -184,6 +195,7 @@ export const PLACES: Place[] = [
     description:
       'Yves Saint Laurent’s cobalt-blue garden oasis. Book timed tickets ahead.',
     image: placeImg('jardin-majorelle.jpg'),
+    imageFocus: 'center 35%',
     rating: 4.8,
     priceRange: '$$',
     tags: ['garden', 'museum', 'must-see'],
@@ -312,6 +324,7 @@ export const PLACES: Place[] = [
     description:
       'Casablanca classic inspired by the film. Cocktails, live piano, and Atlantic evenings.',
     image: placeImg('ricks-cafe.jpg'),
+    imageFocus: 'center 40%',
     rating: 4.4,
     priceRange: '$$$',
     tags: ['dinner', 'cocktails', 'iconic', 'instagram'],
@@ -789,6 +802,7 @@ export const EXPERIENCES: Experience[] = [
     location: 'Agafay Stone Desert',
     city: 'Marrakech',
     image: xpImg('agafay.jpg'),
+    imageFocus: 'center 40%',
     price: 'From 450 MAD',
     duration: '2-4 hours',
     description:
@@ -803,6 +817,7 @@ export const EXPERIENCES: Experience[] = [
     location: 'High Atlas foothills',
     city: 'Marrakech',
     image: xpImg('atlas.jpg'),
+    imageFocus: 'center 35%',
     price: 'From 800 MAD',
     duration: 'Half day',
     description:
@@ -817,6 +832,7 @@ export const EXPERIENCES: Experience[] = [
     location: 'Palm groves outside Marrakech',
     city: 'Marrakech',
     image: xpImg('balloon.jpg'),
+    imageFocus: 'center 30%',
     price: 'From 1,900 MAD',
     duration: '5 hours',
     description:
