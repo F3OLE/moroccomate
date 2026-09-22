@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { LanguageSwitcher } from '@/components/Providers';
 import { useI18n } from '@/lib/i18n';
 
@@ -16,13 +15,11 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t } = useI18n();
-  const reduce = useReducedMotion();
 
   const isHome = pathname === '/';
   const isDarkRoute =
     DARK_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`));
 
-  // Over the home hero (or dark plan pages): light text on clear glass
   const lightChrome = isDarkRoute || (isHome && !scrolled);
 
   useEffect(() => {
@@ -52,19 +49,20 @@ export default function SiteNav() {
   ];
 
   return (
-    <motion.header
-      initial={reduce ? false : { opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 inset-x-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color] duration-300 ${
+    <header
+      className={`fixed top-0 inset-x-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color] duration-300 ${
         lightChrome
-          ? 'border-white/20 bg-white/[0.08] text-white'
-          : 'border-white/35 bg-white/25 text-[#2C3E50]'
+          ? 'border-white/15 bg-[rgba(12,18,24,0.35)] text-white'
+          : 'border-[var(--ink)]/10 bg-[rgba(243,239,232,0.92)] text-[var(--ink)]'
       }`}
-      style={{
-        backdropFilter: 'blur(24px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-      }}
+      style={
+        lightChrome
+          ? undefined
+          : {
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+            }
+      }
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-2">
         <Link href="/" className="flex items-center gap-2 shrink-0 min-w-0 justify-self-start">
@@ -76,8 +74,8 @@ export default function SiteNav() {
             className="w-8 h-8 sm:w-9 sm:h-9 shrink-0"
           />
           <span
-            className={`font-bold tracking-tight text-sm sm:text-base truncate ${
-              lightChrome ? 'text-white' : 'text-[#D93D3D]'
+            className={`font-display font-bold tracking-tight text-sm sm:text-base truncate ${
+              lightChrome ? 'text-white' : 'text-[var(--brand)]'
             }`}
           >
             MoroccoMate
@@ -91,10 +89,10 @@ export default function SiteNav() {
               href={l.href}
               className={`text-sm font-medium transition-colors whitespace-nowrap ${
                 pathname === l.href
-                  ? 'text-[#D93D3D]'
+                  ? 'text-[var(--brand)]'
                   : lightChrome
                     ? 'text-white/75 hover:text-white'
-                    : 'text-[#2C3E50]/70 hover:text-[#D93D3D]'
+                    : 'text-[var(--ink-soft)] hover:text-[var(--brand)]'
               }`}
             >
               {l.label}
@@ -113,8 +111,8 @@ export default function SiteNav() {
           <LanguageSwitcher dark={lightChrome} compact />
           <button
             type="button"
-            className={`p-2 rounded-lg ${
-              lightChrome ? 'text-white hover:bg-white/10' : 'text-[#2C3E50] hover:bg-black/5'
+            className={`p-2 rounded-md ${
+              lightChrome ? 'text-white hover:bg-white/10' : 'text-[var(--ink)] hover:bg-black/5'
             }`}
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -129,22 +127,18 @@ export default function SiteNav() {
         <div
           className={`lg:hidden border-t px-4 py-4 space-y-1 max-h-[calc(100dvh-3.5rem)] overflow-y-auto pb-[max(1rem,env(safe-area-inset-bottom))] ${
             lightChrome
-              ? 'border-white/10 bg-[#1a1520]/70 text-white'
-              : 'border-white/30 bg-white/60 text-[#2C3E50]'
+              ? 'border-white/10 bg-[rgba(12,18,24,0.92)] text-white'
+              : 'border-[var(--ink)]/10 bg-[var(--paper)] text-[var(--ink)]'
           }`}
-          style={{
-            backdropFilter: 'blur(28px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(28px) saturate(180%)',
-          }}
         >
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className={`block py-3 px-3 rounded-xl text-base font-medium ${
+              className={`block py-3 px-3 rounded-md text-base font-medium ${
                 pathname === l.href
-                  ? 'bg-[#D93D3D]/15 text-[#D93D3D]'
+                  ? 'bg-[var(--brand)]/15 text-[var(--brand)]'
                   : lightChrome
                     ? 'hover:bg-white/10'
                     : 'hover:bg-black/5'
@@ -162,7 +156,7 @@ export default function SiteNav() {
           </Link>
         </div>
       )}
-    </motion.header>
+    </header>
   );
 }
 

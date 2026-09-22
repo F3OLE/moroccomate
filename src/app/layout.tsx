@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
+import { Bricolage_Grotesque, Figtree, Noto_Sans_Arabic } from "next/font/google";
 import SiteNav, { NavSpacer } from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { Providers } from "@/components/Providers";
@@ -16,14 +16,16 @@ import {
 } from "@/lib/seo";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = Bricolage_Grotesque({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const body = Figtree({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const notoArabic = Noto_Sans_Arabic({
@@ -114,7 +116,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoArabic.variable} antialiased`}
+        className={`${display.variable} ${body.variable} ${notoArabic.variable} antialiased`}
       >
         <Providers>
           <SiteNav />
