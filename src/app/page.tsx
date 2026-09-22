@@ -64,22 +64,29 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FFFAF5]">
       <section className="relative min-h-[100svh] -mt-14 sm:-mt-16 flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/welcomebackground.png"
-          alt=""
-          fill
-          priority
-          className="object-cover object-center scale-105"
-        />
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1.06, opacity: 0.85 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Image
+            src="/images/welcomebackground.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/75" />
-        <div className="absolute inset-0 hero-shimmer opacity-25 bg-gradient-to-r from-transparent via-[#D93D3D]/25 to-transparent" />
+        <div className="absolute inset-0 hero-shimmer opacity-20 bg-gradient-to-r from-transparent via-[#D93D3D]/20 to-transparent" />
 
         <div className="relative z-10 w-full max-w-3xl mx-auto px-4 sm:px-6 pt-28 pb-16 sm:py-24 text-center text-white">
           <motion.div
-            initial={{ opacity: 0, scale: 0.88, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="animate-float mb-8"
+            initial={{ opacity: 0, y: 18, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-8"
           >
             <Image
               src="/images/logo.png"
@@ -92,9 +99,9 @@ export default function Home() {
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.25, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="text-2xl md:text-3xl font-medium tracking-wide text-white mb-2"
           >
             {t('hero_tagline')}
@@ -102,7 +109,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.45 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
             className="text-[#E1B168] text-lg md:text-xl mb-12"
             dir="rtl"
             lang="ar"
@@ -111,27 +118,27 @@ export default function Home() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55 }}
+            transition={{ delay: 0.5, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <Link
               href="/plan"
-              className="inline-flex items-center justify-center gap-2 bg-[#D93D3D] hover:bg-[#B83232] text-white font-bold text-lg px-8 py-4 rounded-xl w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 bg-[#D93D3D] hover:bg-[#B83232] text-white font-bold text-lg px-8 py-4 rounded-xl w-full sm:w-auto transition-transform duration-300 hover:-translate-y-0.5"
             >
               {t('hero_plan')}
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               href="/discover"
-              className="inline-flex items-center justify-center gap-2 border border-[#E1B168]/60 text-[#E1B168] hover:bg-[#E1B168]/10 font-semibold px-8 py-4 rounded-xl w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 border border-[#E1B168]/60 text-[#E1B168] hover:bg-[#E1B168]/10 font-semibold px-8 py-4 rounded-xl w-full sm:w-auto transition-colors duration-300"
             >
               {t('hero_discover')}
             </Link>
             <Link
               href="/early-access"
-              className="inline-flex items-center justify-center text-white/80 hover:text-white font-medium px-4 py-3 underline underline-offset-4 decoration-[#E1B168]/50"
+              className="inline-flex items-center justify-center text-white/80 hover:text-white font-medium px-4 py-3 underline underline-offset-4 decoration-[#E1B168]/50 transition-colors duration-300"
             >
               {t('hero_early')}
             </Link>

@@ -12,6 +12,7 @@ import {
   placesForHub,
 } from '@/data/cities';
 import { mapsUrl } from '@/data/places';
+import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
 import { absoluteUrl, buildMetadata, SITE_NAME } from '@/lib/seo';
 
 type Props = { params: Promise<{ city: string }> };
@@ -102,12 +103,14 @@ export default async function CityHubPage({ params }: Props) {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <p className="text-gray-600 text-lg max-w-3xl mb-12 leading-relaxed">
-          {hub.description}
-        </p>
+        <FadeIn>
+          <p className="text-gray-600 text-lg max-w-3xl mb-12 leading-relaxed">
+            {hub.description}
+          </p>
+        </FadeIn>
 
         <section className="mb-14">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-6">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#2C3E50]">
                 Places in {hub.name}
@@ -122,53 +125,52 @@ export default async function CityHubPage({ params }: Props) {
             >
               See all <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </FadeIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {places.map((p) => (
-              <article
-                key={p.id}
-                className="card overflow-hidden flex flex-col"
-              >
-                <div className="relative h-44 -mx-6 -mt-6 mb-4">
-                  <Image
-                    src={p.image}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="flex items-start justify-between gap-2 mb-1">
-                  <h3 className="font-bold text-[#2C3E50] text-lg">{p.name}</h3>
-                  <span className="inline-flex items-center gap-1 text-sm text-gray-600 shrink-0">
-                    <Star className="w-3.5 h-3.5 fill-[#E1B168] text-[#E1B168]" />
-                    {p.rating}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500 mb-2 flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" />
-                  {p.neighborhood}
-                </p>
-                <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">
-                  {p.description}
-                </p>
-                <a
-                  href={mapsUrl(p.mapsQuery)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#D93D3D]"
-                >
-                  Open in Maps <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </article>
+              <StaggerItem key={p.id}>
+                <article className="card overflow-hidden flex flex-col h-full">
+                  <div className="relative h-44 -mx-6 -mt-6 mb-4">
+                    <Image
+                      src={p.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h3 className="font-bold text-[#2C3E50] text-lg">{p.name}</h3>
+                    <span className="inline-flex items-center gap-1 text-sm text-gray-600 shrink-0">
+                      <Star className="w-3.5 h-3.5 fill-[#E1B168] text-[#E1B168]" />
+                      {p.rating}
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-2 flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5" />
+                    {p.neighborhood}
+                  </p>
+                  <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">
+                    {p.description}
+                  </p>
+                  <a
+                    href={mapsUrl(p.mapsQuery)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#D93D3D]"
+                  >
+                    Open in Maps <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </article>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </section>
 
         {experiences.length > 0 && (
           <section className="mb-14">
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+            <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-6">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#2C3E50]">
                   Experiences near {hub.name}
@@ -183,92 +185,100 @@ export default async function CityHubPage({ params }: Props) {
               >
                 All experiences <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            </FadeIn>
+            <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {experiences.map((xp) => (
-                <article key={xp.id} className="card">
-                  <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-xl">
-                    <Image
-                      src={xp.image}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-                  <h3 className="font-bold text-[#2C3E50] text-lg mb-1">
-                    {xp.title}
-                  </h3>
-                  <p className="text-sm text-[#D93D3D] font-medium mb-2">
-                    {xp.price} · {xp.duration}
-                  </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {xp.description}
-                  </p>
-                </article>
+                <StaggerItem key={xp.id}>
+                  <article className="card h-full">
+                    <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-xl">
+                      <Image
+                        src={xp.image}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
+                    <h3 className="font-bold text-[#2C3E50] text-lg mb-1">
+                      {xp.title}
+                    </h3>
+                    <p className="text-sm text-[#D93D3D] font-medium mb-2">
+                      {xp.price} · {xp.duration}
+                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {xp.description}
+                    </p>
+                  </article>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </section>
         )}
 
-        <section className="mb-14 rounded-2xl bg-[#2C3E50] text-white p-8 sm:p-10 text-center">
-          <p className="text-[#E1B168] text-sm font-bold uppercase tracking-wider mb-2">
-            Build your days
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3">
-            Plan a {hub.name} itinerary
-          </h2>
-          <p className="text-white/75 max-w-xl mx-auto mb-6">
-            Pick dates and interests. Get a day-by-day plan with real venues and
-            Maps links.
-          </p>
-          <Link
-            href="/plan"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            Plan {hub.name} <ArrowRight className="w-4 h-4" />
-          </Link>
-        </section>
+        <FadeIn>
+          <section className="mb-14 rounded-2xl bg-[#2C3E50] text-white p-8 sm:p-10 text-center">
+            <p className="text-[#E1B168] text-sm font-bold uppercase tracking-wider mb-2">
+              Build your days
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+              Plan a {hub.name} itinerary
+            </h2>
+            <p className="text-white/75 max-w-xl mx-auto mb-6">
+              Pick dates and interests. Get a day-by-day plan with real venues and
+              Maps links.
+            </p>
+            <Link
+              href="/plan"
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              Plan {hub.name} <ArrowRight className="w-4 h-4" />
+            </Link>
+          </section>
+        </FadeIn>
 
         {posts.length > 0 && (
-          <section className="mb-14">
-            <h2 className="text-2xl font-bold text-[#2C3E50] mb-4">
-              Guides for your trip
-            </h2>
-            <ul className="space-y-3">
-              {posts.map((post) => (
-                <li key={post.slug}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="font-semibold text-[#2C3E50] hover:text-[#D93D3D]"
-                  >
-                    {post.title}
-                  </Link>
-                  <p className="text-sm text-gray-600 mt-0.5">
-                    {post.description}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <FadeIn>
+            <section className="mb-14">
+              <h2 className="text-2xl font-bold text-[#2C3E50] mb-4">
+                Guides for your trip
+              </h2>
+              <ul className="space-y-3">
+                {posts.map((post) => (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="font-semibold text-[#2C3E50] hover:text-[#D93D3D]"
+                    >
+                      {post.title}
+                    </Link>
+                    <p className="text-sm text-gray-600 mt-0.5">
+                      {post.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </FadeIn>
         )}
 
-        <section>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
-            Other cities
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {otherCities.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}`}
-                className="px-4 py-2 rounded-full bg-white border border-gray-200 text-[#2C3E50] font-medium hover:border-[#D93D3D] hover:text-[#D93D3D]"
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
-        </section>
+        <FadeIn>
+          <section>
+            <h2 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
+              Other cities
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {otherCities.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/${c.slug}`}
+                  className="px-4 py-2 rounded-full bg-white border border-gray-200 text-[#2C3E50] font-medium hover:border-[#D93D3D] hover:text-[#D93D3D] transition-colors duration-300"
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </div>
+          </section>
+        </FadeIn>
       </div>
     </div>
   );

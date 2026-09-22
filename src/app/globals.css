@@ -49,18 +49,18 @@ img, video {
 }
 
 .btn-primary {
-  @apply bg-[#D93D3D] hover:bg-[#B83232] text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  @apply bg-[#D93D3D] hover:bg-[#B83232] text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
 }
 
 .btn-secondary {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  @apply text-white border border-white/40 font-medium py-3 px-6 rounded-xl transition-all duration-200 hover:bg-white/30;
+  @apply text-white border border-white/40 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:bg-white/30;
 }
 
 .card {
-  @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-200;
+  @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5;
 }
 
 /* Soft place photo wash. photo stronger on the left, white on the right */
@@ -278,7 +278,7 @@ img, video {
 
 @keyframes float-soft {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes shimmer {
@@ -287,10 +287,24 @@ img, video {
 }
 
 .animate-float {
-  animation: float-soft 5s ease-in-out infinite;
+  animation: float-soft 7s ease-in-out infinite;
 }
 
 .hero-shimmer {
   background-size: 200% 200%;
-  animation: shimmer 8s linear infinite;
+  animation: shimmer 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .hero-shimmer {
+    animation: none !important;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .card {
+    transition: none !important;
+    transform: none !important;
+  }
 }

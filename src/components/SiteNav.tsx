@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { LanguageSwitcher } from '@/components/Providers';
 import { useI18n } from '@/lib/i18n';
 
@@ -15,6 +16,7 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t } = useI18n();
+  const reduce = useReducedMotion();
 
   const isHome = pathname === '/';
   const isDarkRoute =
@@ -50,7 +52,10 @@ export default function SiteNav() {
   ];
 
   return (
-    <header
+    <motion.header
+      initial={reduce ? false : { opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 inset-x-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color] duration-300 ${
         lightChrome
           ? 'border-white/20 bg-white/[0.08] text-white'
@@ -157,7 +162,7 @@ export default function SiteNav() {
           </Link>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }
 
