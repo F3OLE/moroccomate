@@ -58,8 +58,23 @@ export default function ExperiencesPage() {
     }
   }, []);
 
+  const syncUrl = (nextCity: string, nextView: ViewMode) => {
+    const params = new URLSearchParams();
+    if (nextCity !== 'all') params.set('city', nextCity);
+    if (nextView !== 'list') params.set('view', nextView);
+    const qs = params.toString();
+    const url = qs ? `/experiences?${qs}` : '/experiences';
+    window.history.replaceState(null, '', url);
+  };
+
+  const setCityFilter = (id: string) => {
+    setCity(id);
+    syncUrl(id, view);
+  };
+
   const setViewPersist = (mode: ViewMode) => {
     setView(mode);
+    syncUrl(city, mode);
     try {
       localStorage.setItem('mm_xp_view', mode);
     } catch {
@@ -100,7 +115,7 @@ export default function ExperiencesPage() {
                   key={c.id}
                   type="button"
                   data-testid={`xp-city-${c.id}`}
-                  onClick={() => setCity(c.id)}
+                  onClick={() => setCityFilter(c.id)}
                   className={`text-sm font-semibold py-2 border-b-2 -mb-[13px] transition-colors ${
                     city === c.id
                       ? 'border-[var(--brand)] text-[var(--brand)]'
