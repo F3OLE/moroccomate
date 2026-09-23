@@ -89,7 +89,7 @@ export default function ExperiencesPage() {
           <p className="text-[var(--ink-soft)] text-lg leading-relaxed">{t('xp_page_sub')}</p>
         </FadeIn>
 
-        <FadeIn delay={0.05} className="mb-8 space-y-5">
+        <FadeIn delay={0.05} className="relative z-10 mb-8 space-y-5">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-3">
               City
@@ -99,8 +99,9 @@ export default function ExperiencesPage() {
                 <button
                   key={c.id}
                   type="button"
+                  data-testid={`xp-city-${c.id}`}
                   onClick={() => setCity(c.id)}
-                  className={`text-sm font-semibold pb-2 border-b-2 -mb-[13px] transition-colors ${
+                  className={`text-sm font-semibold py-2 border-b-2 -mb-[13px] transition-colors ${
                     city === c.id
                       ? 'border-[var(--brand)] text-[var(--brand)]'
                       : 'border-transparent text-[var(--ink-soft)] hover:text-[var(--ink)]'
@@ -114,7 +115,7 @@ export default function ExperiencesPage() {
 
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)]">
-              View
+              How do you want to see experiences?
             </p>
             <div
               className="inline-flex items-center gap-1 border-b border-[var(--ink)]/12"
@@ -123,9 +124,10 @@ export default function ExperiencesPage() {
             >
               <button
                 type="button"
+                data-testid="xp-view-list"
                 onClick={() => setViewPersist('list')}
                 aria-pressed={view === 'list'}
-                className={`inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 border-b-2 -mb-px transition-colors ${
+                className={`inline-flex items-center gap-2 text-sm font-semibold px-3 py-2.5 border-b-2 -mb-px transition-colors ${
                   view === 'list'
                     ? 'border-[var(--brand)] text-[var(--brand)]'
                     : 'border-transparent text-[var(--ink-soft)] hover:text-[var(--ink)]'
@@ -136,9 +138,10 @@ export default function ExperiencesPage() {
               </button>
               <button
                 type="button"
+                data-testid="xp-view-grid"
                 onClick={() => setViewPersist('grid')}
                 aria-pressed={view === 'grid'}
-                className={`inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 border-b-2 -mb-px transition-colors ${
+                className={`inline-flex items-center gap-2 text-sm font-semibold px-3 py-2.5 border-b-2 -mb-px transition-colors ${
                   view === 'grid'
                     ? 'border-[var(--brand)] text-[var(--brand)]'
                     : 'border-transparent text-[var(--ink-soft)] hover:text-[var(--ink)]'
