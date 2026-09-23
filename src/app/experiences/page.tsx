@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Check, Clock, MapPin, ArrowRight, Mountain } from 'lucide-react';
-import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
+import { Check, ArrowRight } from 'lucide-react';
+import { FadeIn } from '@/components/FadeIn';
+import HoverImageReveal from '@/components/HoverImageReveal';
 import { EXPERIENCES, mapsUrl } from '@/data/places';
 import { useI18n } from '@/lib/i18n';
 
@@ -10,72 +11,87 @@ export default function ExperiencesPage() {
   const { t } = useI18n();
 
   return (
-    <div className="min-h-screen bg-pattern">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <FadeIn className="mb-10 max-w-3xl">
-          <p className="text-[#D93D3D] font-semibold text-sm uppercase tracking-wider mb-2">
+    <div className="min-h-screen bg-[var(--paper)]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <FadeIn className="mb-10 md:mb-12 max-w-2xl">
+          <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
             {t('xp_page_label')}
           </p>
-          <h1 className="text-4xl font-bold text-gradient mb-3">{t('xp_page_title')}</h1>
-          <p className="text-gray-600">{t('xp_page_sub')}</p>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-[var(--ink)] leading-[1.1] mb-4">
+            {t('xp_page_title')}
+          </h1>
+          <p className="text-[var(--ink-soft)] text-lg leading-relaxed">{t('xp_page_sub')}</p>
         </FadeIn>
 
-        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {EXPERIENCES.map((xp) => (
-            <StaggerItem key={xp.id}>
-              <article
-                className="card place-card-fade h-full flex flex-col border border-[#E1B168]/25 hover:border-[#D93D3D]/40 transition-colors"
-                style={{ ['--place-photo' as string]: `url(${xp.image})` }}
+        <div className="border-t border-[var(--ink)]/15 mb-14">
+          {EXPERIENCES.map((xp, i) => (
+            <FadeIn key={xp.id} delay={Math.min(i * 0.04, 0.2)}>
+              <HoverImageReveal
+                src={xp.image}
+                alt={xp.title}
+                tone="light"
+                focus={xp.imageFocus || 'center center'}
+                className="min-h-[8rem] py-7 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
               >
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className="w-11 h-11 rounded-xl bg-[#FCE8E8] flex items-center justify-center">
-                    <Mountain className="w-5 h-5 text-[#D93D3D]" />
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs uppercase tracking-wider text-[var(--zellige)] mb-1">
+                      {xp.partnerType}
+                    </p>
+                    <h2 className="font-display text-xl md:text-2xl font-bold text-[var(--ink)] mb-1 group-hover/hover-img:text-[var(--brand)] transition-colors">
+                      {xp.title}
+                    </h2>
+                    <p className="text-sm text-[var(--ink-soft)] mb-2">
+                      {xp.location} · {xp.duration}
+                    </p>
+                    <p className="text-sm text-[var(--ink-soft)] leading-relaxed max-w-xl mb-3">
+                      {xp.description}
+                    </p>
+                    <ul className="space-y-1 mb-3">
+                      {xp.included.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-sm text-[var(--ink)]"
+                        >
+                          <Check className="w-4 h-4 text-[var(--brand)] shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href={mapsUrl(`${xp.title} ${xp.location}`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-semibold text-[var(--brand)] hover:underline"
+                    >
+                      {t('find_maps')} →
+                    </a>
                   </div>
-                  <span className="text-sm font-bold text-[#D93D3D]">{xp.price}</span>
+                  <p className="font-display text-lg font-bold text-[var(--brand)] shrink-0">
+                    {xp.price}
+                  </p>
                 </div>
-                <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#FFFAF5] border border-[#E1B168]/40 text-[#2C3E50] w-fit mb-3">
-                  {xp.partnerType}
-                </span>
-                <h2 className="text-xl font-semibold mb-2 text-[#2C3E50]">{xp.title}</h2>
-                <div className="flex flex-wrap gap-3 text-xs text-gray-500 mb-3">
-                  <span className="inline-flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5" /> {xp.location}
-                  </span>
-                  <span className="inline-flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" /> {xp.duration}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4 flex-1">{xp.description}</p>
-                <ul className="space-y-1.5 mb-4">
-                  {xp.included.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
-                      <Check className="w-4 h-4 text-[#D93D3D] shrink-0 mt-0.5" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={mapsUrl(`${xp.title} ${xp.location}`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-semibold text-[#D93D3D] hover:underline"
-                >
-                  {t('find_maps')} →
-                </a>
-              </article>
-            </StaggerItem>
+              </HoverImageReveal>
+            </FadeIn>
           ))}
-        </Stagger>
+        </div>
 
         <FadeIn>
-          <div className="rounded-2xl bg-[#2C3E50] text-white p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="border-y border-[var(--ink)]/15 py-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h2 className="text-2xl font-bold mb-2">{t('xp_partner_cta_title')}</h2>
-              <p className="text-white/80 max-w-xl">{t('xp_partner_cta_text')}</p>
+              <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-2">
+                Partners
+              </p>
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)] mb-2">
+                {t('xp_partner_cta_title')}
+              </h2>
+              <p className="text-[var(--ink-soft)] max-w-xl leading-relaxed">
+                {t('xp_partner_cta_text')}
+              </p>
             </div>
             <Link
               href="/partners"
-              className="inline-flex items-center justify-center gap-2 bg-[#E1B168] text-[#2C3E50] font-bold px-6 py-3 rounded-xl shrink-0"
+              className="btn-primary inline-flex items-center justify-center gap-2 shrink-0"
             >
               {t('partner_cta')} <ArrowRight className="w-4 h-4" />
             </Link>

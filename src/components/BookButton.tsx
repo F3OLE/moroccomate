@@ -125,21 +125,21 @@ export default function BookButton({
             onClick={close}
           >
             <div
-              className="w-full sm:max-w-md bg-[#FFFAF5] rounded-t-2xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 max-h-[90vh] overflow-y-auto"
+              className="w-full sm:max-w-md bg-[var(--paper)] rounded-t-md sm:rounded-md border border-[var(--ink)]/15 p-5 sm:p-6 max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between gap-3 mb-4">
                 <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#D93D3D] mb-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--brand)] mb-1">
                     Book via MoroccoMate
                   </p>
-                  <h3 className="text-lg font-bold text-[#2C3E50] leading-snug break-words">
+                  <h3 className="font-display text-lg font-bold text-[var(--ink)] leading-snug break-words">
                     {place.placeName}
                   </h3>
                   {place.city && (
-                    <p className="text-sm text-[#2C3E50]/60">{place.city}</p>
+                    <p className="text-sm text-[var(--ink-soft)]">{place.city}</p>
                   )}
-                  <p className="text-xs text-[#2C3E50]/55 mt-2 leading-relaxed">
+                  <p className="text-xs text-[var(--ink-soft)] mt-2 leading-relaxed">
                     We confirm with the venue for you. You message MoroccoMate,
                     not the business.
                   </p>
@@ -147,7 +147,7 @@ export default function BookButton({
                 <button
                   type="button"
                   onClick={close}
-                  className="p-1 text-[#2C3E50]/40 hover:text-[#2C3E50] shrink-0"
+                  className="p-1 text-[var(--ink-soft)] hover:text-[var(--ink)] shrink-0"
                   aria-label="Close"
                 >
                   <X className="w-5 h-5" />
@@ -156,7 +156,7 @@ export default function BookButton({
 
               <div className="space-y-3">
                 <label className="block">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#2C3E50]/50">
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
                     Your name
                   </span>
                   <input
@@ -167,7 +167,7 @@ export default function BookButton({
                   />
                 </label>
                 <label className="block">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#2C3E50]/50">
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
                     Your WhatsApp *
                   </span>
                   <input
@@ -179,7 +179,7 @@ export default function BookButton({
                   />
                 </label>
                 <label className="block">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#2C3E50]/50">
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
                     Preferred date
                   </span>
                   <input
@@ -190,7 +190,7 @@ export default function BookButton({
                   />
                 </label>
                 <label className="block">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#2C3E50]/50">
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
                     Note
                   </span>
                   <textarea
@@ -204,14 +204,14 @@ export default function BookButton({
               </div>
 
               {error && (
-                <p className="mt-3 text-sm text-[#D93D3D] font-medium">{error}</p>
+                <p className="mt-3 text-sm text-[var(--brand)] font-medium">{error}</p>
               )}
 
               <button
                 type="button"
                 onClick={submit}
                 disabled={status === 'loading'}
-                className="mt-5 w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white font-bold py-3 rounded-xl disabled:opacity-60"
+                className="mt-5 w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white font-bold py-3 rounded-md disabled:opacity-60"
               >
                 {status === 'loading' ? (
                   <>
@@ -225,7 +225,7 @@ export default function BookButton({
                   </>
                 )}
               </button>
-              <p className="mt-2 text-[11px] text-[#2C3E50]/45 text-center">
+              <p className="mt-2 text-[11px] text-[var(--ink-soft)] text-center">
                 Opens WhatsApp to our team. We handle the venue.
               </p>
             </div>
@@ -247,7 +247,7 @@ export default function BookButton({
         className={
           className ||
           (compact
-            ? 'inline-flex items-center gap-1 text-xs font-bold text-[#D93D3D] hover:underline shrink-0'
+            ? 'inline-flex items-center gap-1 text-xs font-bold text-[var(--brand)] hover:underline shrink-0'
             : 'inline-flex flex-col items-start gap-0.5 text-left shrink-0')
         }
       >
@@ -258,11 +258,11 @@ export default function BookButton({
           </>
         ) : (
           <>
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-lg bg-[#D93D3D] text-white hover:bg-[#B83232] transition-colors">
+            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[var(--brand)] hover:underline">
               <MessageCircle className="w-3.5 h-3.5" />
               Book via MoroccoMate
             </span>
-            <span className="text-[10px] text-[#2C3E50]/55 font-medium pl-0.5">
+            <span className="text-[10px] text-[var(--ink-soft)] font-medium pl-0.5">
               We confirm with the venue for you
             </span>
           </>
