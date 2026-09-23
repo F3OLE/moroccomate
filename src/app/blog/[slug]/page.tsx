@@ -68,7 +68,7 @@ export default async function BlogPostPage({ params }: Props) {
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-pattern">
+    <div className="min-h-screen bg-[var(--paper)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -76,14 +76,14 @@ export default async function BlogPostPage({ params }: Props) {
       <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[#D93D3D] hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[var(--brand)] hover:underline mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           All guides
         </Link>
 
-        <header className="mb-10">
-          <div className="flex flex-wrap gap-2 text-xs text-gray-500 mb-3">
+        <header className="mb-10 pb-8 border-b border-[var(--ink)]/12">
+          <div className="flex flex-wrap gap-2 text-xs text-[var(--ink-soft)] mb-3">
             <time dateTime={post.publishedAt}>
               {new Date(post.publishedAt).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -98,15 +98,17 @@ export default async function BlogPostPage({ params }: Props) {
               </>
             )}
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold text-[#2C3E50] leading-tight mb-4">
+          <h1 className="font-display text-3xl sm:text-5xl font-bold text-[var(--ink)] leading-[1.1] mb-4">
             {post.title}
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">{post.description}</p>
-          <div className="flex flex-wrap gap-2 mt-4">
+          <p className="text-lg text-[var(--ink-soft)] leading-relaxed mb-5">
+            {post.description}
+          </p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[11px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-[#FCE8E8] text-[#D93D3D]"
+                className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--zellige)]"
               >
                 {tag}
               </span>
@@ -114,16 +116,19 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        <div className="prose-morocco space-y-8">
+        <div className="space-y-8">
           {post.sections.map((section, i) => (
             <section key={i}>
               {section.heading && (
-                <h2 className="text-xl sm:text-2xl font-bold text-[#2C3E50] mb-3">
+                <h2 className="font-display text-xl sm:text-2xl font-bold text-[var(--ink)] mb-3">
                   {section.heading}
                 </h2>
               )}
               {section.paragraphs.map((p, j) => (
-                <p key={j} className="text-gray-700 leading-relaxed mb-3 text-base sm:text-lg">
+                <p
+                  key={j}
+                  className="text-[var(--ink-soft)] leading-relaxed mb-3 text-base sm:text-lg"
+                >
                   {p}
                 </p>
               ))}
@@ -132,13 +137,13 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {post.cta && (
-          <div className="mt-12 rounded-2xl bg-[#2C3E50] text-white p-6 sm:p-8 text-center">
-            <p className="text-[#E1B168] text-sm font-bold uppercase tracking-wider mb-2">
+          <div className="mt-12 border-y border-[var(--ink)]/15 py-8">
+            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
               Next step
             </p>
             <Link
               href={post.cta.href}
-              className="inline-flex items-center gap-2 bg-[#D93D3D] hover:bg-[#B83232] font-bold px-6 py-3 rounded-xl"
+              className="btn-primary inline-flex items-center gap-2"
             >
               {post.cta.label}
               <ArrowRight className="w-4 h-4" />
@@ -147,22 +152,24 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {related.length > 0 && (
-          <aside className="mt-14 pt-8 border-t border-gray-200">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
+          <aside className="mt-14 pt-8 border-t border-[var(--ink)]/12">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-4">
               More guides
-            </h2>
-            <ul className="space-y-3">
+            </p>
+            <div className="border-t border-[var(--ink)]/10">
               {related.map((r) => (
-                <li key={r.slug}>
-                  <Link
-                    href={`/blog/${r.slug}`}
-                    className="font-semibold text-[#2C3E50] hover:text-[#D93D3D]"
-                  >
+                <Link
+                  key={r.slug}
+                  href={`/blog/${r.slug}`}
+                  className="group flex items-baseline justify-between gap-4 py-4 border-b border-[var(--ink)]/12"
+                >
+                  <span className="font-display font-bold text-[var(--ink)] group-hover:text-[var(--brand)] transition-colors">
                     {r.title}
-                  </Link>
-                </li>
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-[var(--brand)] shrink-0 transition-transform group-hover:translate-x-1" />
+                </Link>
               ))}
-            </ul>
+            </div>
           </aside>
         )}
       </article>

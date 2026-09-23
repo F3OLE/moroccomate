@@ -33,7 +33,7 @@ export default function HoverImageReveal({
 
   return (
     <div
-      className={`relative isolate overflow-hidden rounded-md ${className}`}
+      className={`group/hover-img relative isolate overflow-hidden rounded-md ${className}`}
       onMouseEnter={() => setOn(true)}
       onMouseLeave={() => setOn(false)}
       onFocusCapture={() => setOn(true)}
