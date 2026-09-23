@@ -15,14 +15,14 @@ type ViewMode = 'list' | 'grid';
 const CITY_OPTIONS = [
   { id: 'all', label: 'All cities' },
   ...Array.from(new Set(EXPERIENCES.map((xp) => xp.city))).map((city) => ({
-    id: city.toLowerCase(),
+    id: city.toLowerCase().replace(/\s+/g, '-'),
     label: city,
   })),
 ];
 
 function cityMatches(xpCity: string, filterId: string) {
   if (filterId === 'all') return true;
-  return xpCity.toLowerCase() === filterId;
+  return xpCity.toLowerCase().replace(/\s+/g, '-') === filterId;
 }
 
 function parseView(raw: string | null): ViewMode | null {
@@ -33,11 +33,12 @@ function parseView(raw: string | null): ViewMode | null {
 
 function parseCity(raw: string | null): string | null {
   if (!raw) return null;
+  const key = raw.toLowerCase().replace(/\s+/g, '-');
   const match = CITY_OPTIONS.find(
     (opt) =>
-      opt.id === raw.toLowerCase() ||
+      opt.id === key ||
       opt.label.toLowerCase() === raw.toLowerCase() ||
-      (raw.toLowerCase().includes('marr') && opt.id.includes('marr'))
+      (key.includes('marr') && opt.id.includes('marr'))
   );
   return match?.id ?? null;
 }
