@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Check, ArrowRight, LayoutList, LayoutGrid } from 'lucide-react';
 import { FadeIn } from '@/components/FadeIn';
 import HoverImageReveal from '@/components/HoverImageReveal';
@@ -24,47 +25,63 @@ function cityMatches(xpCity: string, filterId: string) {
   return xpCity.toLowerCase() === filterId;
 }
 
-export default function ExperiencesPage() {
+function parseView(raw: string | null): ViewMode | null {
+  if (raw === 'grid' || raw === 'square') return 'grid';
+  if (raw === 'list') return 'list';
+  return null;
+}
+
+function parseCity(raw: string | null): string | null {
+  if (!raw) return null;
+  const match = CITY_OPTIONS.find(
+    (opt) =>
+      opt.id === raw.toLowerCase() ||
+      opt.label.toLowerCase() === raw.toLowerCase() ||
+      (raw.toLowerCase().includes('marr') && opt.id.includes('marr'))
+  );
+  return match?.id ?? null;
+}
+
+function ExperiencesContent() {
   const { t } = useI18n();
-  const [city, setCity] = useState('all');
-  const [view, setView] = useState<ViewMode>('list');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const appliedLocalPref = useRef(false);
+
+  const urlCity = parseCity(searchParams.get('city')) || 'all';
+  const urlView = parseView(searchParams.get('view'));
+
+  const [city, setCity] = useState(urlCity);
+  const [view, setView] = useState<ViewMode>(urlView || 'list');
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const c = params.get('city');
-    if (c) {
-      const match = CITY_OPTIONS.find(
-        (opt) =>
-          opt.id === c.toLowerCase() ||
-          opt.label.toLowerCase() === c.toLowerCase() ||
-          (c.toLowerCase().includes('marr') && opt.id.includes('marr'))
-      );
-      if (match) setCity(match.id);
-    }
-    const v = params.get('view');
-    if (v === 'grid' || v === 'square') {
-      setView('grid');
+    setCity(urlCity);
+    if (urlView) {
+      setView(urlView);
       return;
     }
-    if (v === 'list') {
+    if (!appliedLocalPref.current) {
+      appliedLocalPref.current = true;
+      try {
+        const saved = localStorage.getItem('mm_xp_view');
+        if (saved === 'grid' || saved === 'list') {
+          setView(saved);
+          return;
+        }
+      } catch {
+        /* ignore */
+      }
       setView('list');
-      return;
     }
-    try {
-      const saved = localStorage.getItem('mm_xp_view');
-      if (saved === 'grid' || saved === 'list') setView(saved);
-    } catch {
-      /* ignore */
-    }
-  }, []);
+  }, [urlCity, urlView]);
 
   const syncUrl = (nextCity: string, nextView: ViewMode) => {
     const params = new URLSearchParams();
     if (nextCity !== 'all') params.set('city', nextCity);
     if (nextView !== 'list') params.set('view', nextView);
     const qs = params.toString();
-    const url = qs ? `/experiences?${qs}` : '/experiences';
-    window.history.replaceState(null, '', url);
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
 
   const setCityFilter = (id: string) => {
@@ -308,5 +325,19 @@ export default function ExperiencesPage() {
         </FadeIn>
       </div>
     </div>
+  );
+}
+
+export default function ExperiencesPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[var(--paper)] flex items-center justify-center text-[var(--ink-soft)]">
+          Loading experiences…
+        </div>
+      }
+    >
+      <ExperiencesContent />
+    </Suspense>
   );
 }
