@@ -45,15 +45,18 @@ export default function HoverImageReveal({
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out"
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out overflow-hidden"
         style={{ opacity: on ? 1 : 0 }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: focus }}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out"
+          style={{
+            objectPosition: focus,
+            transform: on ? 'scale(1.05)' : 'scale(1)',
+          }}
           loading="lazy"
           draggable={false}
         />

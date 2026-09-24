@@ -130,7 +130,7 @@ export default async function CityHubPage({ params }: Props) {
 
           <div className="border-t border-[var(--ink)]/15">
             {places.map((p, i) => (
-              <FadeIn key={p.id} delay={i * 0.04}>
+              <FadeIn key={p.id} delay={i * 0.1}>
                 <HoverImageReveal
                   src={p.image}
                   alt={p.name}
@@ -200,7 +200,7 @@ export default async function CityHubPage({ params }: Props) {
             </FadeIn>
             <div className="border-t border-[var(--ink)]/15">
               {experiences.map((xp, i) => (
-                <FadeIn key={xp.id} delay={i * 0.05}>
+                <FadeIn key={xp.id} delay={i * 0.1}>
                   <HoverImageReveal
                     src={xp.image}
                     alt={xp.title}

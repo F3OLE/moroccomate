@@ -128,7 +128,7 @@ export default function DiscoverPage() {
 
         <div className="border-t border-[var(--ink)]/15">
           {places.map((p, i) => (
-            <FadeIn key={p.id} delay={Math.min(i * 0.03, 0.24)}>
+            <FadeIn key={p.id} delay={Math.min(i * 0.1, 0.5)}>
               <HoverImageReveal
                 src={p.image}
                 alt={p.name}
