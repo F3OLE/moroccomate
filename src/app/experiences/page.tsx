@@ -25,7 +25,7 @@ export default function ExperiencesPage() {
 
         <div className="border-t border-[var(--ink)]/15 mb-14">
           {EXPERIENCES.map((xp, i) => (
-            <FadeIn key={xp.id} delay={Math.min(i * 0.04, 0.2)}>
+            <FadeIn key={xp.id} delay={Math.min(i * 0.1, 0.5)}>
               <HoverImageReveal
                 src={xp.image}
                 alt={xp.title}

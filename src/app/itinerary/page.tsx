@@ -21,28 +21,48 @@ import { cityDisplayName } from '@/data/places';
 export default function ItineraryPage() {
   const router = useRouter();
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(0);
   const [showTips, setShowTips] = useState(true);
 
   useEffect(() => {
     const stored = sessionStorage.getItem('currentItinerary');
     if (stored) {
-      setItinerary(JSON.parse(stored));
+      try {
+        setItinerary(JSON.parse(stored));
+      } catch {
+        router.push('/plan');
+        return;
+      }
+      setLoading(false);
     } else {
       router.push('/plan');
     }
   }, [router]);
 
-  if (!itinerary) {
+  if (loading || !itinerary) {
     return (
-      <div className="min-h-screen plan-scene flex items-center justify-center relative pt-14 sm:pt-16">
+      <div className="min-h-screen plan-scene relative pt-14 sm:pt-16">
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative bg-[#FFFAF5] rounded-sm p-8 text-center max-w-md mx-4 border-l-4 border-[#D93D3D] shadow-2xl">
-          <h2 className="text-2xl font-bold text-[#2C3E50] mb-3">No itinerary yet</h2>
-          <p className="text-[#2C3E50]/70 mb-6">Build one first. Takes a couple minutes.</p>
-          <Link href="/plan" className="btn-primary inline-flex">
-            Plan your trip
-          </Link>
+        <div className="relative max-w-3xl mx-auto px-4 py-12 sm:py-16 space-y-6">
+          <div className="skeleton h-8 w-40" />
+          <div className="skeleton h-12 w-3/4 max-w-md" />
+          <div className="grid sm:grid-cols-3 gap-3">
+            <div className="skeleton h-16" />
+            <div className="skeleton h-16" />
+            <div className="skeleton h-16" />
+          </div>
+          <div className="rounded-sm border border-white/10 overflow-hidden bg-white/5">
+            <div className="skeleton h-24 rounded-none" />
+            <div className="p-5 space-y-3 bg-[#FFFAF5]/95">
+              <div className="skeleton-light h-5 w-1/2" />
+              <div className="skeleton-light h-4 w-full" />
+              <div className="skeleton-light h-4 w-5/6" />
+              <div className="skeleton-light h-20 w-full mt-4" />
+              <div className="skeleton-light h-20 w-full" />
+            </div>
+          </div>
+          <p className="text-white/50 text-sm text-center pt-2">Loading your itinerary…</p>
         </div>
       </div>
     );

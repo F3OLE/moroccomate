@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
 import { LanguageSwitcher } from '@/components/Providers';
 import { useI18n } from '@/lib/i18n';
 
@@ -118,7 +117,11 @@ export default function SiteNav() {
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span className={`menu-icon ${open ? 'is-open' : ''}`} aria-hidden>
+              <span />
+              <span />
+              <span />
+            </span>
           </button>
         </div>
       </div>

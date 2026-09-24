@@ -43,7 +43,7 @@ export default function BlogIndexPage() {
 
         <div className="border-t border-[var(--ink)]/15">
           {posts.map((post, i) => (
-            <FadeIn key={post.slug} delay={i * 0.05}>
+            <FadeIn key={post.slug} delay={i * 0.1}>
               <Link
                 href={`/blog/${post.slug}`}
                 className="group block py-7 border-b border-[var(--ink)]/12"
