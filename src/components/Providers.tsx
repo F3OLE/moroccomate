@@ -16,36 +16,46 @@ export function LanguageSwitcher({
   compact?: boolean;
 }) {
   const { lang, setLang } = useI18n();
+  const activeIndex = Math.max(
+    0,
+    options.findIndex((o) => o.id === lang)
+  );
 
   return (
     <div
-      className={`inline-flex items-center rounded-full border font-bold ${
-        compact ? 'p-0.5 text-[10px]' : 'p-0.5 text-xs'
+      className={`lang-switch relative inline-grid grid-cols-3 items-center font-bold ${
+        compact ? 'text-[10px] p-0.5' : 'text-xs p-0.5'
       } ${
         dark
-          ? 'border-white/25 bg-white/10 text-white'
-          : 'border-white/50 bg-white/40 text-[#2C3E50]'
+          ? 'border border-white/25 bg-white/10 text-white'
+          : 'border border-[var(--ink)]/15 bg-white/70 text-[var(--ink)]'
       }`}
-      style={{
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-      }}
+      style={{ borderRadius: '999px' }}
       role="group"
       aria-label="Language"
     >
+      <span
+        aria-hidden
+        className="lang-switch-pill absolute inset-y-0.5 rounded-full bg-[var(--brand)] transition-transform duration-300 ease-out"
+        style={{
+          width: `calc((100% - 4px) / 3)`,
+          left: 2,
+          transform: `translateX(${activeIndex * 100}%)`,
+        }}
+      />
       {options.map((opt) => (
         <button
           key={opt.id}
           type="button"
           onClick={() => setLang(opt.id)}
-          className={`rounded-full transition-colors ${
+          className={`relative z-10 rounded-full transition-colors duration-200 ${
             compact ? 'px-2 py-1' : 'px-2.5 py-1'
           } ${
             lang === opt.id
-              ? 'bg-[#D93D3D] text-white'
+              ? 'text-white'
               : dark
                 ? 'text-white/70 hover:text-white'
-                : 'text-[#2C3E50]/55 hover:text-[#D93D3D]'
+                : 'text-[var(--ink-soft)] hover:text-[var(--brand)]'
           }`}
         >
           {opt.label}

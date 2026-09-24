@@ -1,40 +1,88 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { ReactNode } from 'react';
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
-export function FadeIn({
-  children,
-  delay = 0,
-  className = '',
-  y = 14,
-}: {
+type FadeInProps = {
   children: ReactNode;
+  /** Delay in seconds once visible (use 0.1 steps for 100ms stagger). */
   delay?: number;
   className?: string;
   y?: number;
-}) {
-  const reduce = useReducedMotion();
+};
+
+function usePrefersReducedMotion() {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduce(mq.matches);
+    const onChange = () => setReduce(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return reduce;
+}
+
+/**
+ * Fade + slight slide-up when entering the viewport.
+ * Intersection Observer only — no animation library.
+ */
+export function FadeIn({ children, delay = 0, className = '', y = 20 }: FadeInProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const reduce = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (reduce) {
+      setVisible(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.08 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce]);
 
   if (reduce) {
     return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-8% 0px' }}
-      transition={{ duration: 0.55, delay, ease }}
+    <div
+      ref={ref}
+      className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
+      style={
+        {
+          '--reveal-y': `${y}px`,
+          transitionDelay: visible ? `${Math.round(delay * 1000)}ms` : '0ms',
+        } as CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
+/** Parent that staggers child FadeIn / StaggerItem by 100ms each. */
 export function Stagger({
   children,
   className = '',
@@ -42,48 +90,29 @@ export function Stagger({
   children: ReactNode;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: '-8% 0px' }}
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: 0.07, delayChildren: 0.04 } },
-      }}
-    >
-      {children}
-    </motion.div>
+    <div className={className}>
+      {Children.map(children, (child, i) => {
+        if (!isValidElement(child)) return child;
+        const el = child as ReactElement<{ delay?: number }>;
+        return cloneElement(el, { delay: (el.props.delay ?? 0) + i * 0.1 });
+      })}
+    </div>
   );
 }
 
 export function StaggerItem({
   children,
   className = '',
+  delay = 0,
 }: {
   children: ReactNode;
   className?: string;
+  delay?: number;
 }) {
   return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 14 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease },
-        },
-      }}
-    >
+    <FadeIn className={className} delay={delay} y={20}>
       {children}
-    </motion.div>
+    </FadeIn>
   );
 }

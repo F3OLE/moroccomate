@@ -194,7 +194,7 @@ function ExperiencesContent() {
         ) : view === 'list' ? (
           <div className="border-t border-[var(--ink)]/15 mb-14">
             {experiences.map((xp, i) => (
-              <FadeIn key={xp.id} delay={Math.min(i * 0.04, 0.2)}>
+              <FadeIn key={xp.id} delay={Math.min(i * 0.1, 0.5)}>
                 <HoverImageReveal
                   src={xp.image}
                   alt={xp.title}
@@ -247,9 +247,9 @@ function ExperiencesContent() {
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
             {experiences.map((xp, i) => (
-              <FadeIn key={xp.id} delay={Math.min(i * 0.04, 0.2)}>
-                <article className="h-full flex flex-col border border-[var(--ink)]/12 bg-[var(--paper-deep)]/40 overflow-hidden">
-                  <div className="relative aspect-square w-full bg-[var(--paper-deep)]">
+              <FadeIn key={xp.id} delay={Math.min(i * 0.1, 0.5)}>
+                <article className="card h-full flex flex-col !p-0 overflow-hidden border border-[var(--ink)]/12 bg-[var(--paper-deep)]/40">
+                  <div className="relative aspect-square w-full bg-[var(--paper-deep)] media-zoom">
                     <Image
                       src={xp.image}
                       alt={xp.title}
