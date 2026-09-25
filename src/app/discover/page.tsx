@@ -1,16 +1,50 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { ExternalLink, MapPin, Star, BadgeCheck, Sun } from 'lucide-react';
+import { ExternalLink, MapPin, Star, BadgeCheck, Sun, ArrowRight } from 'lucide-react';
 import { FadeIn } from '@/components/FadeIn';
-import HoverImageReveal from '@/components/HoverImageReveal';
 import { PLACES, mapsUrl, placeBestTime, cityDisplayName, type PlaceCategory } from '@/data/places';
 import { useI18n, type MessageKey } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
 import BookButton from '@/components/BookButton';
 
 const CITY_IDS = ['marrakesh', 'casablanca', 'rabat', 'tangier'] as const;
+
+const CITY_VISUALS: Record<
+  (typeof CITY_IDS)[number],
+  { label: string; hub: string; image: string; focus: string; line: string }
+> = {
+  marrakesh: {
+    label: 'Marrakech',
+    hub: '/marrakech',
+    image: '/images/places/jemaa-sunset.jpg',
+    focus: 'center 40%',
+    line: 'Medina, souks, rooftops',
+  },
+  casablanca: {
+    label: 'Casablanca',
+    hub: '/casablanca',
+    image: '/images/places/hassan-ii.jpg',
+    focus: 'center 35%',
+    line: 'Corniche & nightlife',
+  },
+  rabat: {
+    label: 'Rabat',
+    hub: '/rabat',
+    image: '/images/places/kasbah-oudayas.jpg',
+    focus: 'center 40%',
+    line: 'Kasbah & Atlantic calm',
+  },
+  tangier: {
+    label: 'Tangier',
+    hub: '/tangier',
+    image: '/images/places/cafe-hafa.jpg',
+    focus: 'center 35%',
+    line: 'Strait views & jazz nights',
+  },
+};
 
 export default function DiscoverPage() {
   const { t } = useI18n();
@@ -34,14 +68,6 @@ export default function DiscoverPage() {
     { id: 'experiences', label: 'Pools & days out' },
   ];
 
-  const cities = [
-    { id: 'all', labelKey: 'all_cities' as MessageKey },
-    { id: 'marrakesh', label: 'Marrakech', hub: '/marrakech' },
-    { id: 'casablanca', label: 'Casablanca', hub: '/casablanca' },
-    { id: 'rabat', label: 'Rabat', hub: '/rabat' },
-    { id: 'tangier', label: 'Tangier', hub: '/tangier' },
-  ];
-
   const places = useMemo(() => {
     return PLACES.filter((p) => {
       const catOk = category === 'all' || p.category === category;
@@ -50,96 +76,217 @@ export default function DiscoverPage() {
     });
   }, [category, city]);
 
+  const featured = useMemo(() => {
+    const pool = places.filter((p) => p.badge === 'partner' || p.badge === 'verified');
+    const ranked = (pool.length ? pool : places)
+      .slice()
+      .sort((a, b) => b.rating - a.rating);
+    return ranked.slice(0, 3);
+  }, [places]);
+
+  const activeCity =
+    city !== 'all' && city in CITY_VISUALS
+      ? CITY_VISUALS[city as keyof typeof CITY_VISUALS]
+      : null;
+
   return (
     <div className="min-h-screen bg-[var(--paper)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <FadeIn className="mb-10 md:mb-12">
-          <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
-            {t('discover_label')}
-          </p>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-[var(--ink)] leading-[1.1] mb-4">
-            {t('discover_title')}
-          </h1>
-          <p className="text-[var(--ink-soft)] text-lg max-w-xl leading-relaxed mb-8">
-            {t('discover_sub')}
-          </p>
-          <PartnerCta />
-        </FadeIn>
+      {/* Visual open — city as the first composition */}
+      <section className="relative overflow-hidden border-b border-[var(--ink)]/10">
+        <div className="absolute inset-0">
+          <Image
+            src={
+              activeCity?.image ||
+              '/images/places/marrakech-medina.jpg'
+            }
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{
+              objectPosition: activeCity?.focus || 'center 45%',
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to top, rgba(243,239,232,0.97) 0%, rgba(243,239,232,0.72) 38%, rgba(12,18,24,0.45) 100%)',
+            }}
+          />
+          <div className="hero-grain opacity-[0.05]" aria-hidden />
+        </div>
 
-        <FadeIn delay={0.05} className="mb-10 space-y-6">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-3">
-              City
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-14 sm:pt-16 pb-7 sm:pb-8">
+          <FadeIn>
+            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-2 drop-shadow-sm">
+              {t('discover_label')}
             </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 border-b border-[var(--ink)]/12 pb-3">
-              {cities.map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => setCity(c.id)}
-                  className={`text-sm font-semibold pb-2 border-b-2 -mb-[13px] transition-colors ${
-                    city === c.id
-                      ? 'border-[var(--brand)] text-[var(--brand)]'
-                      : 'border-transparent text-[var(--ink-soft)] hover:text-[var(--ink)]'
-                  }`}
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-[var(--ink)] leading-[1.05] mb-2 max-w-xl">
+              {t('discover_title')}
+            </h1>
+            <p className="text-[var(--ink-soft)] text-base sm:text-lg max-w-xl leading-relaxed mb-6">
+              {t('discover_sub')}
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.08}>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-2.5">
+              Pick a city
+            </p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5">
+              {CITY_IDS.map((id) => {
+                const c = CITY_VISUALS[id];
+                const on = city === id;
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setCity(id)}
+                    className={`group relative overflow-hidden rounded-md text-left aspect-[16/10] sm:aspect-[5/3] transition-transform duration-200 ${
+                      on ? 'ring-2 ring-[var(--brand)] ring-offset-2 ring-offset-[var(--paper)]' : ''
+                    }`}
+                  >
+                    <Image
+                      src={c.image}
+                      alt={c.label}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectPosition: c.focus }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-3 sm:p-3.5 text-white">
+                      <p className="font-display text-base sm:text-lg font-bold leading-none mb-1">
+                        {c.label}
+                      </p>
+                      <p className="text-[11px] sm:text-xs text-white/75 leading-snug">{c.line}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+              <button
+                type="button"
+                onClick={() => setCity('all')}
+                className={`font-semibold transition-colors ${
+                  city === 'all'
+                    ? 'text-[var(--brand)]'
+                    : 'text-[var(--ink-soft)] hover:text-[var(--ink)]'
+                }`}
+              >
+                {t('all_cities')}
+              </button>
+              {CITY_IDS.map((id) => (
+                <Link
+                  key={id}
+                  href={CITY_VISUALS[id].hub}
+                  className="text-[var(--brand)] font-medium hover:underline"
                 >
-                  {'labelKey' in c && c.labelKey ? t(c.labelKey) : c.label}
-                </button>
+                  {CITY_VISUALS[id].label} guide
+                </Link>
               ))}
             </div>
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mt-4 text-sm text-[var(--ink-soft)]">
-              <span>City guides</span>
-              {cities
-                .filter((c) => 'hub' in c && c.hub)
-                .map((c) => (
-                  <Link
-                    key={c.hub}
-                    href={c.hub!}
-                    className="text-[var(--brand)] font-medium hover:underline"
-                  >
-                    {c.label}
-                  </Link>
-                ))}
-            </div>
-          </div>
+          </FadeIn>
+        </div>
+      </section>
 
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-3">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <FadeIn className="mb-6">
+          <div className="flex flex-wrap items-end justify-between gap-3 mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)]">
               {t('filter')}
             </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-2">
-              {filters.map((f) => (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => setCategory(f.id)}
-                  className={`text-sm font-semibold transition-colors ${
-                    category === f.id
-                      ? 'text-[var(--brand)]'
-                      : 'text-[var(--ink-soft)] hover:text-[var(--ink)]'
-                  }`}
-                >
-                  {f.labelKey ? t(f.labelKey) : f.label}
-                </button>
-              ))}
-            </div>
+            <p className="text-sm text-[var(--ink-soft)] tabular-nums">
+              <span className="font-display font-bold text-[var(--brand)] text-base">
+                {places.length}
+              </span>{' '}
+              {places.length === 1 ? 'spot' : 'spots'}
+              {activeCity ? ` in ${activeCity.label}` : ''}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 border-b border-[var(--ink)]/12 pb-3">
+            {filters.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => setCategory(f.id)}
+                className={`text-sm font-semibold pb-2 border-b-2 -mb-[13px] transition-colors ${
+                  category === f.id
+                    ? 'border-[var(--brand)] text-[var(--brand)]'
+                    : 'border-transparent text-[var(--ink-soft)] hover:text-[var(--ink)]'
+                }`}
+              >
+                {f.labelKey ? t(f.labelKey) : f.label}
+              </button>
+            ))}
           </div>
         </FadeIn>
+
+        {featured.length > 0 && category === 'all' && (
+          <FadeIn delay={0.05} className="mb-10">
+            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
+              Start here
+            </p>
+            <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
+              {featured.map((p) => (
+                <a
+                  key={`feat-${p.id}`}
+                  href={mapsUrl(p.mapsQuery)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden rounded-md aspect-[16/10] sm:aspect-[4/5] block"
+                >
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{ objectPosition: p.imageFocus || 'center' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--saffron)] mb-1">
+                      {cityDisplayName(p.city)} · {p.category}
+                    </p>
+                    <p className="font-display text-lg font-bold leading-snug mb-1 group-hover:text-[var(--saffron)] transition-colors">
+                      {p.name}
+                    </p>
+                    <p className="text-xs text-white/75 line-clamp-2">{p.neighborhood}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </FadeIn>
+        )}
 
         <div className="border-t border-[var(--ink)]/15">
           {places.map((p, i) => (
-            <FadeIn key={p.id} delay={Math.min(i * 0.1, 0.5)}>
-              <HoverImageReveal
-                src={p.image}
-                alt={p.name}
-                tone="light"
-                focus={p.imageFocus || 'center center'}
-                className="min-h-[7.5rem] py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2"
-              >
-                <article className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
+            <FadeIn key={p.id} delay={Math.min(i * 0.06, 0.36)}>
+              <article className="group grid grid-cols-[6.5rem_1fr] sm:grid-cols-[9.5rem_1fr] gap-4 sm:gap-6 py-6 border-b border-[var(--ink)]/12">
+                <Link
+                  href={mapsUrl(p.mapsQuery)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="media-zoom relative aspect-square sm:aspect-[4/5] overflow-hidden rounded-md bg-[var(--paper-deep)] shrink-0"
+                >
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    sizes="(max-width: 640px) 104px, 152px"
+                    className="object-cover"
+                    style={{ objectPosition: p.imageFocus || 'center' }}
+                  />
+                </Link>
+
+                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 min-w-0">
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
-                      <h2 className="font-display text-xl font-bold text-[var(--ink)] group-hover/hover-img:text-[var(--brand)] transition-colors">
+                      <h2 className="font-display text-lg sm:text-xl font-bold text-[var(--ink)] group-hover:text-[var(--brand)] transition-colors">
                         {p.name}
                       </h2>
                       <span className="text-xs uppercase tracking-wider text-[var(--ink-soft)]/70">
@@ -158,27 +305,25 @@ export default function DiscoverPage() {
                     </div>
                     <p className="text-sm text-[var(--ink-soft)] mb-1.5 flex items-center gap-1 capitalize">
                       <MapPin className="w-3.5 h-3.5 shrink-0" />
-                      {p.city === 'marrakesh'
-                        ? 'Marrakech'
-                        : p.city === 'tangier'
-                          ? 'Tangier'
-                          : p.city.charAt(0).toUpperCase() + p.city.slice(1)}{' '}
-                      · {p.neighborhood}
+                      {cityDisplayName(p.city)} · {p.neighborhood}
                     </p>
                     <p className="text-xs text-[var(--saffron)] font-medium mb-2 flex items-center gap-1">
                       <Sun className="w-3.5 h-3.5" />
                       {placeBestTime(p)}
                     </p>
-                    <p className="text-sm text-[var(--ink-soft)] leading-relaxed max-w-2xl line-clamp-2">
+                    <p className="text-sm text-[var(--ink-soft)] leading-relaxed max-w-2xl line-clamp-2 sm:line-clamp-3">
                       {p.description}
                     </p>
                   </div>
+
                   <div className="flex sm:flex-col items-start sm:items-end gap-2 shrink-0">
                     <span className="inline-flex items-center gap-1 text-sm text-[var(--saffron)]">
                       <Star className="w-3.5 h-3.5 fill-[var(--saffron)]" />
                       {p.rating}
                     </span>
-                    <span className="text-sm font-medium text-[var(--ink-soft)]">{p.priceRange}</span>
+                    <span className="text-sm font-medium text-[var(--ink-soft)]">
+                      {p.priceRange}
+                    </span>
                     <BookButton
                       compact
                       place={{
@@ -198,22 +343,30 @@ export default function DiscoverPage() {
                       {t('google_maps')} <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
-                </article>
-              </HoverImageReveal>
+                </div>
+              </article>
             </FadeIn>
           ))}
         </div>
 
         {places.length === 0 && (
-          <p className="py-12 text-[var(--ink-soft)] text-center">No places match these filters.</p>
+          <p className="py-12 text-[var(--ink-soft)] text-center">
+            No places match these filters.
+          </p>
         )}
 
         <FadeIn className="mt-14 space-y-10">
           <PartnerCta />
-          <div className="border-t border-[var(--ink)]/12 pt-10">
-            <p className="text-[var(--ink-soft)] mb-4">{t('want_plan')}</p>
-            <Link href="/plan" className="btn-primary inline-flex">
+          <div className="border-t border-[var(--ink)]/12 pt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
+            <div>
+              <p className="text-[var(--ink-soft)] mb-1">{t('want_plan')}</p>
+              <p className="font-display text-xl font-bold text-[var(--ink)]">
+                Turn these spots into days
+              </p>
+            </div>
+            <Link href="/plan" className="btn-primary inline-flex items-center gap-2 shrink-0">
               {t('build_itinerary')}
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </FadeIn>

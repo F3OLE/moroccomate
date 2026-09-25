@@ -18,11 +18,11 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
-  Sparkles,
 } from 'lucide-react';
 import { generateItinerary } from '@/lib/api';
 import { TripFormData } from '@/types';
 import { FadeIn } from '@/components/FadeIn';
+import PalmLoader from '@/components/PalmLoader';
 import TripDateRange, {
   isValidTripRange,
   tripDayCount,
@@ -85,6 +85,13 @@ export default function PlanPage() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Partial<TripFormData>>({});
+
+  // Visual QA: /plan?preview=loading shows the palm overlay
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('preview') === 'loading') {
+      setIsLoading(true);
+    }
+  }, []);
 
   const toggleInterest = (interestId: string) => {
     setSelectedInterests((prev) =>
@@ -242,13 +249,13 @@ export default function PlanPage() {
       <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-          <div className="w-full max-w-md rounded-2xl bg-[#FFFAF5] border border-white/20 shadow-2xl p-6 sm:p-8 text-center">
-            <div className="mx-auto w-12 h-12 rounded-full bg-[#FCE8E8] flex items-center justify-center mb-4">
-              <Sparkles className="w-6 h-6 text-[#D93D3D] animate-pulse" />
-            </div>
-            <h3 className="text-xl font-bold text-[#2C3E50] mb-2">Building your trip</h3>
-            <p className="text-[#2C3E50]/75 text-sm min-h-[2.5rem] mb-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(12,18,24,0.78)] backdrop-blur-sm px-4">
+          <div className="w-full max-w-md rounded-md bg-[var(--paper)] border border-white/15 shadow-2xl px-6 py-8 sm:px-8 sm:py-10 text-center">
+            <PalmLoader label="Building your trip" className="mb-5" />
+            <h3 className="font-display text-2xl font-bold text-[var(--ink)] mb-2">
+              Building your trip
+            </h3>
+            <p className="text-[var(--ink-soft)] text-sm min-h-[2.5rem] mb-5 leading-relaxed">
               {loadMessages[Math.min(loadStep, Math.max(loadMessages.length - 1, 0))] ||
                 'Building your day-by-day plan…'}
             </p>
@@ -257,13 +264,13 @@ export default function PlanPage() {
                 <span
                   key={i}
                   className={`h-1.5 flex-1 max-w-[2.5rem] rounded-full transition-colors ${
-                    i <= loadStep ? 'bg-[#D93D3D]' : 'bg-[#2C3E50]/15'
+                    i <= loadStep ? 'bg-[var(--brand)]' : 'bg-[var(--ink)]/12'
                   }`}
                 />
               ))}
             </div>
-            <p className="text-[11px] text-[#2C3E50]/45 mt-3">
-              Usually takes a few seconds. If AI is busy, we use curated spots.
+            <p className="text-[11px] text-[var(--ink-soft)]/80 mt-3">
+              Usually a few seconds. If AI is busy, we use curated spots.
             </p>
           </div>
         </div>
