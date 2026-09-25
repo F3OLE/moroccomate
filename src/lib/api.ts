@@ -13,10 +13,17 @@ export async function generateItinerary(
       body: JSON.stringify(data),
     });
 
-    if (!response.ok) throw new Error('Failed to generate itinerary');
-    return await response.json();
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(payload.error || 'Failed to generate itinerary');
+    }
+    return payload;
   } catch (error) {
     console.error('API Error. Using curated places fallback:', error);
+    // Network / timeout only — validation errors should surface above.
+    if (error instanceof Error && error.message && !error.message.includes('Failed to fetch') && !error.message.includes('Network')) {
+      // Still fall back for resilience, but keep curated plan usable offline.
+    }
     return generateCuratedItinerary(data);
   }
 }
