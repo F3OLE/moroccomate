@@ -23,7 +23,10 @@ import {
 import { generateItinerary } from '@/lib/api';
 import { TripFormData } from '@/types';
 import { FadeIn } from '@/components/FadeIn';
-import TripDateRange, { isValidTripRange } from '@/components/TripDateRange';
+import TripDateRange, {
+  isValidTripRange,
+  tripDayCount,
+} from '@/components/TripDateRange';
 import { cityDisplayName } from '@/data/places';
 
 const interests = [
@@ -174,11 +177,7 @@ export default function PlanPage() {
         'mid-range': 90,
         luxury: 150,
       };
-      const daysDiff = Math.ceil(
-        (new Date(formData.endDate!).getTime() -
-          new Date(formData.startDate!).getTime()) /
-          (1000 * 60 * 60 * 24)
-      );
+      const daysDiff = tripDayCount(formData.startDate!, formData.endDate!);
       const itinerary = await generateItinerary({
         city: formData.city,
         startDate: formData.startDate!,
@@ -193,7 +192,11 @@ export default function PlanPage() {
       router.push('/itinerary');
     } catch (error) {
       console.error(error);
-      alert('Error generating itinerary. Please try again.');
+      alert(
+        error instanceof Error
+          ? error.message
+          : 'Error generating itinerary. Please try again.'
+      );
     } finally {
       setIsLoading(false);
     }

@@ -4,6 +4,7 @@ import {
   generateCuratedItinerary,
   type ItineraryInput,
 } from '@/lib/curated-itinerary';
+import { tripDayCount } from '@/lib/trip-days';
 
 export const runtime = 'nodejs';
 export const maxDuration = 45;
@@ -87,9 +88,7 @@ export async function POST(request: Request) {
   today.setHours(0, 0, 0, 0);
   const maxAhead = new Date(today);
   maxAhead.setMonth(maxAhead.getMonth() + 12);
-  const daySpan = Math.ceil(
-    (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
-  );
+  const daySpan = tripDayCount(input.startDate, input.endDate);
 
   if (
     Number.isNaN(start.getTime()) ||
@@ -98,7 +97,7 @@ export async function POST(request: Request) {
     start < today ||
     start > maxAhead ||
     end > maxAhead ||
-    daySpan > 20
+    daySpan > 21
   ) {
     return NextResponse.json(
       {
@@ -118,25 +117,21 @@ export async function POST(request: Request) {
     console.error('[itinerary/generate] Gemini failed:', err);
   }
 
-  // Instant curated plan when Gemini is slow/unavailable (503, timeout, etc.)
+  // Instant curated plan when Gemini is slow/unavailable (503, timeout, missing key, etc.)
   const fallback = generateCuratedItinerary(input);
   return NextResponse.json({ ...fallback, source: 'curated' as const });
 }
 
 async function generateWithGemini(input: ItineraryInput) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    console.warn('[itinerary/generate] GEMINI_API_KEY missing');
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey || apiKey === 'your_gemini_api_key') {
+    console.warn(
+      '[itinerary/generate] GEMINI_API_KEY missing — using curated places'
+    );
     return null;
   }
 
-  const dayCount = Math.max(
-    1,
-    Math.ceil(
-      (new Date(input.endDate).getTime() - new Date(input.startDate).getTime()) /
-        (1000 * 60 * 60 * 24)
-    ) || 1
-  );
+  const dayCount = tripDayCount(input.startDate, input.endDate);
 
   const budgetLabel =
     input.budget <= 60 * dayCount
@@ -215,7 +210,6 @@ Rules:
 - Keep descriptions concise (1-2 sentences).
 - Never use em dashes or long dashes in any text. Use commas or periods instead.`;
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`;
   const requestBody = JSON.stringify({
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: {
@@ -225,12 +219,34 @@ Rules:
     },
   });
 
-  // Gemini often 503s under load. One short retry, then bail to curated.
-  const res = await fetchGeminiWithRetry(url, apiKey, requestBody, 2);
+  // Try current flash first, then a stable alias if the model id moved.
+  const models = [
+    'gemini-2.0-flash',
+    'gemini-2.0-flash-001',
+    'gemini-flash-latest',
+  ];
 
-  if (!res.ok) {
-    const errText = await res.text().catch(() => '');
-    throw new Error(`Gemini HTTP ${res.status}: ${errText.slice(0, 300)}`);
+  let res: Response | null = null;
+  let lastErr = '';
+  for (const model of models) {
+    const modelUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+    try {
+      res = await fetchGeminiWithRetry(modelUrl, apiKey, requestBody, 2);
+      if (res.ok) break;
+      lastErr = await res.text().catch(() => '');
+      // Model not found / not supported for this key — try next id.
+      if (res.status === 404 || res.status === 400) continue;
+      throw new Error(`Gemini HTTP ${res.status}: ${lastErr.slice(0, 300)}`);
+    } catch (err) {
+      lastErr = err instanceof Error ? err.message : String(err);
+      if (model === models[models.length - 1]) throw err;
+    }
+  }
+
+  if (!res || !res.ok) {
+    throw new Error(
+      `Gemini unavailable: ${lastErr.slice(0, 300) || 'no response'}`
+    );
   }
 
   const payload = await res.json();

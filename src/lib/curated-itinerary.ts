@@ -8,6 +8,7 @@ import {
   placePreferredSlot,
   type Place,
 } from '@/data/places';
+import { tripDayCount } from '@/lib/trip-days';
 
 export type ItineraryInput = {
   city: string;
@@ -58,13 +59,7 @@ class PlacePicker {
 }
 
 export function generateCuratedItinerary(data: ItineraryInput) {
-  const dayCount = Math.max(
-    1,
-    Math.ceil(
-      (new Date(data.endDate).getTime() - new Date(data.startDate).getTime()) /
-        (1000 * 60 * 60 * 24)
-    ) || 1
-  );
+  const dayCount = tripDayCount(data.startDate, data.endDate);
 
   const budgetKey =
     data.budget <= 60 * dayCount

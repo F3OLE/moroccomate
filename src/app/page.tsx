@@ -72,6 +72,28 @@ export default function Home() {
         {/* Dark at bottom → transparent at top */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[rgba(12,18,24,0.94)] via-[rgba(12,18,24,0.45)] to-transparent" />
         <div className="hero-grain" aria-hidden />
+        <div className="hero-palms" aria-hidden>
+          <svg className="hero-palm hero-palm-left" viewBox="0 0 200 280" fill="currentColor">
+            <ellipse cx="100" cy="268" rx="48" ry="8" opacity="0.35" />
+            <path d="M98 270 V118" stroke="currentColor" strokeWidth="7" fill="none" />
+            <path d="M100 120 C40 95 18 55 28 28 C55 48 78 78 100 120 Z" />
+            <path d="M100 118 C55 70 58 22 78 8 C88 42 96 78 100 118 Z" />
+            <path d="M100 116 C90 55 112 12 142 6 C128 48 112 82 100 116 Z" />
+            <path d="M102 118 C145 88 178 55 182 28 C155 48 128 78 102 118 Z" />
+            <path d="M102 122 C158 115 188 95 192 72 C162 88 128 108 102 122 Z" />
+            <path d="M98 122 C42 128 18 108 12 82 C38 95 72 112 98 122 Z" />
+          </svg>
+          <svg className="hero-palm hero-palm-right" viewBox="0 0 200 280" fill="currentColor">
+            <ellipse cx="100" cy="268" rx="52" ry="9" opacity="0.3" />
+            <path d="M102 270 V108" stroke="currentColor" strokeWidth="8" fill="none" />
+            <path d="M100 112 C38 90 12 48 22 18 C52 40 78 72 100 112 Z" />
+            <path d="M100 110 C52 62 48 14 72 2 C86 38 96 72 100 110 Z" />
+            <path d="M100 108 C95 42 120 4 152 0 C136 42 114 76 100 108 Z" />
+            <path d="M102 110 C148 78 186 42 190 14 C162 38 130 72 102 110 Z" />
+            <path d="M104 114 C162 108 194 84 198 58 C168 78 132 100 104 114 Z" />
+            <path d="M96 116 C40 122 10 98 6 70 C32 86 68 106 96 116 Z" />
+          </svg>
+        </div>
 
         <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-14 sm:py-24 text-white">
           <div className="hero-fade flex items-center gap-3 mb-6">

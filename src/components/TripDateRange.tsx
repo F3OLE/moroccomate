@@ -51,6 +51,12 @@ function daysBetween(a: string, b: string) {
   );
 }
 
+/** Inclusive day count — matches the calendar label (“3 days”). */
+export function tripDayCount(startDate: string, endDate: string) {
+  if (!startDate || !endDate) return 1;
+  return Math.max(1, daysBetween(startDate, endDate) + 1);
+}
+
 interface TripDateRangeProps {
   startDate?: string;
   endDate?: string;

@@ -1,6 +1,6 @@
 'use client';
 
-/** Soft fade when navigating between routes — CSS only, no bounce. */
+/** Pass-through — no route transition flash on first paint / navigation. */
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div className="animate-rise">{children}</div>;
+  return <>{children}</>;
 }
