@@ -1,3 +1,16 @@
+export type BlogImage = {
+  src: string;
+  alt: string;
+  focus?: string;
+  caption?: string;
+};
+
+export type BlogSection = {
+  heading?: string;
+  paragraphs: string[];
+  image?: BlogImage;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -6,12 +19,168 @@ export type BlogPost = {
   updatedAt?: string;
   city?: string;
   tags: string[];
+  cover: BlogImage;
   /** Plain sections for the article body */
-  sections: { heading?: string; paragraphs: string[] }[];
+  sections: BlogSection[];
   cta?: { label: string; href: string };
 };
 
+const img = (file: string) => `/images/places/${file}`;
+
+function wordCount(post: Pick<BlogPost, 'title' | 'description' | 'sections'>) {
+  const body = post.sections
+    .flatMap((s) => [s.heading || '', ...s.paragraphs])
+    .join(' ');
+  return `${post.title} ${post.description} ${body}`
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+export function postReadMinutes(post: BlogPost) {
+  return Math.max(3, Math.round(wordCount(post) / 220));
+}
+
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: 'marrakech-short-film-festival-september-2026',
+    title: 'Marrakech Short Film Festival Week: What to Do Between Screenings',
+    description:
+      'The 6th Marrakech Short Film Festival runs 25–30 September 2026. Here is how to pair cinema days with medina walks, Majorelle mornings, and soft autumn nights — without packing your calendar.',
+    publishedAt: '2026-09-25',
+    updatedAt: '2026-09-25',
+    city: 'Marrakech',
+    tags: ['marrakech', 'events', 'festival', 'autumn', 'film'],
+    cover: {
+      src: img('jemaa-sunset.jpg'),
+      alt: 'Jemaa el-Fnaa square at golden hour in Marrakech',
+      focus: 'center 40%',
+      caption: 'Jemaa at blue hour — perfect after an afternoon screening.',
+    },
+    sections: [
+      {
+        paragraphs: [
+          'If you are in Marrakech this week, the city has a quiet cultural pulse under the usual medina buzz: the 6th Marrakech Short Film Festival runs from 25 to 30 September 2026. Shorts travel easier than feature premieres — you can catch two programs before dinner and still have a rooftop sunset.',
+          'September is also one of the best travel months here. Heat softens, nights stay warm, and hotel rates are kinder than peak winter film week in November. Use festival days as anchors, not as a full-time job.',
+        ],
+        image: {
+          src: img('marrakech-medina.jpg'),
+          alt: 'Marrakech medina alley with warm light',
+          focus: 'center 45%',
+          caption: 'Keep mornings free for the medina before afternoon screenings.',
+        },
+      },
+      {
+        heading: 'Build a festival day that still feels like Marrakech',
+        paragraphs: [
+          'Morning: walk Bahia Palace or a calmer souk lane before 11:00. Buy nothing yet — just map the streets.',
+          'Midday: lunch in a courtyard (Le Jardin energy) or a spice-square café, then a short rest. Short festivals reward people who are not fried by 16:00.',
+          'Afternoon or early evening: your screening block. Travel light. Bring a scarf for cold cinema AC.',
+          'Night: Jemaa from a rooftop, or Hivernage if you want dinner-show energy. Do not try to “do nightlife” every festival night — two strong evenings beat five forgettable ones.',
+        ],
+        image: {
+          src: img('bahia-palace.jpg'),
+          alt: 'Courtyard detail at Bahia Palace, Marrakech',
+          focus: 'center 35%',
+          caption: 'Bahia early — cooler light, fewer tour groups.',
+        },
+      },
+      {
+        heading: 'Also on the calendar this week',
+        paragraphs: [
+          '27 September is World Tourism Day, with city programs around sustainable travel. Easy add-on if you want a talk or neighborhood walk between films.',
+          'Through 29 September, the Yves Saint Laurent Museum is running “Yves Saint Laurent et ses chiens.” Pair it with Jardin Majorelle next door — classic, photogenic, and a soft counterpoint to cinema seats.',
+          'Looking ahead: Rencontres de la Photographie lands late October, and the Marrakech International Film Festival returns 20–28 November. If shorts this week feel good, November is the red-carpet sequel.',
+        ],
+        image: {
+          src: img('jardin-majorelle.jpg'),
+          alt: 'Blue walls and plants at Jardin Majorelle',
+          focus: 'center 40%',
+          caption: 'Majorelle + YSL on a non-screening morning.',
+        },
+      },
+      {
+        heading: 'Where to stay in the rhythm',
+        paragraphs: [
+          'Medina riads keep you walkable to Jemaa and many cultural venues. Guéliz / Hivernage is easier for taxis, cafés, and late dinners. If you are flying out of CMN after the festival, leave one buffer morning — September traffic and festival crowds both love the same hours.',
+          'Want a day-by-day skeleton for your dates? Generate a Marrakech plan, then swap two afternoon slots for screenings. MoroccoMate is built for that kind of edit.',
+        ],
+      },
+    ],
+    cta: {
+      label: 'Plan Marrakech around the festival',
+      href: '/plan',
+    },
+  },
+  {
+    slug: 'tanjazz-tangier-2026-weekend-guide',
+    title: 'Tanjazz Just Lit Up Tangier — A Weekend Guide to the Strait City',
+    description:
+      'Tanjazz’s 23rd edition ran 18–20 September 2026 across Tangier. Whether you caught the sets or you are arriving on the afterglow, here is how to spend three days between Café Hafa, the kasbah, Cap Spartel, and the beach.',
+    publishedAt: '2026-09-24',
+    updatedAt: '2026-09-24',
+    city: 'Tangier',
+    tags: ['tangier', 'events', 'tanjazz', 'jazz', 'weekend'],
+    cover: {
+      src: img('cafe-hafa.jpg'),
+      alt: 'Café Hafa terrace overlooking the Strait of Gibraltar',
+      focus: 'center 35%',
+      caption: 'Café Hafa — Tangier’s long balcony over the Strait.',
+    },
+    sections: [
+      {
+        paragraphs: [
+          'Tanjazz returned to Tangier from 18 to 20 September 2026 after skipping 2025 to rebuild partnerships. Outdoor stages and intimate rooms, jazz meeting Moroccan and world sounds — the festival is how the city introduces itself: open, coastal, a little cinematic.',
+          'If you were here for the weekend, keep the playlist energy but slow the pace. If you missed it, Tangier still rewards the same three-day skeleton: one medina day, one Atlantic day, one “do nothing on a terrace” day.',
+        ],
+        image: {
+          src: img('tangier-kasbah.jpg'),
+          alt: 'Tangier kasbah walls and sea light',
+          focus: 'center 40%',
+          caption: 'Kasbah lanes after a late concert — quieter, cooler air.',
+        },
+      },
+      {
+        heading: 'Day plan when the city is still humming',
+        paragraphs: [
+          'Morning: Petit Socco coffee, then climb toward the kasbah for views and empty alleys.',
+          'Late morning: Café Hafa. Order mint tea. Watch ferries stitch Spain to Africa. Stay longer than you planned.',
+          'Afternoon: Cap Spartel and the caves if you want Atlantic drama, or Tangier beach if you want sand and soft light.',
+          'Evening: Grand Socco energy, a medina dinner, and — if Cinema Rif has something on — a film that fits the mood. Tangier loves a night that ends with conversation, not a checklist.',
+        ],
+        image: {
+          src: img('cap-spartel.jpg'),
+          alt: 'Cap Spartel lighthouse on the Atlantic coast near Tangier',
+          focus: 'center 45%',
+          caption: 'Cap Spartel for Atlantic wind after a late night.',
+        },
+      },
+      {
+        heading: 'Why Tanjazz matters for travelers',
+        paragraphs: [
+          'In 2024 the festival drew tens of thousands of visitors. The 2026 edition put names like Dee Dee Bridgewater, Diego El Cigala, Rodrigo y Gabriela, and Buena Vista All Stars on the Tangier stage — the kind of lineup that makes a city feel international without losing its streets.',
+          'For travelers, festivals are an excuse to book the shoulder season: September light on the Strait is sharp, hotels are available, and you get culture without midsummer heat.',
+          'Check tanjazz.org and WeBook for future editions. Tangier rewards people who leave one evening empty — that is usually when the best set finds you.',
+        ],
+        image: {
+          src: img('petit-socco.jpg'),
+          alt: 'Petit Socco square in Tangier medina',
+          focus: 'center 50%',
+          caption: 'Petit Socco between sets — people-watching is half the festival.',
+        },
+      },
+      {
+        heading: 'Turn the weekend into a plan',
+        paragraphs: [
+          'Open Discover filtered to Tangier, pin Café Hafa, Cap Spartel, and a medina dinner, then use Plan a trip to lock dates. If you are combining Tangier with Chefchaouen or a southbound train to Casa, leave a buffer morning — the Strait has a way of making you late on purpose.',
+        ],
+      },
+    ],
+    cta: {
+      label: 'Build a Tangier weekend',
+      href: '/plan',
+    },
+  },
   {
     slug: 'how-to-avoid-scams-in-morocco',
     title: "How to Avoid Scams in Morocco: A Local's Honest Guide (2027)",
@@ -21,11 +190,23 @@ export const BLOG_POSTS: BlogPost[] = [
     updatedAt: '2026-09-22',
     city: 'Morocco',
     tags: ['safety', 'tips', 'marrakech', 'first-timers', 'scams'],
+    cover: {
+      src: img('souk-semmarine.jpg'),
+      alt: 'Covered souk lane in Marrakech with lanterns and shops',
+      focus: 'center 40%',
+      caption: 'Souk Semmarine — beautiful, busy, and full of negotiation theater.',
+    },
     sections: [
       {
         paragraphs: [
           'Morocco is one of the safest and most rewarding countries you will ever visit. But like any major tourist destination, there are people who make a living off visitors who do not know the rules. This is not a scare piece. It is a cheat sheet from someone who was born and raised in the Marrakech medina so you can relax and enjoy your trip without getting ripped off.',
         ],
+        image: {
+          src: img('ensemble-artisanale.jpg'),
+          alt: 'Artisan crafts display in Marrakech',
+          focus: 'center 45%',
+          caption: 'Fixed-price artisan shops beat high-pressure “guided” tours.',
+        },
       },
       {
         heading: 'The "Friendly Local" Who Walks You Somewhere',
@@ -45,6 +226,12 @@ export const BLOG_POSTS: BlogPost[] = [
           'How to handle it: Start at 30 to 40% of their asking price and negotiate from there. Walk away if they will not come down. Walking away is the strongest negotiation tool you have because 9 times out of 10 they will call you back with a lower number. Never feel bad about negotiating. It is expected. It is cultural. A vendor who does not want to negotiate will tell you.',
           'Pro tip: Buy from the smaller stalls deeper inside the souk, not the big shops on the main tourist paths. The deeper you go, the lower the starting prices.',
         ],
+        image: {
+          src: img('grand-socco-souk.jpg'),
+          alt: 'Busy market square atmosphere in northern Morocco',
+          focus: 'center 50%',
+          caption: 'Busy squares are for atmosphere — buy deeper in the lanes.',
+        },
       },
       {
         heading: 'The Spice Shop "Tour"',
@@ -114,12 +301,24 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: '2026-09-22',
     city: 'Morocco',
     tags: ['itinerary', 'marrakech', 'casablanca', 'planning'],
+    cover: {
+      src: img('agafay-pool-camp.jpg'),
+      alt: 'Desert pool camp near Marrakech at golden hour',
+      focus: 'center 40%',
+      caption: 'Agafay evening — the 7-day plan’s best add-on.',
+    },
     sections: [
       {
         paragraphs: [
           'Most “Morocco in 5 days” guides try to cover Marrakech, Fes, the desert, and the coast. That is a lot of transit for little enjoyment.',
           'These plans stay realistic: pick a base city, do day trips, and leave room for food and evenings. Use our planner to customize dates and interests.',
         ],
+        image: {
+          src: img('nomad-marrakech.jpg'),
+          alt: 'Rooftop dining view over Marrakech medina',
+          focus: 'center 45%',
+          caption: 'Leave room for rooftop dinners — they are half the trip.',
+        },
       },
       {
         heading: '5 days: Marrakech base',
@@ -138,6 +337,12 @@ export const BLOG_POSTS: BlogPost[] = [
           'Day 6: Agafay desert evening (quad or pool camp) or Essaouira as a long day / overnight if you like the coast.',
           'Day 7: Buffer day for shopping, a second hammam, or Casablanca if you fly out from CMN and want Hassan II Mosque + Corniche.',
         ],
+        image: {
+          src: img('ourika-river-day.jpg'),
+          alt: 'Ourika Valley river cafés in the Atlas foothills',
+          focus: 'center 50%',
+          caption: 'Ourika for cooler air when the medina feels loud.',
+        },
       },
       {
         heading: '5 days: Casablanca + Rabat',
@@ -148,6 +353,12 @@ export const BLOG_POSTS: BlogPost[] = [
           'Day 4: Train or drive to Rabat. Kasbah des Oudayas, Café Maure, Hassan Tower.',
           'Day 5: Chellah or marina evening, back to Casa for your flight.',
         ],
+        image: {
+          src: img('hassan-ii.jpg'),
+          alt: 'Hassan II Mosque on the Casablanca waterfront',
+          focus: 'center 35%',
+          caption: 'Hassan II Mosque — start the Casa base here.',
+        },
       },
       {
         heading: 'How to use MoroccoMate',
@@ -170,12 +381,24 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: '2026-09-22',
     city: 'Marrakech',
     tags: ['marrakech', 'things-to-do', 'nightlife', 'food'],
+    cover: {
+      src: img('mamounia-pool.jpg'),
+      alt: 'Garden pool at a Marrakech palace hotel',
+      focus: 'center 45%',
+      caption: 'Pool days are how Marrakech does “beach.”',
+    },
     sections: [
       {
         paragraphs: [
           'Marrakech rewards slow mornings and intentional evenings. You do not need to “see everything.” Pick a few anchors and leave gaps for mint tea and people-watching.',
           'Here is a practical mix of classics and places travelers actually enjoy.',
         ],
+        image: {
+          src: img('le-jardin.jpg'),
+          alt: 'Leafy courtyard restaurant in Marrakech medina',
+          focus: 'center center',
+          caption: 'Courtyard lunches beat square-edge tourist menus.',
+        },
       },
       {
         heading: 'Medina classics (worth it once)',
@@ -192,6 +415,12 @@ export const BLOG_POSTS: BlogPost[] = [
           'For a calmer lunch, courtyard spots away from the main square are easier.',
           'Ask your riad for a current favorite. Places rotate in popularity fast.',
         ],
+        image: {
+          src: img('cafe-des-epices.jpg'),
+          alt: 'Café des Épices overlooking the spice square',
+          focus: 'center 22%',
+          caption: 'Spice-square cafés for juice and people-watching.',
+        },
       },
       {
         heading: 'Pools, clubs, and nights out',
@@ -229,4 +458,11 @@ export function getPost(slug: string) {
 
 export function getAllSlugs() {
   return BLOG_POSTS.map((p) => p.slug);
+}
+
+export function sortedPosts() {
+  return [...BLOG_POSTS].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 }
