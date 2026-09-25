@@ -86,6 +86,13 @@ export default function PlanPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Partial<TripFormData>>({});
 
+  // Visual QA: /plan?preview=loading shows the palm overlay
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('preview') === 'loading') {
+      setIsLoading(true);
+    }
+  }, []);
+
   const toggleInterest = (interestId: string) => {
     setSelectedInterests((prev) =>
       prev.includes(interestId)

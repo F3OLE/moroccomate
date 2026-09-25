@@ -118,24 +118,24 @@ export default function DiscoverPage() {
           <div className="hero-grain opacity-[0.05]" aria-hidden />
         </div>
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-10 sm:pb-12">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-14 sm:pt-16 pb-7 sm:pb-8">
           <FadeIn>
-            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3 drop-shadow-sm">
+            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-2 drop-shadow-sm">
               {t('discover_label')}
             </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-[var(--ink)] leading-[1.05] mb-3 max-w-xl">
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-[var(--ink)] leading-[1.05] mb-2 max-w-xl">
               {t('discover_title')}
             </h1>
-            <p className="text-[var(--ink-soft)] text-lg max-w-xl leading-relaxed mb-8">
+            <p className="text-[var(--ink-soft)] text-base sm:text-lg max-w-xl leading-relaxed mb-6">
               {t('discover_sub')}
             </p>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)] mb-2.5">
               Pick a city
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5">
               {CITY_IDS.map((id) => {
                 const c = CITY_VISUALS[id];
                 const on = city === id;
@@ -144,7 +144,7 @@ export default function DiscoverPage() {
                     key={id}
                     type="button"
                     onClick={() => setCity(id)}
-                    className={`group relative overflow-hidden rounded-md text-left aspect-[5/3] sm:aspect-[4/3] transition-transform duration-200 ${
+                    className={`group relative overflow-hidden rounded-md text-left aspect-[16/10] sm:aspect-[5/3] transition-transform duration-200 ${
                       on ? 'ring-2 ring-[var(--brand)] ring-offset-2 ring-offset-[var(--paper)]' : ''
                     }`}
                   >
@@ -193,9 +193,9 @@ export default function DiscoverPage() {
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-        <FadeIn className="mb-8">
-          <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <FadeIn className="mb-6">
+          <div className="flex flex-wrap items-end justify-between gap-3 mb-3">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink-soft)]">
               {t('filter')}
             </p>
@@ -226,18 +226,18 @@ export default function DiscoverPage() {
         </FadeIn>
 
         {featured.length > 0 && category === 'all' && (
-          <FadeIn delay={0.05} className="mb-12">
-            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-4">
+          <FadeIn delay={0.05} className="mb-10">
+            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
               Start here
             </p>
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
               {featured.map((p) => (
                 <a
                   key={`feat-${p.id}`}
                   href={mapsUrl(p.mapsQuery)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-md aspect-[4/5] sm:aspect-[3/4] block"
+                  className="group relative overflow-hidden rounded-md aspect-[16/10] sm:aspect-[4/5] block"
                 >
                   <Image
                     src={p.image}
