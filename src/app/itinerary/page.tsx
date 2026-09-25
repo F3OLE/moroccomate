@@ -123,9 +123,18 @@ export default function ItineraryPage() {
   };
 
   const dayCount = itinerary.days || itinerary.itinerary.length;
-  const isAi =
-    (itinerary as Itinerary & { source?: string }).source === 'gemini';
+  const meta = itinerary as Itinerary & {
+    source?: string;
+    fallbackReason?: string;
+  };
+  const isAi = meta.source === 'gemini';
   const sourceLabel = isAi ? 'Crafted with AI' : 'Curated stops';
+  const fallbackReason = meta.fallbackReason || '';
+  const missingKey =
+    !isAi &&
+    (fallbackReason === 'missing_key' ||
+      fallbackReason.startsWith('missing_key'));
+  const geminiErrored = !isAi && fallbackReason.startsWith('gemini_error');
 
   return (
     <div className="min-h-screen plan-scene relative pt-14 sm:pt-16">
@@ -143,8 +152,29 @@ export default function ItineraryPage() {
 
           {!isAi && (
             <div className="mb-6 rounded-xl border border-[#E1B168]/40 bg-[#2C3E50]/80 backdrop-blur px-4 py-3 text-sm text-white/90">
-              <span className="font-semibold text-[#E1B168]">Curated plan. </span>
-              AI was busy or unavailable, so we built this from our verified spots. Still editable.
+              {missingKey ? (
+                <>
+                  <span className="font-semibold text-[#E1B168]">
+                    AI key not loaded on the server.{' '}
+                  </span>
+                  Add <code className="text-[#E1B168]">GEMINI_API_KEY</code> in
+                  Vercel → Project Settings → Environment Variables (Production),
+                  then Redeploy. Until then we used verified spots.
+                </>
+              ) : geminiErrored ? (
+                <>
+                  <span className="font-semibold text-[#E1B168]">
+                    AI planner hit an error.{' '}
+                  </span>
+                  We built this from our verified spots instead. Still editable.
+                </>
+              ) : (
+                <>
+                  <span className="font-semibold text-[#E1B168]">Curated plan. </span>
+                  AI was busy or unavailable, so we built this from our verified
+                  spots. Still editable.
+                </>
+              )}
             </div>
           )}
 

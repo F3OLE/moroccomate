@@ -5,6 +5,7 @@ import {
   type ItineraryInput,
 } from '@/lib/curated-itinerary';
 import { tripDayCount } from '@/lib/trip-days';
+import { getGeminiApiKey, geminiKeySource } from '@/lib/gemini';
 
 export const runtime = 'nodejs';
 export const maxDuration = 45;
@@ -108,28 +109,41 @@ export async function POST(request: Request) {
     );
   }
 
+  let fallbackReason: string | undefined;
+
   try {
     const gemini = await generateWithGemini(input);
     if (gemini) {
       return NextResponse.json(gemini);
     }
+    fallbackReason = 'missing_key';
   } catch (err) {
+    fallbackReason =
+      err instanceof Error ? `gemini_error:${err.message.slice(0, 120)}` : 'gemini_error';
     console.error('[itinerary/generate] Gemini failed:', err);
   }
 
   // Instant curated plan when Gemini is slow/unavailable (503, timeout, missing key, etc.)
   const fallback = generateCuratedItinerary(input);
-  return NextResponse.json({ ...fallback, source: 'curated' as const });
+  return NextResponse.json({
+    ...fallback,
+    source: 'curated' as const,
+    fallbackReason,
+  });
 }
 
 async function generateWithGemini(input: ItineraryInput) {
-  const apiKey = process.env.GEMINI_API_KEY?.trim();
-  if (!apiKey || apiKey === 'your_gemini_api_key') {
+  const apiKey = getGeminiApiKey();
+  if (!apiKey) {
     console.warn(
-      '[itinerary/generate] GEMINI_API_KEY missing — using curated places'
+      '[itinerary/generate] No Gemini key in env (checked GEMINI_API_KEY, GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_AI_API_KEY, GOOGLE_API_KEY) — using curated places'
     );
     return null;
   }
+
+  console.info(
+    `[itinerary/generate] Using Gemini key from ${geminiKeySource()}`
+  );
 
   const dayCount = tripDayCount(input.startDate, input.endDate);
 
