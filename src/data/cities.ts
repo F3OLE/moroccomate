@@ -42,7 +42,7 @@ export const CITY_HUBS: CityHub[] = [
     tagline: 'Atlantic city energy and late dinners',
     description:
       'Discover Casablanca restaurants, Corniche nights, cafés, and landmarks. Build a realistic city itinerary with MoroccoMate.',
-    heroImage: '/images/places/hassan-ii.jpg',
+    heroImage: '/images/places/casablanca-skyline.jpg',
     keywords: [
       'Casablanca guide',
       'things to do in Casablanca',
@@ -58,7 +58,7 @@ export const CITY_HUBS: CityHub[] = [
     tagline: 'Capital calm, kasbah views, and good food',
     description:
       'Explore Rabat restaurants, cafés, Chellah, and the Kasbah des Oudayas. Plan a quieter Morocco base with real mapped spots.',
-    heroImage: '/images/places/bahia-palace.jpg',
+    heroImage: '/images/places/rabat-oudayas.jpg',
     keywords: [
       'Rabat guide',
       'things to do in Rabat',
@@ -74,7 +74,7 @@ export const CITY_HUBS: CityHub[] = [
     tagline: 'Where the Mediterranean meets the Atlantic',
     description:
       'Browse Tangier cafés, kasbah walks, beach time, and restaurants. Plan a north Morocco stop with Maps links and local picks.',
-    heroImage: '/images/places/ensemble-artisanal.jpg',
+    heroImage: '/images/places/tangier-medina.jpg',
     keywords: [
       'Tangier guide',
       'things to do in Tangier',

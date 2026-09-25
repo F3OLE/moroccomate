@@ -788,7 +788,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Agafay Desert Quad Biking',
     location: 'Agafay Stone Desert',
     city: 'Marrakech',
-    image: xpImg('agafay.jpg'),
+    image: xpImg('quad-palmeraie.jpg'),
     price: 'From 450 MAD',
     duration: '2-4 hours',
     description:
@@ -802,7 +802,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Atlas Paragliding',
     location: 'High Atlas foothills',
     city: 'Marrakech',
-    image: xpImg('atlas.jpg'),
+    image: xpImg('paragliding-atlas.jpg'),
     price: 'From 800 MAD',
     duration: 'Half day',
     description:
@@ -830,7 +830,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Merzouga Camel Trek & Camp',
     location: 'Erg Chebbi',
     city: 'Sahara',
-    image: xpImg('merzouga.jpg'),
+    image: xpImg('merzouga-camp.jpg'),
     price: 'From 1,200 MAD',
     duration: 'Overnight',
     description:
