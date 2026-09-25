@@ -4,14 +4,8 @@ import { useState } from 'react';
 import {
   MapPin,
   Clock,
-  DollarSign,
   Edit,
   Trash2,
-  Lightbulb,
-  Utensils,
-  Landmark,
-  Mountain,
-  Moon,
   ExternalLink,
   ChevronDown,
   BadgeCheck,
@@ -19,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Activity } from '@/types';
 import BookButton from '@/components/BookButton';
+import HoverImageReveal from '@/components/HoverImageReveal';
 import { cityDisplayName, PLACES } from '@/data/places';
 
 interface ActivityItemProps {
@@ -40,18 +35,6 @@ export default function ActivityItem({
 }: ActivityItemProps) {
   const [showDetails, setShowDetails] = useState(false);
 
-  const getActivityIcon = (type: string, timeSlot: string) => {
-    if (type === 'meal') return Utensils;
-    const icons: Record<string, typeof Mountain> = {
-      morning: Mountain,
-      afternoon: Landmark,
-      evening: Moon,
-      lunch: Utensils,
-      dinner: Utensils,
-    };
-    return icons[timeSlot] || Landmark;
-  };
-
   const getTimeSlotLabel = (timeSlot: string) => {
     const labels: Record<string, string> = {
       morning: 'Morning',
@@ -63,7 +46,6 @@ export default function ActivityItem({
     return labels[timeSlot] || timeSlot;
   };
 
-  const Icon = getActivityIcon(activity.type, activity.timeSlot);
   const clock = activity.clock || defaultClock(activity.timeSlot);
   const known = PLACES.find(
     (p) =>
@@ -76,82 +58,66 @@ export default function ActivityItem({
     city: known ? cityDisplayName(known.city) : undefined,
     badge: activity.badge || known?.badge,
   };
-  const accent =
+  const typeLabel =
     activity.type === 'meal'
-      ? 'border-[#E1B168]'
-      : activity.timeSlot === 'evening'
-        ? 'border-[#7a3280]/50'
-        : 'border-[#D93D3D]';
+      ? 'Meal'
+      : activity.type === 'transport'
+        ? 'Transport'
+        : activity.category || 'Stop';
 
-  return (
-    <article
-      className={`relative grid grid-cols-[4.5rem_1fr] sm:grid-cols-[5.5rem_1fr] gap-3 sm:gap-5 py-5 ${
-        !isLast ? 'border-b border-[#2C3E50]/08' : ''
-      }`}
-    >
-      <div className="pt-1 text-right pr-1">
-        <p className="text-lg sm:text-xl font-bold text-[#D93D3D] tabular-nums leading-none">
+  const body = (
+    <article className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+      <div className="sm:w-[4.75rem] shrink-0 pt-0.5">
+        <p className="font-display text-xl font-bold text-[var(--brand)] tabular-nums leading-none">
           {clock}
         </p>
-        <p className="text-[10px] font-bold uppercase tracking-wider text-[#2C3E50]/45 mt-1.5">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)] mt-1.5">
           {getTimeSlotLabel(activity.timeSlot)}
         </p>
       </div>
 
-      <div className={`pl-4 sm:pl-5 border-l-2 ${accent}`}>
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <div className="flex items-start gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-[2px] bg-[#FCE8E8] border border-[#D93D3D]/20 flex items-center justify-center shrink-0">
-              <Icon className="w-4 h-4 text-[#D93D3D]" />
-            </div>
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <h3 className="font-bold text-[#2C3E50] text-base sm:text-lg leading-snug">
-                  {activity.title}
-                </h3>
-                {activity.badge === 'partner' && (
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-[1px] bg-[#D93D3D] text-white">
-                    <BadgeCheck className="w-3 h-3" />
-                    Partner
-                  </span>
-                )}
-                {activity.badge === 'verified' && (
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-[1px] bg-[#2C3E50] text-white">
-                    <BadgeCheck className="w-3 h-3" />
-                    Verified
-                  </span>
-                )}
-                <span
-                  className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-[1px] ${
-                    activity.type === 'meal'
-                      ? 'bg-[#E1B168]/25 text-[#8a6a2a]'
-                      : 'bg-[#2C3E50]/08 text-[#2C3E50]'
-                  }`}
-                >
-                  {activity.type}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-start justify-between gap-3 mb-1">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
+              <h3 className="font-display text-xl font-bold text-[var(--ink)] group-hover/hover-img:text-[var(--brand)] transition-colors leading-snug">
+                {activity.title}
+              </h3>
+              <span className="text-xs uppercase tracking-wider text-[var(--ink-soft)]/70">
+                {typeLabel}
+              </span>
+              {(activity.badge === 'partner' || known?.badge === 'partner') && (
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--brand)]">
+                  <BadgeCheck className="w-3 h-3" /> Partner
                 </span>
-              </div>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-[#2C3E50]/65">
-                <span className="inline-flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#D93D3D]/70" />
-                  {activity.location}
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
-                  {activity.duration}
-                </span>
-                <span className="inline-flex items-center gap-1 font-semibold text-[#2C3E50]">
-                  <DollarSign className="w-3.5 h-3.5 text-[#D93D3D]" />
-                  {activity.cost}
-                </span>
-              </div>
-              {activity.bestTime && (
-                <p className="mt-1.5 text-xs font-medium text-[#C4923A] inline-flex items-center gap-1">
-                  <Sun className="w-3.5 h-3.5" />
-                  Best time: {activity.bestTime}
-                </p>
               )}
+              {(activity.badge === 'verified' || known?.badge === 'verified') &&
+                activity.badge !== 'partner' &&
+                known?.badge !== 'partner' && (
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--zellige)]">
+                    <BadgeCheck className="w-3 h-3" /> Verified
+                  </span>
+                )}
             </div>
+            <p className="text-sm text-[var(--ink-soft)] mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 shrink-0" />
+                {activity.location}
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 shrink-0" />
+                {activity.duration}
+              </span>
+            </p>
+            {activity.bestTime && (
+              <p className="text-xs text-[var(--saffron)] font-medium mb-2 flex items-center gap-1">
+                <Sun className="w-3.5 h-3.5" />
+                Best time: {activity.bestTime}
+              </p>
+            )}
+            <p className="text-sm text-[var(--ink-soft)] leading-relaxed max-w-2xl">
+              {activity.description}
+            </p>
           </div>
 
           <div className="flex items-center gap-0.5 shrink-0">
@@ -159,7 +125,7 @@ export default function ActivityItem({
               <button
                 type="button"
                 onClick={() => onEdit(dayIndex, activityIndex)}
-                className="p-1.5 text-[#2C3E50]/35 hover:text-[#2C3E50]"
+                className="p-1.5 text-[var(--ink-soft)]/50 hover:text-[var(--ink)] transition-colors"
                 title="Edit"
               >
                 <Edit className="w-4 h-4" />
@@ -169,7 +135,7 @@ export default function ActivityItem({
               <button
                 type="button"
                 onClick={() => onRemove(dayIndex, activityIndex)}
-                className="p-1.5 text-[#2C3E50]/35 hover:text-[#D93D3D]"
+                className="p-1.5 text-[var(--ink-soft)]/50 hover:text-[var(--brand)] transition-colors"
                 title="Remove"
               >
                 <Trash2 className="w-4 h-4" />
@@ -178,48 +144,69 @@ export default function ActivityItem({
           </div>
         </div>
 
-        <p className="text-[#2C3E50]/80 text-sm leading-relaxed mb-3 pl-0 sm:pl-12">
-          {activity.description}
-        </p>
-
-        <div className="flex flex-wrap items-center gap-3 pl-0 sm:pl-12">
-          {activity.category && (
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#C4923A]">
-              {activity.category}
-            </span>
-          )}
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="font-display text-sm font-bold text-[var(--brand)]">
+            {activity.cost}
+          </span>
           <button
             type="button"
             onClick={() => setShowDetails(!showDetails)}
-            className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#2C3E50]/50 hover:text-[#D93D3D]"
+            className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[var(--ink-soft)] hover:text-[var(--brand)] transition-colors"
           >
             Details
             <ChevronDown
               className={`w-3.5 h-3.5 transition-transform ${showDetails ? 'rotate-180' : ''}`}
             />
           </button>
-          <BookButton place={bookPlace} compact />
+          <BookButton
+            place={bookPlace}
+            compact
+            className="inline-flex items-center gap-1 text-xs font-bold text-[var(--brand)] hover:underline"
+          />
           {activity.mapsUrl && (
             <a
               href={activity.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-bold text-[#D93D3D] hover:underline ml-auto"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--brand)] hover:underline"
             >
               Google Maps
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
           )}
         </div>
 
         {showDetails && activity.tips && (
-          <div className="mt-3 ml-0 sm:ml-12 flex items-start gap-2 p-3 bg-[#E1B168]/15 border border-[#E1B168]/30 rounded-[2px]">
-            <Lightbulb className="w-4 h-4 text-[#C4923A] mt-0.5 shrink-0" />
-            <p className="text-sm text-[#2C3E50] leading-relaxed">{activity.tips}</p>
-          </div>
+          <p className="mt-3 text-sm text-[var(--ink)] leading-relaxed border-l-2 border-[var(--saffron)] pl-3">
+            {activity.tips}
+          </p>
         )}
       </div>
     </article>
+  );
+
+  if (known?.image) {
+    return (
+      <HoverImageReveal
+        src={known.image}
+        alt={activity.title}
+        tone="light"
+        focus={known.imageFocus || 'center center'}
+        className={`min-h-[7.5rem] py-6 border-b border-[var(--ink)]/12 -mx-1 sm:-mx-2 ${
+          isLast ? 'border-b-0' : ''
+        }`}
+      >
+        {body}
+      </HoverImageReveal>
+    );
+  }
+
+  return (
+    <div
+      className={`py-6 border-b border-[var(--ink)]/12 ${isLast ? 'border-b-0' : ''}`}
+    >
+      {body}
+    </div>
   );
 }
 
