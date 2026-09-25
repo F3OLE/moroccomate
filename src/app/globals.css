@@ -450,6 +450,54 @@ a {
   background-size: 180px 180px;
 }
 
+/* Little palms for AI itinerary loading */
+.palm-loader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.65rem;
+  height: 5.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.palm-loader-tree {
+  width: 2.65rem;
+  height: auto;
+  color: var(--zellige);
+  transform-origin: 50% 100%;
+  animation: palm-sway 1.35s ease-in-out infinite;
+}
+
+.palm-loader-tree-1 {
+  width: 2.15rem;
+  color: var(--brand);
+  animation-delay: 0s;
+  opacity: 0.9;
+}
+
+.palm-loader-tree-2 {
+  width: 3.1rem;
+  color: var(--zellige);
+  animation-delay: 0.18s;
+}
+
+.palm-loader-tree-3 {
+  width: 2.35rem;
+  color: var(--saffron);
+  animation-delay: 0.36s;
+  opacity: 0.95;
+}
+
+@keyframes palm-sway {
+  0%,
+  100% {
+    transform: rotate(-7deg) translateY(0);
+  }
+  50% {
+    transform: rotate(7deg) translateY(-5px);
+  }
+}
+
 /* Soft palm silhouettes — atmosphere, not decoration noise */
 .hero-palms {
   pointer-events: none;
@@ -566,8 +614,13 @@ a {
   .hero-fade-delay-2,
   .hero-fade-delay-3,
   .skeleton,
-  .skeleton-light {
+  .skeleton-light,
+  .palm-loader-tree {
     animation: none !important;
+  }
+
+  .palm-loader-tree {
+    transform: none !important;
   }
 
   .reveal {
