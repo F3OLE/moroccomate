@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3efe8;
+  --background: #fffaf5;
   --foreground: #15202b;
   --ink: #15202b;
   --ink-soft: #3a4654;
-  --paper: #f3efe8;
+  --paper: #fffaf5;
   --paper-deep: #e8e1d6;
   --brand: #c41e3a;
   --brand-dark: #9e1830;
@@ -28,11 +28,26 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  position: relative;
   color: var(--foreground);
   font-family: var(--font-body), var(--font-noto-arabic), "Noto Sans Arabic",
     system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+/* Ghost zellige texture: sits over opaque section backgrounds, so keep opacity tiny */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/zellige-bg.jpg');
+  background-repeat: repeat;
+  background-size: 400px;
+  opacity: 0.04;
+  filter: grayscale(100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 h1,
