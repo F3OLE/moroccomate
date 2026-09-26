@@ -5,10 +5,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLink, MapPin, Star, BadgeCheck, Sun, ArrowRight } from 'lucide-react';
 import { FadeIn } from '@/components/FadeIn';
-import { PLACES, mapsUrl, placeBestTime, cityDisplayName, type PlaceCategory } from '@/data/places';
+import {
+  PLACES,
+  mapsUrl,
+  placeBestTime,
+  cityDisplayName,
+  type Place,
+  type PlaceCategory,
+} from '@/data/places';
 import { useI18n, type MessageKey } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
 import BookButton from '@/components/BookButton';
+import DiscoverGate, { hasDiscoverAccess } from '@/components/DiscoverGate';
+
+/** Spots shown before the early-access gate */
+const FREE_LIMIT = 8;
 
 const CITY_IDS = ['marrakesh', 'casablanca', 'rabat', 'tangier'] as const;
 
@@ -50,6 +61,7 @@ export default function DiscoverPage() {
   const { t } = useI18n();
   const [category, setCategory] = useState<PlaceCategory | 'all'>('all');
   const [city, setCity] = useState('all');
+  const [unlocked, setUnlocked] = useState(false);
 
   useEffect(() => {
     const c = new URLSearchParams(window.location.search).get('city');
@@ -83,6 +95,14 @@ export default function DiscoverPage() {
       .sort((a, b) => b.rating - a.rating);
     return ranked.slice(0, 3);
   }, [places]);
+
+  useEffect(() => {
+    setUnlocked(hasDiscoverAccess());
+  }, []);
+
+  const gated = !unlocked && places.length > FREE_LIMIT + 2;
+  const visiblePlaces = gated ? places.slice(0, FREE_LIMIT) : places;
+  const teaserPlaces = gated ? places.slice(FREE_LIMIT, FREE_LIMIT + 3) : [];
 
   const activeCity =
     city !== 'all' && city in CITY_VISUALS
@@ -264,8 +284,62 @@ export default function DiscoverPage() {
         )}
 
         <div className="border-t border-[var(--ink)]/15">
-          {places.map((p, i) => (
-            <FadeIn key={p.id} delay={Math.min(i * 0.06, 0.36)}>
+          {visiblePlaces.map((p, i) => (
+            <FadeIn key={p.id} delay={Math.min((i % FREE_LIMIT) * 0.06, 0.36)}>
+              {renderRow(p)}
+            </FadeIn>
+          ))}
+        </div>
+
+        {gated && (
+          <div className="relative min-h-[36rem] sm:min-h-[32rem]">
+            <div inert className="pointer-events-none select-none blur-[5px] opacity-60">
+              {teaserPlaces.map((p) => (
+                <div key={`teaser-${p.id}`}>{renderRow(p)}</div>
+              ))}
+            </div>
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--paper)]/75 to-[var(--paper)]"
+              aria-hidden
+            />
+            <div className="absolute inset-x-0 top-6 sm:top-12 flex justify-center">
+              <DiscoverGate
+                previews={places.slice(FREE_LIMIT)}
+                lockedCount={places.length - FREE_LIMIT}
+                city={city}
+                onUnlocked={() => setUnlocked(true)}
+              />
+            </div>
+          </div>
+        )}
+
+        {places.length === 0 && (
+          <p className="py-12 text-[var(--ink-soft)] text-center">
+            No places match these filters.
+          </p>
+        )}
+
+        <FadeIn className="mt-14 space-y-10">
+          <PartnerCta />
+          <div className="border-t border-[var(--ink)]/12 pt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
+            <div>
+              <p className="text-[var(--ink-soft)] mb-1">{t('want_plan')}</p>
+              <p className="font-display text-xl font-bold text-[var(--ink)]">
+                Turn these spots into days
+              </p>
+            </div>
+            <Link href="/plan" className="btn-primary inline-flex items-center gap-2 shrink-0">
+              {t('build_itinerary')}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </FadeIn>
+      </div>
+    </div>
+  );
+
+  function renderRow(p: Place) {
+    return (
               <article className="group grid grid-cols-[6.5rem_1fr] sm:grid-cols-[9.5rem_1fr] gap-4 sm:gap-6 py-6 border-b border-[var(--ink)]/12">
                 <Link
                   href={mapsUrl(p.mapsQuery)}
@@ -345,32 +419,6 @@ export default function DiscoverPage() {
                   </div>
                 </div>
               </article>
-            </FadeIn>
-          ))}
-        </div>
-
-        {places.length === 0 && (
-          <p className="py-12 text-[var(--ink-soft)] text-center">
-            No places match these filters.
-          </p>
-        )}
-
-        <FadeIn className="mt-14 space-y-10">
-          <PartnerCta />
-          <div className="border-t border-[var(--ink)]/12 pt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
-            <div>
-              <p className="text-[var(--ink-soft)] mb-1">{t('want_plan')}</p>
-              <p className="font-display text-xl font-bold text-[var(--ink)]">
-                Turn these spots into days
-              </p>
-            </div>
-            <Link href="/plan" className="btn-primary inline-flex items-center gap-2 shrink-0">
-              {t('build_itinerary')}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </FadeIn>
-      </div>
-    </div>
-  );
+    );
+  }
 }

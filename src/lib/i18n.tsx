@@ -102,6 +102,15 @@ const messages = {
     both_cities: 'Both / more cities',
     want_most: 'What do you want most? (optional)',
     join_early: 'Join early access',
+    gate_locked: 'spots locked',
+    gate_title: 'Unlock the full list',
+    gate_sub:
+      'Hidden rooftops, local cafés, and the places we would send a friend. Free with early access to MoroccoMate.',
+    gate_placeholder: 'your@email.com',
+    gate_cta: 'Unlock all spots',
+    gate_note: 'Free. No spam, just one email when the app launches.',
+    gate_done_title: 'Unlocked. Marhba bik!',
+    gate_done_sub: 'That means welcome. Enjoy the full list.',
     submitting: 'Submitting…',
     partners_page_title: 'List your business',
     partners_page_sub:
@@ -210,6 +219,15 @@ const messages = {
     both_cities: 'Les deux / plus de villes',
     want_most: 'Ce que vous voulez le plus (optionnel)',
     join_early: 'Rejoindre l’accès anticipé',
+    gate_locked: 'lieux verrouillés',
+    gate_title: 'Débloquez la liste complète',
+    gate_sub:
+      'Rooftops cachés, cafés de quartier et les adresses qu’on donnerait à un ami. Gratuit avec l’accès anticipé à MoroccoMate.',
+    gate_placeholder: 'vous@email.com',
+    gate_cta: 'Tout débloquer',
+    gate_note: 'Gratuit. Pas de spam, un seul email au lancement de l’app.',
+    gate_done_title: 'Débloqué. Marhba bik !',
+    gate_done_sub: 'Ça veut dire bienvenue. Profitez de la liste complète.',
     submitting: 'Envoi…',
     partners_page_title: 'Référencer mon activité',
     partners_page_sub:
@@ -318,6 +336,15 @@ const messages = {
     both_cities: 'Ambas / más ciudades',
     want_most: '¿Qué quieres más? (opcional)',
     join_early: 'Unirme al acceso anticipado',
+    gate_locked: 'lugares bloqueados',
+    gate_title: 'Desbloquea la lista completa',
+    gate_sub:
+      'Azoteas escondidas, cafés de barrio y los sitios que recomendaríamos a un amigo. Gratis con el acceso anticipado a MoroccoMate.',
+    gate_placeholder: 'tu@email.com',
+    gate_cta: 'Desbloquear todo',
+    gate_note: 'Gratis. Sin spam, solo un email cuando lancemos la app.',
+    gate_done_title: 'Desbloqueado. ¡Marhba bik!',
+    gate_done_sub: 'Significa bienvenido. Disfruta de la lista completa.',
     submitting: 'Enviando…',
     partners_page_title: 'Registrar mi negocio',
     partners_page_sub:
