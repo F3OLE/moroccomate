@@ -527,6 +527,23 @@ export const PLACES: Place[] = [
     preferredSlot: 'evening',
   },
   {
+    id: 'mk-rooftop',
+    name: 'MK Rooftop',
+    category: 'nightlife',
+    city: 'marrakesh',
+    neighborhood: 'Medina · Souk Laksour',
+    description:
+      'One of the highest rooftops in the medina, with 360° views over the Koutoubia. Signature cocktails, French wines, and Moroccan-Mediterranean tapas. Open until 2am.',
+    image: placeImg('placeholder.jpg'),
+    rating: 4.4,
+    priceRange: '$$$',
+    tags: ['rooftop', 'sunset', 'cocktails', 'views'],
+    mapsQuery: 'MK Rooftop Maison MK 14 Derb Sebaai Marrakech',
+    bestFor: ['nightlife', 'food'],
+    bestTime: 'Sunset drinks · 18:00-21:00',
+    preferredSlot: 'evening',
+  },
+  {
     id: 'jajjah',
     name: 'Jajjah',
     category: 'cafes',
