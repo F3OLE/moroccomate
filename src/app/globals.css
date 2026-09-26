@@ -456,6 +456,92 @@ a {
   transform: translateY(0);
 }
 
+/* Homepage "Explore by city": expand on hover (mouse) or tap (touch, via data-active) */
+.city-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  scrollbar-width: none;
+}
+
+.city-row::-webkit-scrollbar {
+  display: none;
+}
+
+.city-card {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 68%;
+  height: 400px;
+  transition:
+    flex 0.4s ease,
+    width 0.4s ease;
+}
+
+.city-card[data-active='true'] {
+  width: 88%;
+}
+
+.city-tags {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  transition-delay: 0s;
+}
+
+.city-card[data-active='true'] .city-tags {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.2s;
+}
+
+@media (hover: hover) {
+  .city-card:hover,
+  .city-card:focus-visible {
+    width: 88%;
+  }
+
+  .city-card:hover .city-tags,
+  .city-card:focus-visible .city-tags {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
+  }
+}
+
+@media (min-width: 768px) {
+  .city-row {
+    gap: 1.25rem;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .city-card,
+  .city-card[data-active='true'] {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    height: 440px;
+  }
+
+  .city-card[data-active='true'] {
+    flex-grow: 2.5;
+  }
+}
+
+@media (min-width: 768px) and (hover: hover) {
+  .city-card:hover,
+  .city-card:focus-visible {
+    flex-grow: 2.5;
+    width: auto;
+  }
+}
+
 /* Section rhythm */
 .section-pad {
   padding-top: 6.25rem;
@@ -671,6 +757,8 @@ a {
 
   .btn-primary,
   .btn-secondary,
+  .city-card,
+  .city-tags,
   .card,
   .media-zoom img,
   .menu-icon span,

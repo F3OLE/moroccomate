@@ -18,6 +18,7 @@ import HeroParallax from '@/components/HeroParallax';
 import HoverImageReveal from '@/components/HoverImageReveal';
 import ExperienceCard from '@/components/ExperienceCard';
 import CountUp from '@/components/CountUp';
+import CityExpandCards from '@/components/CityExpandCards';
 import { EXPERIENCES, PLACES, mapsUrl } from '@/data/places';
 import { CITY_HUBS } from '@/data/cities';
 import { useI18n } from '@/lib/i18n';
@@ -322,39 +323,9 @@ export default function Home() {
               City guides with real places, experiences, and a path to plan your days.
             </p>
           </FadeIn>
-          <div className="flex md:grid md:grid-cols-4 gap-4 md:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4 md:scroll-px-0 -mx-4 px-4 md:mx-0 md:px-0 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {CITY_HUBS.map((c, i) => (
-              <FadeIn
-                key={c.slug}
-                delay={i * 0.06}
-                className="shrink-0 w-[75%] sm:w-[45%] md:w-auto snap-start"
-              >
-                <Link
-                  href={`/${c.slug}`}
-                  className="group relative block aspect-[3/4] rounded-[12px] overflow-hidden shadow-[0_18px_40px_-18px_rgba(21,32,43,0.5)]"
-                >
-                  <Image
-                    src={c.heroImage}
-                    alt={c.name}
-                    fill
-                    sizes="(max-width: 768px) 75vw, 25vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(12,18,24,0.9)] via-[rgba(12,18,24,0.25)] to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <h3 className="font-display text-2xl md:text-[28px] font-bold text-white leading-tight">
-                      {c.name}
-                    </h3>
-                    <p className="mt-1 text-sm text-white/80 line-clamp-2">{c.tagline}</p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[var(--saffron)]">
-                      Open guide
-                      <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn>
+            <CityExpandCards cities={CITY_HUBS} />
+          </FadeIn>
         </div>
       </section>
 

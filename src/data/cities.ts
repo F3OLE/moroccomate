@@ -14,6 +14,8 @@ export type CityHub = {
   tagline: string;
   description: string;
   heroImage: string;
+  /** Short "known for" tags shown on the expanded homepage card. */
+  highlights: string[];
   keywords: string[];
 };
 
@@ -26,6 +28,7 @@ export const CITY_HUBS: CityHub[] = [
     description:
       'Plan Marrakech with real restaurants, nightlife, souks, hammams, and Agafay adventures. Open spots in Maps or build a day-by-day itinerary.',
     heroImage: '/images/places/jemaa-sunset.jpg',
+    highlights: ['Medina & souks', 'Nightlife', 'Rooftop dining'],
     keywords: [
       'Marrakech guide',
       'things to do in Marrakech',
@@ -43,6 +46,7 @@ export const CITY_HUBS: CityHub[] = [
     description:
       'Discover Casablanca restaurants, Corniche nights, cafés, and landmarks. Build a realistic city itinerary with MoroccoMate.',
     heroImage: '/images/places/casablanca-skyline.jpg',
+    highlights: ['Modern city', 'Art Deco', 'Seafood'],
     keywords: [
       'Casablanca guide',
       'things to do in Casablanca',
@@ -59,6 +63,7 @@ export const CITY_HUBS: CityHub[] = [
     description:
       'Explore Rabat restaurants, cafés, Chellah, and the Kasbah des Oudayas. Plan a quieter Morocco base with real mapped spots.',
     heroImage: '/images/places/rabat-oudayas.jpg',
+    highlights: ['Kasbah', 'Museums', 'Quiet charm'],
     keywords: [
       'Rabat guide',
       'things to do in Rabat',
@@ -75,6 +80,7 @@ export const CITY_HUBS: CityHub[] = [
     description:
       'Browse Tangier cafés, kasbah walks, beach time, and restaurants. Plan a north Morocco stop with Maps links and local picks.',
     heroImage: '/images/places/tangier-medina.jpg',
+    highlights: ['Mediterranean', 'Cafes', 'Street art'],
     keywords: [
       'Tangier guide',
       'things to do in Tangier',
