@@ -23,10 +23,35 @@ type Props = {
   lockedCount: number;
   city: string;
   onUnlocked: () => void;
+  variant?: 'places' | 'experiences';
 };
 
-export default function DiscoverGate({ previews, lockedCount, city, onUnlocked }: Props) {
+const COPY = {
+  places: {
+    locked: 'gate_locked',
+    title: 'gate_title',
+    sub: 'gate_sub',
+    cta: 'gate_cta',
+    source: 'Unlocked the Discover list',
+  },
+  experiences: {
+    locked: 'gate_xp_locked',
+    title: 'gate_xp_title',
+    sub: 'gate_xp_sub',
+    cta: 'gate_xp_cta',
+    source: 'Unlocked the Experiences list',
+  },
+} as const;
+
+export default function DiscoverGate({
+  previews,
+  lockedCount,
+  city,
+  onUnlocked,
+  variant = 'places',
+}: Props) {
   const { t } = useI18n();
+  const copy = COPY[variant];
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [error, setError] = useState('');
 
@@ -39,7 +64,7 @@ export default function DiscoverGate({ previews, lockedCount, city, onUnlocked }
       await submitLead('early-access', {
         email,
         city: city === 'all' ? '' : city,
-        message: 'Unlocked the Discover list',
+        message: copy.source,
       });
       localStorage.setItem(DISCOVER_UNLOCK_KEY, '1');
       setStatus('done');
@@ -84,15 +109,15 @@ export default function DiscoverGate({ previews, lockedCount, city, onUnlocked }
                   +{lockedCount}
                 </span>
                 <span className="text-[11px] uppercase tracking-[0.16em] text-white/50">
-                  {t('gate_locked')}
+                  {t(copy.locked)}
                 </span>
               </p>
             </div>
 
             <h3 className="font-display text-2xl sm:text-3xl font-bold leading-tight mb-2">
-              {t('gate_title')}
+              {t(copy.title)}
             </h3>
-            <p className="text-white/65 leading-relaxed mb-6">{t('gate_sub')}</p>
+            <p className="text-white/65 leading-relaxed mb-6">{t(copy.sub)}</p>
 
             <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-2">
               <input
@@ -108,7 +133,7 @@ export default function DiscoverGate({ previews, lockedCount, city, onUnlocked }
                 disabled={status === 'loading'}
                 className="inline-flex items-center justify-center gap-2 rounded-[8px] bg-[var(--brand)] px-5 py-3 font-semibold transition-colors hover:bg-white hover:text-[var(--ink)] disabled:opacity-60"
               >
-                {status === 'loading' ? t('submitting') : t('gate_cta')}
+                {status === 'loading' ? t('submitting') : t(copy.cta)}
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
