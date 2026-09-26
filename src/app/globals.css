@@ -756,3 +756,75 @@ a {
     transform: none !important;
   }
 }
+
+/* Homepage "Book experiences" camel */
+.camel-track {
+  position: absolute;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.camel-walker {
+  left: -150px;
+  animation:
+    camel-fade-in 0.8s ease-out both,
+    camel-walk 26s linear infinite;
+}
+
+.camel-leg {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: camel-leg 0.9s ease-in-out infinite alternate;
+}
+
+.camel-leg-b {
+  animation-delay: -0.9s;
+}
+
+.camel-bob {
+  animation: camel-bob 0.45s ease-in-out infinite alternate;
+}
+
+.camel-nod {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: camel-nod 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes camel-walk {
+  from { left: -150px; }
+  to { left: 100%; }
+}
+
+@keyframes camel-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes camel-leg {
+  from { transform: rotate(16deg); }
+  to { transform: rotate(-16deg); }
+}
+
+@keyframes camel-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2px); }
+}
+
+@keyframes camel-nod {
+  from { transform: rotate(-2deg); }
+  to { transform: rotate(3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .camel-walker {
+    animation: none;
+    left: 40%;
+  }
+
+  .camel-leg,
+  .camel-bob,
+  .camel-nod {
+    animation: none;
+  }
+}

@@ -19,6 +19,7 @@ import HoverImageReveal from '@/components/HoverImageReveal';
 import ExperienceCard from '@/components/ExperienceCard';
 import CountUp from '@/components/CountUp';
 import CityExpandCards from '@/components/CityExpandCards';
+import WalkingCamel from '@/components/WalkingCamel';
 import { EXPERIENCES, PLACES, mapsUrl } from '@/data/places';
 import { CITY_HUBS } from '@/data/cities';
 import { useI18n, type MessageKey } from '@/lib/i18n';
@@ -218,7 +219,10 @@ export default function Home() {
             {modes.map((m, i) => {
               const flip = i % 2 === 1;
               return (
-                <div key={m.href} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                <div key={m.href} className="relative grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                  {m.href === '/experiences' && (
+                    <WalkingCamel className="inset-x-0 md:left-1/2 -bottom-24 h-24" />
+                  )}
                   <FadeIn className={flip ? 'md:order-2' : ''}>
                     <Link
                       href={m.href}
