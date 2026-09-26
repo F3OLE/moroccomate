@@ -14,7 +14,6 @@ import {
   Star,
 } from 'lucide-react';
 import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
-import HeroParallax from '@/components/HeroParallax';
 import HoverImageReveal from '@/components/HoverImageReveal';
 import ExperienceCard from '@/components/ExperienceCard';
 import CountUp from '@/components/CountUp';
@@ -100,82 +99,39 @@ export default function Home() {
   ];
   return (
     <div className="min-h-screen bg-[var(--paper)]">
-      {/* Hero: full viewport, Marrakech photo, parallax + grain */}
-      <section className="relative h-[100vh] min-h-[100vh] -mt-14 sm:-mt-16 flex items-end sm:items-center overflow-hidden">
-        <HeroParallax className="absolute inset-0 scale-110 origin-center">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/welcomebackground.jpg"
-              alt=""
-              fill
-              priority
-              className="object-cover object-center"
-            />
-          </div>
-        </HeroParallax>
-        {/* Dark at bottom → transparent at top */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[rgba(12,18,24,0.94)] via-[rgba(12,18,24,0.45)] to-transparent" />
-        <div className="hero-grain" aria-hidden />
-        <div className="hero-palms" aria-hidden>
-          <svg className="hero-palm hero-palm-left" viewBox="0 0 200 280" fill="currentColor">
-            <ellipse cx="100" cy="268" rx="48" ry="8" opacity="0.35" />
-            <path d="M98 270 V118" stroke="currentColor" strokeWidth="7" fill="none" />
-            <path d="M100 120 C40 95 18 55 28 28 C55 48 78 78 100 120 Z" />
-            <path d="M100 118 C55 70 58 22 78 8 C88 42 96 78 100 118 Z" />
-            <path d="M100 116 C90 55 112 12 142 6 C128 48 112 82 100 116 Z" />
-            <path d="M102 118 C145 88 178 55 182 28 C155 48 128 78 102 118 Z" />
-            <path d="M102 122 C158 115 188 95 192 72 C162 88 128 108 102 122 Z" />
-            <path d="M98 122 C42 128 18 108 12 82 C38 95 72 112 98 122 Z" />
-          </svg>
-          <svg className="hero-palm hero-palm-right" viewBox="0 0 200 280" fill="currentColor">
-            <ellipse cx="100" cy="268" rx="52" ry="9" opacity="0.3" />
-            <path d="M102 270 V108" stroke="currentColor" strokeWidth="8" fill="none" />
-            <path d="M100 112 C38 90 12 48 22 18 C52 40 78 72 100 112 Z" />
-            <path d="M100 110 C52 62 48 14 72 2 C86 38 96 72 100 110 Z" />
-            <path d="M100 108 C95 42 120 4 152 0 C136 42 114 76 100 108 Z" />
-            <path d="M102 110 C148 78 186 42 190 14 C162 38 130 72 102 110 Z" />
-            <path d="M104 114 C162 108 194 84 198 58 C168 78 132 100 104 114 Z" />
-            <path d="M96 116 C40 122 10 98 6 70 C32 86 68 106 96 116 Z" />
-          </svg>
+      <section className="relative h-[100svh] flex items-center justify-center overflow-hidden">
+        <div className="hero-zoom absolute inset-0">
+          <Image
+            src="/images/hero-kasbah.jpg"
+            alt="Mud-brick kasbah and palm oasis in southern Morocco at golden hour"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
         </div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.4)_0%,rgba(0,0,0,0.7)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-white" aria-hidden />
 
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-14 sm:py-24 text-white">
-          <div className="hero-fade flex items-center gap-3 mb-6">
-            <Image
-              src="/images/logo.png"
-              alt=""
-              width={56}
-              height={56}
-              className="w-12 h-12 sm:w-14 sm:h-14"
-              priority
-            />
-            <p
-              className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none"
-              aria-label="MoroccoMate"
-            >
-              MoroccoMate
-            </p>
-          </div>
-
-          <p className="hero-fade-delay-1 font-display text-xl sm:text-2xl md:text-3xl font-medium text-white/90 max-w-xl mb-3">
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
+          <h1 className="hero-fade font-display text-[48px] md:text-[72px] font-bold text-white tracking-[-0.02em] leading-none">
+            MoroccoMate
+          </h1>
+          <p className="hero-fade-delay-1 mt-2 text-[20px] text-white/80">
             {t('hero_tagline')}
           </p>
-          <p
-            className="hero-fade-delay-2 w-fit text-[var(--saffron)] text-2xl sm:text-3xl md:text-4xl font-medium mb-10"
-            dir="rtl"
-            lang="ar"
-          >
-            رحلتك تبدأ هنا
-          </p>
 
-          <div className="hero-fade-delay-3 flex flex-col sm:flex-row sm:items-center gap-3">
-            <Link href="/plan" className="btn-primary text-base sm:text-lg px-7 py-3.5">
+          <div className="hero-fade-delay-2 mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+            <Link
+              href="/plan"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-white text-[var(--ink)] font-semibold rounded-[8px] px-8 py-4 transition-colors duration-200 hover:bg-white/90"
+            >
               {t('hero_plan')}
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               href="/discover"
-              className="btn-secondary text-base sm:text-lg px-7 py-3.5"
+              className="inline-flex items-center justify-center w-full sm:w-auto border border-white text-white font-semibold rounded-[8px] px-8 py-4 transition-colors duration-200 hover:bg-white/10"
             >
               {t('hero_discover')}
             </Link>
@@ -185,9 +141,9 @@ export default function Home() {
         <a
           href="#features"
           aria-label="Scroll down"
-          className="hero-fade-delay-3 absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 text-white/70 hover:text-white"
+          className="hero-fade-delay-3 absolute bottom-24 left-1/2 -translate-x-1/2 z-10 text-white"
         >
-          <ChevronDown className="scroll-cue w-7 h-7" strokeWidth={1.75} />
+          <ChevronDown className="scroll-cue w-8 h-8" strokeWidth={1.75} />
         </a>
       </section>
 

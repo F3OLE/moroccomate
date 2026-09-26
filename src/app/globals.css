@@ -433,12 +433,26 @@ a {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
 }
 
 .scroll-cue {
-  animation: scroll-cue 1.8s ease-in-out infinite;
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.hero-zoom {
+  animation: hero-zoom 20s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 /* Scroll reveals (Intersection Observer toggles .is-visible) */
@@ -623,47 +637,6 @@ a {
   }
 }
 
-/* Soft palm silhouettes — atmosphere, not decoration noise */
-.hero-palms {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  overflow: hidden;
-}
-
-.hero-palm {
-  position: absolute;
-  bottom: -4%;
-  width: min(46vw, 340px);
-  height: auto;
-  color: #07110f;
-  opacity: 0.28;
-  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.55));
-}
-
-.hero-palm-left {
-  left: -6%;
-  transform: rotate(-6deg);
-}
-
-.hero-palm-right {
-  right: -8%;
-  width: min(52vw, 380px);
-  opacity: 0.22;
-  transform: rotate(8deg) scaleX(-1);
-}
-
-@media (max-width: 640px) {
-  .hero-palm {
-    width: min(58vw, 220px);
-    opacity: 0.2;
-  }
-  .hero-palm-right {
-    width: min(62vw, 240px);
-  }
-}
-
 /* Itinerary loading skeleton */
 .skeleton {
   background: linear-gradient(
@@ -739,6 +712,7 @@ a {
   .hero-fade-delay-2,
   .hero-fade-delay-3,
   .scroll-cue,
+  .hero-zoom,
   .skeleton,
   .skeleton-light,
   .palm-loader-tree {

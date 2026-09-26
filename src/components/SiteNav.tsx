@@ -19,14 +19,18 @@ export default function SiteNav() {
   const isDarkRoute =
     DARK_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`));
 
-  const lightChrome = isDarkRoute || (isHome && !scrolled);
+  const overHero = isHome && !scrolled;
+  const lightChrome = isDarkRoute || overHero;
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () =>
+      setScrolled(
+        pathname === '/' ? window.scrollY > window.innerHeight - 64 : window.scrollY > 24
+      );
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -49,10 +53,12 @@ export default function SiteNav() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color] duration-300 ${
-        lightChrome
-          ? 'border-white/15 bg-[rgba(12,18,24,0.35)] text-white'
-          : 'border-[var(--ink)]/10 bg-[rgba(243,239,232,0.92)] text-[var(--ink)]'
+      className={`fixed top-0 inset-x-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color,box-shadow] duration-300 ${
+        overHero
+          ? 'border-transparent bg-transparent text-white'
+          : isDarkRoute
+            ? 'border-white/15 bg-[rgba(12,18,24,0.35)] text-white'
+            : 'border-[var(--ink)]/10 bg-white/95 text-[var(--ink)] shadow-[0_1px_12px_rgba(21,32,43,0.06)]'
       }`}
       style={
         lightChrome
@@ -70,7 +76,9 @@ export default function SiteNav() {
             alt="MoroccoMate"
             width={40}
             height={40}
-            className="w-8 h-8 sm:w-9 sm:h-9 shrink-0"
+            className={`w-8 h-8 sm:w-9 sm:h-9 shrink-0 transition-[filter] duration-300 ${
+              overHero ? 'brightness-0 invert' : ''
+            }`}
           />
           <span
             className={`font-display font-bold tracking-tight text-sm sm:text-base truncate ${
