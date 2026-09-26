@@ -72,7 +72,8 @@ export default async function CityHubPage({ params }: Props) {
           alt=""
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover"
+          style={{ objectPosition: hub.heroFocus || 'center' }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(12,18,24,0.92)] via-[rgba(12,18,24,0.5)] to-[rgba(12,18,24,0.2)]" />
         <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 pb-10 pt-28">

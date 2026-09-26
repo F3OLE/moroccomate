@@ -14,6 +14,8 @@ export type CityHub = {
   tagline: string;
   description: string;
   heroImage: string;
+  /** CSS object-position for the hero photo */
+  heroFocus?: string;
   /** Short "known for" tags shown on the expanded homepage card. */
   highlights: string[];
   keywords: string[];
@@ -62,7 +64,8 @@ export const CITY_HUBS: CityHub[] = [
     tagline: 'Capital calm, kasbah views, and good food',
     description:
       'Explore Rabat restaurants, cafés, Chellah, and the Kasbah des Oudayas. Plan a quieter Morocco base with real mapped spots.',
-    heroImage: '/images/places/rabat-oudayas.jpg',
+    heroImage: '/images/places/rabat-hassan-tower.jpg',
+    heroFocus: '35% 45%',
     highlights: ['Kasbah', 'Museums', 'Quiet charm'],
     keywords: [
       'Rabat guide',
@@ -79,7 +82,8 @@ export const CITY_HUBS: CityHub[] = [
     tagline: 'Where the Mediterranean meets the Atlantic',
     description:
       'Browse Tangier cafés, kasbah walks, beach time, and restaurants. Plan a north Morocco stop with Maps links and local picks.',
-    heroImage: '/images/places/tangier-medina.jpg',
+    heroImage: '/images/places/tangier-bay.jpg',
+    heroFocus: '62% center',
     highlights: ['Mediterranean', 'Cafes', 'Street art'],
     keywords: [
       'Tangier guide',

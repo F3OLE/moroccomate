@@ -35,6 +35,7 @@ export default function CityExpandCards({ cities }: { cities: CityHub[] }) {
             fill
             sizes="(max-width: 768px) 88vw, 50vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            style={{ objectPosition: c.heroFocus || 'center' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[rgba(12,18,24,0.9)] via-[rgba(12,18,24,0.25)] to-transparent" />
 
