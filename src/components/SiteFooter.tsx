@@ -30,7 +30,7 @@ export default function SiteFooter() {
     <footer className="no-texture bg-[var(--ink)] text-white py-14 mt-auto border-t border-white/5">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
-          <Image src="/images/logo.png" alt="" width={36} height={36} />
+          <Image src="/images/logo-mark.png" alt="" width={350} height={412} className="w-auto h-10" />
           <span className="font-display text-xl font-bold tracking-tight">MoroccoMate</span>
         </div>
         <p className="text-[var(--saffron)] text-xl sm:text-2xl mb-2" dir="rtl" lang="ar">

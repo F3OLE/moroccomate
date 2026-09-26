@@ -72,11 +72,12 @@ export default function SiteNav() {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-2">
         <Link href="/" className="flex items-center gap-2 shrink-0 min-w-0 justify-self-start">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-mark.png"
             alt="MoroccoMate"
-            width={40}
-            height={40}
-            className={`w-8 h-8 sm:w-9 sm:h-9 shrink-0 transition-[filter] duration-300 ${
+            width={350}
+            height={412}
+            priority
+            className={`w-auto h-8 sm:h-9 shrink-0 transition-[filter] duration-300 ${
               overHero ? 'brightness-0 invert' : ''
             }`}
           />
