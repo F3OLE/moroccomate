@@ -466,7 +466,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina · Talaa Ben Youssef',
     description:
       'Teahouse in a 300-year-old riad pouring twelve teas for Morocco’s twelve regions. Try the three-tea tasting (around 140 MAD).',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('teahouse-1112.jpg'),
     rating: 4.6,
     priceRange: '$$',
     tags: ['tea', 'riad', 'tasting'],
@@ -482,8 +482,8 @@ export const PLACES: Place[] = [
     city: 'marrakesh',
     neighborhood: 'Gueliz',
     description:
-      'Non-profit restaurant training disadvantaged women as cooks. Lunch only, home-style Moroccan food, and a Friday couscous worth booking ahead.',
-    image: placeImg('placeholder.jpg'),
+      'Non-profit restaurant training disadvantaged women as cooks. Lunch only, home-style Moroccan food, and a Friday couscous worth booking ahead. They also run cooking classes.',
+    image: placeImg('amal-womens-center.jpg'),
     rating: 4.7,
     priceRange: '$',
     tags: ['lunch', 'local', 'social-impact', 'couscous'],
@@ -500,7 +500,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Farm co-op · 20 min from center',
     description:
       'Farm cooperative where local women cook traditional dishes with ingredients grown on site. Known for a big beldi breakfast. Bring cash.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('kolchi-beldi.jpg'),
+    imageFocus: 'center 65%',
     rating: 4.5,
     priceRange: '$',
     tags: ['breakfast', 'farm', 'local', 'cash-only'],
@@ -517,7 +518,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Hivernage',
     description:
       'Rooftop at Nobu Hotel with a sleek, Dubai-style crowd. Expect a 500 MAD minimum spend and one-hour table slots. The pool is for hotel guests only.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('nobu-rooftop.jpg'),
     rating: 4.3,
     priceRange: '$$$$',
     tags: ['rooftop', 'sunset', 'dressy', 'reservation'],
@@ -551,7 +552,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Sidi Ghanem',
     description:
       'Artist Hassan Hajjaj’s pop-art café, gallery, and concept store. Local women cook the lunch, and Thursday is rfissa day. Closed Sundays.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('jajjah.jpg'),
     rating: 4.6,
     priceRange: '$$',
     tags: ['cafe', 'gallery', 'design', 'lunch'],
@@ -567,7 +568,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Sidi Ghanem',
     description:
       'Specialty roastery, restaurant, and barista academy with a garden. V60 and Chemex brews, breakfast, and gelato. Closed Sundays.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('hesperis-coffee.jpg'),
+    imageFocus: 'center 55%',
     rating: 4.6,
     priceRange: '$$',
     tags: ['coffee', 'specialty', 'breakfast', 'garden'],
@@ -583,7 +585,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Sidi Ghanem',
     description:
       'Gourmet shop and café: coffee roasted in front of you, iced teas, chocolate, and dates. A good pit stop between design showrooms.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('marrakech-fine-food.jpg'),
     rating: 4.4,
     priceRange: '$$',
     tags: ['coffee', 'gourmet', 'shop'],
@@ -634,7 +636,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Jaidate · 45 min out',
     description:
       'Hidden farm in an olive grove with a 50 m pool. The day pass (800 MAD, 11:00-19:00) includes a sunbed and a farm-to-table lunch. Adults only. Sundays add brunch and sunset DJs.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('farasha-farmhouse.jpg'),
+    imageFocus: 'center 55%',
     rating: 4.7,
     priceRange: '$$$$',
     tags: ['pool', 'farm', 'day-pass', 'instagram'],
@@ -1214,6 +1217,20 @@ export const EXPERIENCES: Experience[] = [
     category: 'culture',
     included: ['Hammam access', 'Scrub', 'Tea'],
     partnerType: 'Wellness / spa',
+  },
+  {
+    id: 'amal-cooking-class',
+    title: 'Moroccan Cooking Class at Amal',
+    location: 'Amal Targa Center · 20 min from center',
+    city: 'Marrakech',
+    image: placeImg('amal-womens-center.jpg'),
+    price: 'From 400 MAD',
+    duration: '3.5 hours · Mon-Fri 9:30-13:00',
+    description:
+      'Cook your own tagine, couscous, or pastilla over coals with the chefs of Amal, a non-profit that trains disadvantaged women. Pick mint in the garden, learn the tea ceremony, then eat what you made. A 300 MAD baking class (ghriba, msemen) is also available.',
+    category: 'culture',
+    included: ['Hands-on class with a chef', 'Tea ceremony', 'Lunch you cooked'],
+    partnerType: 'Non-profit cooking school',
   },
   {
     id: 'ouzoud-falls',
