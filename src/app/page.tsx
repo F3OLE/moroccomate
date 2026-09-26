@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Coins,
   ExternalLink,
+  Globe,
   Landmark,
   MapPin,
   Quote,
@@ -16,6 +17,7 @@ import { FadeIn, Stagger, StaggerItem } from '@/components/FadeIn';
 import HeroParallax from '@/components/HeroParallax';
 import HoverImageReveal from '@/components/HoverImageReveal';
 import ExperienceCard from '@/components/ExperienceCard';
+import CountUp from '@/components/CountUp';
 import { EXPERIENCES, PLACES, mapsUrl } from '@/data/places';
 import { CITY_HUBS } from '@/data/cities';
 import { useI18n } from '@/lib/i18n';
@@ -34,10 +36,12 @@ const featured = featuredIds
   .filter((p): p is (typeof PLACES)[number] => Boolean(p));
 const featuredXP = EXPERIENCES.slice(0, 3);
 
-const placesMapped = `${Math.floor(PLACES.length / 10) * 10}+`;
-const cityCount = new Set(
-  PLACES.map((p) => p.city).filter((c) => c !== 'nationwide')
-).size;
+const STATS = [
+  { icon: MapPin, to: 100, suffix: '+', label: 'places mapped' },
+  { icon: Landmark, to: 6, suffix: '', label: 'cities' },
+  { icon: Coins, to: 100, suffix: '%', label: 'local prices' },
+  { icon: Globe, to: 30, suffix: '+', label: 'unique experiences' },
+];
 
 // Placeholder quotes. Replace with real traveler reviews before promoting the site.
 const TESTIMONIALS = [
@@ -93,13 +97,6 @@ export default function Home() {
       alt: 'Hot air balloon over the countryside outside Marrakech',
     },
   ];
-
-  const stats = [
-    { icon: MapPin, value: placesMapped, label: 'places mapped' },
-    { icon: Landmark, value: String(cityCount), label: 'cities' },
-    { icon: Coins, value: 'Real', label: 'local prices in MAD' },
-  ];
-
   return (
     <div className="min-h-screen bg-[var(--paper)]">
       {/* Hero: full viewport, Marrakech photo, parallax + grain */}
@@ -196,19 +193,16 @@ export default function Home() {
       <section id="features" className="relative section-pad section-white scroll-mt-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <FadeIn>
-            <div className="grid grid-cols-3 rounded-[12px] bg-[var(--paper)] border border-[var(--ink)]/10 divide-x divide-[var(--ink)]/10">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-3 py-6 sm:py-8 text-center sm:text-left"
-                >
-                  <s.icon className="w-6 h-6 sm:w-7 sm:h-7 text-[var(--brand)] shrink-0" strokeWidth={1.75} />
-                  <div>
-                    <p className="font-display text-2xl sm:text-3xl font-extrabold text-[var(--ink)] leading-none">
-                      {s.value}
-                    </p>
-                    <p className="mt-1 text-xs sm:text-sm text-[var(--ink-soft)]">{s.label}</p>
-                  </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6">
+              {STATS.map((s) => (
+                <div key={s.label} className="flex flex-col items-center text-center">
+                  <s.icon className="w-6 h-6 text-[var(--brand)]" strokeWidth={1.75} />
+                  <CountUp
+                    to={s.to}
+                    suffix={s.suffix}
+                    className="mt-3 font-display text-[32px] md:text-[36px] font-bold text-[var(--ink)] leading-none"
+                  />
+                  <p className="mt-2 text-[13px] text-gray-500">{s.label}</p>
                 </div>
               ))}
             </div>
