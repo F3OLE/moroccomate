@@ -104,7 +104,7 @@ export default function Home() {
         <HeroParallax className="absolute inset-0 scale-110 origin-center">
           <div className="absolute inset-0">
             <Image
-              src="/images/welcomebackground.png"
+              src="/images/welcomebackground.jpg"
               alt=""
               fill
               priority

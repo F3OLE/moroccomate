@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque, Figtree, Noto_Sans_Arabic } from "next/font/google";
 import SiteNav, { NavSpacer } from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: absoluteUrl("/images/welcomebackground.png"),
+        url: absoluteUrl("/images/og-home.jpg"),
         width: 1200,
         height: 630,
         alt: `${SITE_NAME} — Morocco travel companion`,
@@ -70,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} - ${SITE_TAGLINE}`,
     description: DEFAULT_DESCRIPTION,
-    images: [absoluteUrl("/images/welcomebackground.png")],
+    images: [absoluteUrl("/images/og-home.jpg")],
   },
   robots: {
     index: true,
@@ -124,6 +125,7 @@ export default function RootLayout({
           {children}
           <SiteFooter />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
