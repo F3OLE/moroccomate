@@ -50,6 +50,16 @@ body::before {
   z-index: 0;
 }
 
+/* Dark surfaces sit above the texture so it only shows on light sections */
+.no-texture {
+  position: relative;
+  z-index: 1;
+}
+
+body:has(.plan-scene)::before {
+  display: none;
+}
+
 h1,
 h2,
 h3,

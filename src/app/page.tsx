@@ -372,7 +372,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-pad bg-[var(--ink)] text-white">
+      <section className="no-texture section-pad bg-[var(--ink)] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>

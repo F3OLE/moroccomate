@@ -27,7 +27,7 @@ export default function SiteFooter() {
   ];
 
   return (
-    <footer className="bg-[var(--ink)] text-white py-14 mt-auto border-t border-white/5">
+    <footer className="no-texture bg-[var(--ink)] text-white py-14 mt-auto border-t border-white/5">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
           <Image src="/images/logo.png" alt="" width={36} height={36} />

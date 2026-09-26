@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] max-h-[70vh] bg-[var(--ink)] overflow-hidden">
+      <div className="no-texture w-full aspect-[16/10] sm:aspect-[21/9] max-h-[70vh] bg-[var(--ink)] overflow-hidden">
         <Image
           src={post.cover.src}
           alt={post.cover.alt}
