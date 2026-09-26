@@ -535,7 +535,8 @@ export const PLACES: Place[] = [
     neighborhood: 'Medina · Souk Laksour',
     description:
       'One of the highest rooftops in the medina, with 360° views over the Koutoubia. Signature cocktails, French wines, and Moroccan-Mediterranean tapas. Open until 2am.',
-    image: placeImg('placeholder.jpg'),
+    image: placeImg('mk-rooftop.jpg'),
+    imageFocus: 'center 45%',
     rating: 4.4,
     priceRange: '$$$',
     tags: ['rooftop', 'sunset', 'cocktails', 'views'],
