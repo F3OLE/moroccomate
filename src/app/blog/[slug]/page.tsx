@@ -147,9 +147,12 @@ export default async function BlogPostPage({ params }: Props) {
         <p className="text-xl sm:text-2xl text-[var(--ink)] leading-relaxed mb-6 font-medium">
           {post.description}
         </p>
-        {post.cover.caption && (
+        {(post.cover.caption || post.cover.credit) && (
           <p className="text-sm text-[var(--ink-soft)] italic mb-8 -mt-2">
             {post.cover.caption}
+            {post.cover.credit && (
+              <span className="not-italic text-xs text-[var(--ink-soft)]/80"> Photo: {post.cover.credit}</span>
+            )}
           </p>
         )}
         <div className="flex flex-wrap gap-x-4 gap-y-1 mb-10 pb-8 border-b border-[var(--ink)]/12">
@@ -193,9 +196,12 @@ export default async function BlogPostPage({ params }: Props) {
                       }}
                     />
                   </div>
-                  {section.image.caption && (
+                  {(section.image.caption || section.image.credit) && (
                     <figcaption className="mt-3 text-sm text-[var(--ink-soft)] leading-relaxed">
                       {section.image.caption}
+                      {section.image.credit && (
+                        <span className="text-xs text-[var(--ink-soft)]/80"> Photo: {section.image.credit}</span>
+                      )}
                     </figcaption>
                   )}
                 </figure>

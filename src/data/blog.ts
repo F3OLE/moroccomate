@@ -3,6 +3,7 @@ export type BlogImage = {
   alt: string;
   focus?: string;
   caption?: string;
+  credit?: string;
 };
 
 export type BlogSection = {
@@ -26,6 +27,7 @@ export type BlogPost = {
 };
 
 const img = (file: string) => `/images/places/${file}`;
+const blogImg = (file: string) => `/images/blog/${file}`;
 
 function wordCount(post: Pick<BlogPost, 'title' | 'description' | 'sections'>) {
   const body = post.sections
@@ -62,12 +64,14 @@ export const BLOG_POSTS: BlogPost[] = [
         paragraphs: [
           'If you are in Marrakech this week, the city has a quiet cultural pulse under the usual medina buzz: the 6th Marrakech Short Film Festival runs from 25 to 30 September 2026. Shorts travel easier than feature premieres — you can catch two programs before dinner and still have a rooftop sunset.',
           'September is also one of the best travel months here. Heat softens, nights stay warm, and hotel rates are kinder than peak winter film week in November. Use festival days as anchors, not as a full-time job.',
+          'This year Malta is the guest country. Screenings and talks are spread across the Palais Badii, Cyber Parc Moulay Abdessalam, the Institut français, The Folk, Meydene, and Atlantis Studios. Passes run from 50 to 600 DH, and the Bridges of Reality and Low Budget Film programs are free to enter.',
         ],
         image: {
-          src: img('marrakech-medina.jpg'),
-          alt: 'Marrakech medina alley with warm light',
+          src: blogImg('el-badi-palace.jpg'),
+          alt: 'The ruined walls of El Badi Palace reflected in its courtyard pool, Marrakech',
           focus: 'center 45%',
-          caption: 'Keep mornings free for the medina before afternoon screenings.',
+          caption: 'Palais Badii, one of this year’s festival venues. Worth a visit even without a ticket.',
+          credit: 'Jakub Hałun, CC BY 4.0',
         },
       },
       {
@@ -105,6 +109,12 @@ export const BLOG_POSTS: BlogPost[] = [
           'Medina riads keep you walkable to Jemaa and many cultural venues. Guéliz / Hivernage is easier for taxis, cafés, and late dinners. If you are flying out of CMN after the festival, leave one buffer morning — September traffic and festival crowds both love the same hours.',
           'Want a day-by-day skeleton for your dates? Generate a Marrakech plan, then swap two afternoon slots for screenings. MoroccoMate is built for that kind of edit.',
         ],
+        image: {
+          src: img('marrakech-medina.jpg'),
+          alt: 'Marrakech medina lane with a horse cart and warm light',
+          focus: 'center 45%',
+          caption: 'Keep mornings free for the medina before afternoon screenings.',
+        },
       },
     ],
     cta: {
@@ -122,10 +132,10 @@ export const BLOG_POSTS: BlogPost[] = [
     city: 'Tangier',
     tags: ['tangier', 'events', 'tanjazz', 'jazz', 'weekend'],
     cover: {
-      src: img('cafe-hafa.jpg'),
-      alt: 'Café Hafa terrace overlooking the Strait of Gibraltar',
-      focus: 'center 35%',
-      caption: 'Café Hafa — Tangier’s long balcony over the Strait.',
+      src: blogImg('tanjazz-stage.jpg'),
+      alt: 'Crowd facing the red-lit Tanjazz main stage at night in Tangier',
+      focus: 'center 40%',
+      caption: 'The Tanjazz main stage on a festival night in Tangier.',
     },
     sections: [
       {
@@ -135,9 +145,10 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
         image: {
           src: img('tangier-kasbah.jpg'),
-          alt: 'Tangier kasbah walls and sea light',
-          focus: 'center 40%',
-          caption: 'Kasbah lanes after a late concert — quieter, cooler air.',
+          alt: 'The old kasbah walls of Tangier with white houses above',
+          focus: 'center 55%',
+          caption: 'The kasbah walls. The lanes up top are quieter and cooler after a late concert.',
+          credit: 'Travel4Brews, CC BY 2.0',
         },
       },
       {
@@ -174,6 +185,12 @@ export const BLOG_POSTS: BlogPost[] = [
         paragraphs: [
           'Open Discover filtered to Tangier, pin Café Hafa, Cap Spartel, and a medina dinner, then use Plan a trip to lock dates. If you are combining Tangier with Chefchaouen or a southbound train to Casa, leave a buffer morning — the Strait has a way of making you late on purpose.',
         ],
+        image: {
+          src: img('cafe-hafa.jpg'),
+          alt: 'Café Hafa terrace overlooking the Strait of Gibraltar',
+          focus: 'center 35%',
+          caption: 'Café Hafa, Tangier’s long balcony over the Strait.',
+        },
       },
     ],
     cta: {
@@ -303,9 +320,9 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ['itinerary', 'marrakech', 'casablanca', 'planning'],
     cover: {
       src: img('agafay-pool-camp.jpg'),
-      alt: 'Desert pool camp near Marrakech at golden hour',
+      alt: 'Camel riders crossing the stony Agafay desert near Marrakech',
       focus: 'center 40%',
-      caption: 'Agafay evening — the 7-day plan’s best add-on.',
+      caption: 'Agafay, the 7-day plan’s best add-on.',
     },
     sections: [
       {
@@ -315,9 +332,9 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
         image: {
           src: img('nomad-marrakech.jpg'),
-          alt: 'Rooftop dining view over Marrakech medina',
+          alt: 'Baskets of spices and dried herbs in a Marrakech souk',
           focus: 'center 45%',
-          caption: 'Leave room for rooftop dinners — they are half the trip.',
+          caption: 'Leave room to wander. The souks and long dinners are half the trip.',
         },
       },
       {
