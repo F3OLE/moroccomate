@@ -166,7 +166,7 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn className="mt-[100px] md:mt-[120px] mb-14 md:mb-20 max-w-2xl">
-            <p className="text-[var(--zellige)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
+            <p className="text-[var(--brand)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
               MoroccoMate
             </p>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-[var(--ink)] leading-[1.1] max-w-xl">
