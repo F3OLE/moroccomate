@@ -29,13 +29,13 @@ export default function SiteFooter() {
   return (
     <footer className="no-texture bg-[var(--ink)] text-white py-14 mt-auto border-t border-white/5">
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <Image src="/images/logo-mark.png" alt="" width={350} height={412} className="w-9" />
-          <span className="font-display text-xl font-bold tracking-tight">MoroccoMate</span>
-        </div>
-        <p className="text-[var(--saffron)] text-xl sm:text-2xl mb-2" dir="rtl" lang="ar">
-          رحلتك تبدأ هنا
-        </p>
+        <Image
+          src="/images/logo-full.png"
+          alt="MoroccoMate, رحلتك تبدأ هنا"
+          width={822}
+          height={674}
+          className="w-56 sm:w-64 mx-auto mb-4"
+        />
         <p className="text-white/55 text-sm mb-6">{t('footer_line')}</p>
 
         <p className="text-white/40 text-xs uppercase tracking-[0.18em] mb-3">
