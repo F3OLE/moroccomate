@@ -64,6 +64,9 @@ export default function SiteFooter() {
             Tangier
           </Link>
         </div>
+        <Link href="/credits" className="inline-block mt-6 text-xs text-white/35 hover:text-white">
+          Photo credits
+        </Link>
       </div>
     </footer>
   );

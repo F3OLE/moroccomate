@@ -281,6 +281,22 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
+        heading: 'Bracelets, Snake Charmers and Monkeys',
+        paragraphs: [
+          'Same playbook as the henna: someone ties a "free" friendship bracelet on your wrist, then asks for money. Keep your hands to yourself and keep walking.',
+          'In Jemaa el-Fna, every photo of a snake charmer, monkey handler, or performer costs money, even a quick one from a distance. If you want the shot, agree on the price first (10 to 20 MAD is fair). If you do not, keep the phone down.',
+          'If someone will not leave you alone, mention the tourist police. They patrol the main square and the medina, and the word alone usually ends it.',
+        ],
+      },
+      {
+        heading: 'What Things Actually Cost',
+        paragraphs: [
+          'Fresh orange juice: 8 MAD at a local shop, around 20 MAD on the square. A large bottle of water: about 6 MAD. Hot bread from a neighborhood ferran (bakery): 3 MAD. A mixed-meat sandwich from a souk stall: around 15 MAD, so pick the busiest one.',
+          'None of these need haggling. Branded stores in Gueliz have fixed prices too. Haggling is for the souks.',
+          'Cash matters: ATMs charge about 35 to 45 MAD per withdrawal and many small places only take cash, so take out two days of spending at a time.',
+        ],
+      },
+      {
         heading: 'The "Closed Mosque" Redirect',
         paragraphs: [
           'Someone near a mosque or palace will tell you "it\'s closed today" or "you need to enter from the other side" and then offer to lead you there. The destination is usually a carpet shop or a leather store where they get commission.',

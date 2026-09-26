@@ -22,6 +22,7 @@ const pages: {
   { path: '/early-access', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/partners', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/feedback', changeFrequency: 'yearly', priority: 0.3 },
+  { path: '/credits', changeFrequency: 'monthly', priority: 0.2 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
