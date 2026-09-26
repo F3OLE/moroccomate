@@ -244,10 +244,10 @@ export const BLOG_POSTS: BlogPost[] = [
           'Pro tip: Buy from the smaller stalls deeper inside the souk, not the big shops on the main tourist paths. The deeper you go, the lower the starting prices.',
         ],
         image: {
-          src: img('grand-socco-souk.jpg'),
-          alt: 'Busy market square atmosphere in northern Morocco',
+          src: '/images/culture/tagine-pots.jpg',
+          alt: 'Stack of painted tagine pots for sale in a souk',
           focus: 'center 50%',
-          caption: 'Busy squares are for atmosphere — buy deeper in the lanes.',
+          caption: 'A small decorative tagine should cost 30 to 60 MAD. Start low.',
         },
       },
       {

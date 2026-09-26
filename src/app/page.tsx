@@ -20,7 +20,7 @@ import CountUp from '@/components/CountUp';
 import CityExpandCards from '@/components/CityExpandCards';
 import { EXPERIENCES, PLACES, mapsUrl } from '@/data/places';
 import { CITY_HUBS } from '@/data/cities';
-import { useI18n } from '@/lib/i18n';
+import { useI18n, type MessageKey } from '@/lib/i18n';
 import PartnerCta from '@/components/PartnerCta';
 
 const featuredIds = [
@@ -41,6 +41,17 @@ const STATS = [
   { icon: Landmark, to: 6, suffix: '', label: 'cities' },
   { icon: Coins, to: 100, suffix: '%', label: 'local prices' },
   { icon: Globe, to: 30, suffix: '+', label: 'unique experiences' },
+];
+
+const UP_CLOSE: { src: string; caption: MessageKey; span: string; focus?: string }[] = [
+  { src: 'medina-doorway', caption: 'uc_doorway', span: 'col-span-2 row-span-2' },
+  { src: 'water-seller', caption: 'uc_water', span: 'row-span-2', focus: 'center 35%' },
+  { src: 'sahara-guide', caption: 'uc_guide', span: 'row-span-2', focus: 'center 40%' },
+  { src: 'tbourida-rider', caption: 'uc_tbourida', span: 'row-span-2', focus: 'center 55%' },
+  { src: 'fez-tanneries', caption: 'uc_tanneries', span: 'row-span-2', focus: 'center 60%' },
+  { src: 'chebakia-seller', caption: 'uc_chebakia', span: 'row-span-2', focus: 'center 55%' },
+  { src: 'mint-tea', caption: 'uc_tea', span: '', focus: 'center 60%' },
+  { src: 'souk-signs', caption: 'uc_signs', span: '', focus: 'center 35%' },
 ];
 
 // Placeholder quotes. Replace with real traveler reviews before promoting the site.
@@ -77,24 +88,26 @@ export default function Home() {
       num: '01',
       title: t('mode_plan_title'),
       text: t('mode_plan_text'),
-      image: '/images/places/le-jardin.jpg',
-      alt: 'Riad courtyard with palms and a pool in Marrakech',
+      image: '/images/culture/zellige-alcove.jpg',
+      alt: 'Zellige tiles and carved cedar in a Moroccan palace alcove',
+      focus: 'center 45%',
     },
     {
       href: '/discover',
       num: '02',
       title: t('mode_discover_title'),
       text: t('mode_discover_text'),
-      image: '/images/places/souk-semmarine.jpg',
-      alt: 'Souk Semmarine alley in the Marrakech medina',
+      image: '/images/culture/souk-lamps.jpg',
+      alt: 'Lantern and brass shop in a Moroccan medina',
+      focus: 'center 55%',
     },
     {
       href: '/experiences',
       num: '03',
       title: t('mode_xp_title'),
       text: t('mode_xp_text'),
-      image: '/images/experiences/balloon.jpg',
-      alt: 'Hot air balloon over the countryside outside Marrakech',
+      image: '/images/culture/sahara-caravan.jpg',
+      alt: 'Camel caravan crossing the Sahara dunes',
     },
   ];
   return (
@@ -193,6 +206,7 @@ export default function Home() {
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        style={{ objectPosition: m.focus }}
                       />
                     </Link>
                   </FadeIn>
@@ -218,6 +232,38 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="no-texture section-pad bg-[var(--ink)] text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <FadeIn className="mb-10 md:mb-14 max-w-2xl">
+            <p className="text-[var(--saffron)] text-xs font-bold tracking-[0.22em] uppercase mb-3">
+              {t('upclose_label')}
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-[1.1]">
+              {t('upclose_title')}
+            </h2>
+            <p className="mt-4 text-white/65 text-lg leading-relaxed max-w-lg">{t('upclose_sub')}</p>
+          </FadeIn>
+          <Stagger className="grid grid-cols-2 md:grid-cols-4 auto-rows-[10rem] md:auto-rows-[13rem] grid-flow-dense gap-3 md:gap-4">
+            {UP_CLOSE.map((p) => (
+              <StaggerItem key={p.src} className={`group relative overflow-hidden rounded-[12px] ${p.span}`}>
+                <Image
+                  src={`/images/culture/${p.src}.jpg`}
+                  alt={t(p.caption)}
+                  fill
+                  sizes={p.span.includes('col-span-2') ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'}
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  style={{ objectPosition: p.focus || 'center' }}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
+                <p className="absolute left-3 right-3 bottom-3 text-xs md:text-sm font-medium text-white leading-snug">
+                  {t(p.caption)}
+                </p>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </section>
 
