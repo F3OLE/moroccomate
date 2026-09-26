@@ -114,8 +114,8 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-white" aria-hidden />
 
         <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center [text-shadow:0_2px_16px_rgba(0,0,0,0.5)]">
-          <h1 className="hero-fade font-display text-[48px] md:text-[72px] font-bold text-white tracking-[-0.02em] leading-none">
-            MoroccoMate
+          <h1 className="hero-fade font-display text-[48px] md:text-[72px] font-bold text-white tracking-[-0.02em] leading-none" aria-label="MoroccoMate">
+            Morocco<span className="text-[var(--brand)]">Mate</span>
           </h1>
           <p className="hero-fade-delay-1 mt-2 text-[20px] text-white/80">
             {t('hero_tagline')}
@@ -124,7 +124,7 @@ export default function Home() {
           <div className="hero-fade-delay-2 mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
             <Link
               href="/plan"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-white text-[var(--ink)] font-semibold rounded-[8px] px-8 py-4 transition-colors duration-200 hover:bg-white/90"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-white text-[var(--ink)] font-semibold rounded-[8px] px-8 py-4 transition-colors duration-200 hover:bg-[var(--brand)] hover:text-white"
             >
               {t('hero_plan')}
               <ArrowRight className="w-5 h-5" />
