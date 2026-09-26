@@ -55,7 +55,7 @@ export default function WalkingCamel({ className = '' }: { className?: string })
           io.disconnect();
         }
       },
-      { threshold: 0.6 }
+      { threshold: 0.2 }
     );
     io.observe(el);
     return () => io.disconnect();

@@ -767,8 +767,8 @@ a {
 .camel-walker {
   left: -150px;
   animation:
-    camel-fade-in 0.8s ease-out both,
-    camel-walk 26s linear infinite;
+    camel-fade-in 0.6s ease-out both,
+    camel-walk 26s linear -6s infinite;
 }
 
 .camel-leg {
