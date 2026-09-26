@@ -27,6 +27,15 @@
   --font-mono: var(--font-body);
 }
 
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background-color: var(--background);
   position: relative;
