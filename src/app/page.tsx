@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -43,16 +44,38 @@ const STATS = [
   { icon: Globe, to: 30, suffix: '+', label: 'unique experiences' },
 ];
 
-const UP_CLOSE: { src: string; caption: MessageKey; span: string; focus?: string }[] = [
-  { src: 'medina-doorway', caption: 'uc_doorway', span: 'col-span-2 row-span-2' },
-  { src: 'water-seller', caption: 'uc_water', span: 'row-span-2', focus: 'center 35%' },
-  { src: 'sahara-guide', caption: 'uc_guide', span: 'row-span-2', focus: 'center 40%' },
-  { src: 'tbourida-rider', caption: 'uc_tbourida', span: 'row-span-2', focus: 'center 55%' },
-  { src: 'fez-tanneries', caption: 'uc_tanneries', span: 'row-span-2', focus: 'center 60%' },
-  { src: 'chebakia-seller', caption: 'uc_chebakia', span: 'row-span-2', focus: 'center 55%' },
-  { src: 'mint-tea', caption: 'uc_tea', span: '', focus: 'center 60%' },
-  { src: 'souk-signs', caption: 'uc_signs', span: '', focus: 'center 35%' },
+type UpClosePhoto = {
+  src: string;
+  caption: MessageKey;
+  /** Mobile spans + fixed desktop cell, so tiles stay put while tracks resize */
+  span: string;
+  cols: number[];
+  rows: number[];
+  focus?: string;
+};
+
+const UP_CLOSE: UpClosePhoto[] = [
+  { src: 'medina-doorway', caption: 'uc_doorway', span: 'col-span-2 row-span-2 md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-3', cols: [0, 1], rows: [0, 1] },
+  { src: 'water-seller', caption: 'uc_water', span: 'row-span-2 md:col-start-3 md:row-start-1 md:row-end-3', cols: [2], rows: [0, 1], focus: 'center 35%' },
+  { src: 'sahara-guide', caption: 'uc_guide', span: 'row-span-2 md:col-start-4 md:row-start-1 md:row-end-3', cols: [3], rows: [0, 1], focus: 'center 40%' },
+  { src: 'tbourida-rider', caption: 'uc_tbourida', span: 'row-span-2 md:col-start-1 md:row-start-3 md:row-end-5', cols: [0], rows: [2, 3], focus: 'center 55%' },
+  { src: 'fez-tanneries', caption: 'uc_tanneries', span: 'row-span-2 md:col-start-2 md:row-start-3 md:row-end-5', cols: [1], rows: [2, 3], focus: 'center 60%' },
+  { src: 'chebakia-seller', caption: 'uc_chebakia', span: 'row-span-2 md:col-start-3 md:row-start-3 md:row-end-5', cols: [2], rows: [2, 3], focus: 'center 55%' },
+  { src: 'mint-tea', caption: 'uc_tea', span: 'md:col-start-4 md:row-start-3', cols: [3], rows: [2], focus: 'center 60%' },
+  { src: 'souk-signs', caption: 'uc_signs', span: 'md:col-start-4 md:row-start-4', cols: [3], rows: [3], focus: 'center 35%' },
 ];
+
+function upCloseTracks(active: number | null) {
+  const cols = [1, 1, 1, 1];
+  const rows = [1, 1, 1, 1];
+  if (active !== null) {
+    const p = UP_CLOSE[active];
+    p.cols.forEach((c) => (cols[c] = p.cols.length > 1 ? 1.5 : 2.2));
+    p.rows.forEach((r) => (rows[r] = p.rows.length > 1 ? 1.4 : 2));
+  }
+  const fr = (a: number[]) => a.map((n) => `${n}fr`).join(' ');
+  return { '--uc-cols': fr(cols), '--uc-rows': fr(rows) } as CSSProperties;
+}
 
 // Placeholder quotes. Replace with real traveler reviews before promoting the site.
 const TESTIMONIALS = [
@@ -81,6 +104,7 @@ const TESTIMONIALS = [
 
 export default function Home() {
   const { t } = useI18n();
+  const [activeUpClose, setActiveUpClose] = useState<number | null>(null);
 
   const modes = [
     {
@@ -246,24 +270,39 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-white/65 text-lg leading-relaxed max-w-lg">{t('upclose_sub')}</p>
           </FadeIn>
-          <Stagger className="grid grid-cols-2 md:grid-cols-4 auto-rows-[10rem] md:auto-rows-[13rem] grid-flow-dense gap-3 md:gap-4">
-            {UP_CLOSE.map((p) => (
-              <StaggerItem key={p.src} className={`group relative overflow-hidden rounded-[12px] ${p.span}`}>
-                <Image
-                  src={`/images/culture/${p.src}.jpg`}
-                  alt={t(p.caption)}
-                  fill
-                  sizes={p.span.includes('col-span-2') ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'}
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ objectPosition: p.focus || 'center' }}
-                />
-                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
-                <p className="absolute left-3 right-3 bottom-3 text-xs md:text-sm font-medium text-white leading-snug">
-                  {t(p.caption)}
-                </p>
+          <div
+            onMouseLeave={() => setActiveUpClose(null)}
+            style={upCloseTracks(activeUpClose)}
+            className="grid grid-cols-2 auto-rows-[10rem] grid-flow-dense gap-3 md:gap-4 md:h-[55rem] md:[grid-template-columns:var(--uc-cols)] md:[grid-template-rows:var(--uc-rows)] md:[transition:grid-template-columns_700ms_cubic-bezier(0.22,1,0.36,1),grid-template-rows_700ms_cubic-bezier(0.22,1,0.36,1)]"
+          >
+            {UP_CLOSE.map((p, i) => (
+              <StaggerItem
+                key={p.src}
+                delay={i * 0.08}
+                className={`relative overflow-hidden rounded-[12px] min-h-0 min-w-0 ${p.span}`}
+              >
+                <div
+                  onMouseEnter={() => setActiveUpClose(i)}
+                  className={`absolute inset-0 transition-[filter] duration-500 ${
+                    activeUpClose !== null && activeUpClose !== i ? 'md:brightness-[0.6]' : ''
+                  }`}
+                >
+                  <Image
+                    src={`/images/culture/${p.src}.jpg`}
+                    alt={t(p.caption)}
+                    fill
+                    sizes={p.span.includes('col-span-2') ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 40vw'}
+                    className="object-cover"
+                    style={{ objectPosition: p.focus || 'center' }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
+                  <p className="absolute left-3 right-3 bottom-3 text-xs md:text-sm font-medium text-white leading-snug">
+                    {t(p.caption)}
+                  </p>
+                </div>
               </StaggerItem>
             ))}
-          </Stagger>
+          </div>
         </div>
       </section>
 
