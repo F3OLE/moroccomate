@@ -402,6 +402,20 @@ a {
   animation: hero-fade 0.5s ease 0.32s both;
 }
 
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.scroll-cue {
+  animation: scroll-cue 1.8s ease-in-out infinite;
+}
+
 /* Scroll reveals (Intersection Observer toggles .is-visible) */
 .reveal {
   opacity: 0;
@@ -419,14 +433,14 @@ a {
 
 /* Section rhythm */
 .section-pad {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 6.25rem;
+  padding-bottom: 6.25rem;
 }
 
 @media (min-width: 768px) {
   .section-pad {
-    padding-top: 6.5rem;
-    padding-bottom: 6.5rem;
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
   }
 }
 
@@ -613,6 +627,7 @@ a {
   .hero-fade-delay-1,
   .hero-fade-delay-2,
   .hero-fade-delay-3,
+  .scroll-cue,
   .skeleton,
   .skeleton-light,
   .palm-loader-tree {

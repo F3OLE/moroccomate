@@ -817,7 +817,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Atlas Paragliding',
     location: 'High Atlas foothills',
     city: 'Marrakech',
-    image: xpImg('atlas.jpg'),
+    image: xpImg('paragliding-atlas.jpg'),
     imageFocus: 'center 35%',
     price: 'From 800 MAD',
     duration: 'Half day',
@@ -847,7 +847,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Merzouga Camel Trek & Camp',
     location: 'Erg Chebbi',
     city: 'Sahara',
-    image: xpImg('merzouga.jpg'),
+    image: xpImg('merzouga-camp.jpg'),
     price: 'From 1,200 MAD',
     duration: 'Overnight',
     description:
