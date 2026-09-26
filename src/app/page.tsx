@@ -102,8 +102,8 @@ export default function Home() {
       <section className="relative h-[100svh] flex items-center justify-center overflow-hidden">
         <div className="hero-zoom absolute inset-0">
           <Image
-            src="/images/hero-kasbah.jpg"
-            alt="Mud-brick kasbah and palm oasis in southern Morocco at golden hour"
+            src="/images/hero-door.jpg"
+            alt="Zellige fountain with carved plaster arches near the Hassan Tower in Rabat"
             fill
             priority
             sizes="100vw"
@@ -113,7 +113,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.4)_0%,rgba(0,0,0,0.7)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-white" aria-hidden />
 
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center [text-shadow:0_2px_16px_rgba(0,0,0,0.5)]">
           <h1 className="hero-fade font-display text-[48px] md:text-[72px] font-bold text-white tracking-[-0.02em] leading-none">
             MoroccoMate
           </h1>

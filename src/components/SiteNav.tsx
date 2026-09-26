@@ -77,7 +77,7 @@ export default function SiteNav() {
             width={350}
             height={412}
             priority
-            className={`w-auto h-8 sm:h-9 shrink-0 transition-[filter] duration-300 ${
+            className={`w-7 sm:w-8 shrink-0 transition-[filter] duration-300 ${
               overHero ? 'brightness-0 invert' : ''
             }`}
           />
