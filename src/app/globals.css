@@ -77,10 +77,12 @@ h3,
   letter-spacing: -0.02em;
 }
 
-img,
-video {
-  max-width: 100%;
-  height: auto;
+@layer base {
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* Quiet zellige-inspired lattice — atmosphere, not decoration noise */

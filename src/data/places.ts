@@ -64,7 +64,7 @@ export const PLACES: Place[] = [
     description:
       'Modern Moroccan plates with one of the best Medina rooftop views. Mint lemonade, lamb shoulder, and sunset crowds.',
     image: placeImg('nomad-marrakech.jpg'),
-    imageFocus: 'center 45%',
+    imageFocus: 'center 85%',
     rating: 4.6,
     priceRange: '$$$',
     tags: ['rooftop', 'dinner', 'instagram'],
@@ -83,7 +83,7 @@ export const PLACES: Place[] = [
     description:
       'Hidden courtyard restaurant under banana trees. Great for lunch after souk shopping.',
     image: placeImg('le-jardin.jpg'),
-    imageFocus: 'center center',
+    imageFocus: 'center 100%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['garden', 'lunch', 'calm'],
@@ -99,7 +99,7 @@ export const PLACES: Place[] = [
     description:
       'Classic spice-square café for people-watching, fresh juices, and light Moroccan bites.',
     image: placeImg('cafe-des-epices.jpg'),
-    imageFocus: 'center 22%',
+    imageFocus: 'center 30%',
     rating: 4.4,
     priceRange: '$',
     tags: ['cafe', 'juice', 'viewpoint'],
@@ -115,7 +115,7 @@ export const PLACES: Place[] = [
     description:
       'Dinner-show venue with belly dance, DJ energy, and a late-night crowd. Classic Marrakech night out.',
     image: placeImg('riad-courtyard.jpg'),
-    imageFocus: 'center 70%',
+    imageFocus: 'center 85%',
     rating: 4.3,
     priceRange: '$$$',
     tags: ['club', 'show', 'late-night'],
@@ -131,7 +131,7 @@ export const PLACES: Place[] = [
     description:
       'One of Marrakech’s main party spots. International DJs, bottle service, and a dressy scene.',
     image: placeImg('sofitel-marrakech.jpg'),
-    imageFocus: 'center 55%',
+    imageFocus: 'center 95%',
     rating: 4.2,
     priceRange: '$$$$',
     tags: ['club', 'DJ', 'party'],
@@ -150,7 +150,7 @@ export const PLACES: Place[] = [
     description:
       'Main covered souk lane for leather, lanterns, carpets, and spices. Bargain hard, stay polite.',
     image: placeImg('souk-semmarine.jpg'),
-    imageFocus: 'center 45%',
+    imageFocus: 'center 99%',
     rating: 4.7,
     priceRange: '$$',
     tags: ['souk', 'souvenirs', 'crafts'],
@@ -166,7 +166,7 @@ export const PLACES: Place[] = [
     description:
       'Fixed-price artisan co-op for quality leather, ceramics, and textiles without aggressive haggling.',
     image: placeImg('ensemble-artisanale.jpg'),
-    imageFocus: 'center center',
+    imageFocus: 'center 100%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['crafts', 'fixed-price', 'gifts'],
@@ -182,7 +182,7 @@ export const PLACES: Place[] = [
     description:
       '19th-century palace with painted cedar ceilings, riad courtyards, and mosaic gardens.',
     image: placeImg('bahia-palace.jpg'),
-    imageFocus: 'center 40%',
+    imageFocus: 'center 38%',
     rating: 4.6,
     priceRange: '$',
     tags: ['palace', 'history', 'photo'],
@@ -198,7 +198,7 @@ export const PLACES: Place[] = [
     description:
       'Yves Saint Laurent’s cobalt-blue garden oasis. Book timed tickets ahead.',
     image: placeImg('jardin-majorelle.jpg'),
-    imageFocus: 'center 35%',
+    imageFocus: 'center 55%',
     rating: 4.8,
     priceRange: '$$',
     tags: ['garden', 'museum', 'must-see'],
@@ -214,6 +214,7 @@ export const PLACES: Place[] = [
     description:
       'The big pool-club day: cabanas, DJs, champagne, and Instagram floats. Marrakech’s beach without the ocean.',
     image: placeImg('mamounia-pool.jpg'),
+    imageFocus: 'center 0%',
     rating: 4.4,
     priceRange: '$$$$',
     tags: ['pool', 'beach-club', 'dj', 'tiktok', 'instagram'],
@@ -232,6 +233,7 @@ export const PLACES: Place[] = [
     description:
       'Palm-lined pools, hammam, rose gardens, and flower fields. Calmer day-pass energy than the party clubs. Travelers report around £35 for a three-course lunch with pool access.',
     image: placeImg('mamounia-pool.jpg'),
+    imageFocus: 'center 0%',
     rating: 4.6,
     priceRange: '$$$',
     tags: ['pool', 'garden', 'day-pass', 'instagram'],
@@ -247,6 +249,7 @@ export const PLACES: Place[] = [
     description:
       'Slides, wave pool, and lazy river. Best family / friends pool day when you want actual water rides.',
     image: placeImg('oasiria.jpg'),
+    imageFocus: 'center 64%',
     rating: 4.3,
     priceRange: '$$',
     tags: ['pool', 'waterpark', 'family', 'tiktok'],
@@ -262,6 +265,7 @@ export const PLACES: Place[] = [
     description:
       'Infinity pool in the stone desert. Sunset dips, camel selfies, and dinner under the stars.',
     image: placeImg('agafay-pool-camp.jpg'),
+    imageFocus: 'center 50%',
     rating: 4.7,
     priceRange: '$$$$',
     tags: ['pool', 'desert', 'sunset', 'instagram', 'tiktok'],
@@ -280,6 +284,7 @@ export const PLACES: Place[] = [
     description:
       'Pool party Sundays. House music, bottle service, and the classic Kech club-by-day vibe.',
     image: placeImg('mamounia-pool.jpg'),
+    imageFocus: 'center 0%',
     rating: 4.2,
     priceRange: '$$$',
     tags: ['pool', 'party', 'dj', 'tiktok'],
@@ -295,6 +300,7 @@ export const PLACES: Place[] = [
     description:
       'Iconic hotel pool set in centuries-old gardens. Dressy, photogenic, book a day table if you can.',
     image: placeImg('mamounia-pool.jpg'),
+    imageFocus: 'center 0%',
     rating: 4.8,
     priceRange: '$$$$',
     tags: ['pool', 'luxury', 'garden', 'instagram'],
@@ -310,6 +316,7 @@ export const PLACES: Place[] = [
     description:
       'Day trip into the foothills. Riverside cafés, cold mountain pools, and waterfall walks.',
     image: placeImg('ourika-river-day.jpg'),
+    imageFocus: 'center 96%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['river', 'nature', 'day-trip', 'instagram'],
@@ -325,7 +332,7 @@ export const PLACES: Place[] = [
     description:
       'Former Quranic school with a marble courtyard pool, carved cedar, and zellige on every wall. The one monument travelers call a must.',
     image: placeImg('ben-youssef-madrasa.jpg'),
-    imageFocus: 'center 60%',
+    imageFocus: 'center 0%',
     imageCredit: 'Marco Almbauer, CC BY-SA 4.0',
     rating: 4.8,
     priceRange: '$',
@@ -344,7 +351,7 @@ export const PLACES: Place[] = [
     description:
       'Marrakech’s landmark minaret. Only Muslims can enter the mosque, but the gardens around it are free and best at sunset when the call to prayer starts.',
     image: placeImg('koutoubia-mosque.jpg'),
-    imageFocus: 'center 40%',
+    imageFocus: 'center 58%',
     imageCredit: 'Jakub Hałun, CC BY 4.0',
     rating: 4.6,
     priceRange: 'Free',
@@ -362,7 +369,7 @@ export const PLACES: Place[] = [
     description:
       'Huge 16th-century palace ruins with sunken orange gardens, storks on the walls, and rooftop views. Often quiet, which is half the appeal.',
     image: placeImg('el-badi-palace.jpg'),
-    imageFocus: 'center 45%',
+    imageFocus: 'center 50%',
     imageCredit: 'Jakub Hałun, CC BY 4.0',
     rating: 4.3,
     priceRange: '$',
@@ -379,7 +386,7 @@ export const PLACES: Place[] = [
     description:
       'The Pasha’s former palace, now the Museum of Confluences. Painted ceilings, a garden courtyard, and Bacha Coffee inside.',
     image: placeImg('dar-el-bacha.jpg'),
-    imageFocus: 'center 50%',
+    imageFocus: 'center 21%',
     imageCredit: 'YassirZek, CC BY-SA 4.0',
     rating: 4.6,
     priceRange: '$',
@@ -397,7 +404,7 @@ export const PLACES: Place[] = [
     description:
       'Grand coffee salon inside the Dar el Bacha palace with a huge menu of single-origin brews. Very popular: queues can reach three hours by mid-morning, so come at opening.',
     image: placeImg('dar-el-bacha.jpg'),
-    imageFocus: 'center 50%',
+    imageFocus: 'center 21%',
     imageCredit: 'YassirZek, CC BY-SA 4.0',
     rating: 4.4,
     priceRange: '$$',
@@ -416,7 +423,7 @@ export const PLACES: Place[] = [
     description:
       'Small riad museum of vintage Moroccan photography with a rooftop café. Ask about the combined ticket with the music museum nearby.',
     image: placeImg('maison-de-la-photographie.jpg'),
-    imageFocus: 'center 40%',
+    imageFocus: 'center 45%',
     imageCredit: 'DRAGANCESTIC, CC BY-SA 4.0',
     rating: 4.5,
     priceRange: '$',
@@ -433,7 +440,7 @@ export const PLACES: Place[] = [
     description:
       'Working synagogue in the old Jewish quarter, a short walk from the Miâara Jewish Cemetery. A quieter side of Marrakech history worth an hour.',
     image: placeImg('lazama-synagogue.jpg'),
-    imageFocus: 'center 50%',
+    imageFocus: 'center 18%',
     imageCredit: 'David Berkowitz, CC BY 2.0',
     rating: 4.5,
     priceRange: '$',
@@ -450,7 +457,7 @@ export const PLACES: Place[] = [
     description:
       'Museum of Contemporary African Art Al Maaden. A strong collection and sculpture garden outside the medina crowds.',
     image: placeImg('macaal.jpg'),
-    imageFocus: 'center 60%',
+    imageFocus: 'center 35%',
     imageCredit: 'Omar Tajmouati, CC0',
     rating: 4.6,
     priceRange: '$',
@@ -467,6 +474,7 @@ export const PLACES: Place[] = [
     description:
       'Teahouse in a 300-year-old riad pouring twelve teas for Morocco’s twelve regions. Try the three-tea tasting (around 140 MAD).',
     image: placeImg('teahouse-1112.jpg'),
+    imageFocus: 'center 21%',
     rating: 4.6,
     priceRange: '$$',
     tags: ['tea', 'riad', 'tasting'],
@@ -484,6 +492,7 @@ export const PLACES: Place[] = [
     description:
       'Non-profit restaurant training disadvantaged women as cooks. Lunch only, home-style Moroccan food, and a Friday couscous worth booking ahead. They also run cooking classes.',
     image: placeImg('amal-womens-center.jpg'),
+    imageFocus: 'center 35%',
     rating: 4.7,
     priceRange: '$',
     tags: ['lunch', 'local', 'social-impact', 'couscous'],
@@ -519,6 +528,7 @@ export const PLACES: Place[] = [
     description:
       'Rooftop at Nobu Hotel with a sleek, Dubai-style crowd. Expect a 500 MAD minimum spend and one-hour table slots. The pool is for hotel guests only.',
     image: placeImg('nobu-rooftop.jpg'),
+    imageFocus: 'center 65%',
     rating: 4.3,
     priceRange: '$$$$',
     tags: ['rooftop', 'sunset', 'dressy', 'reservation'],
@@ -554,6 +564,7 @@ export const PLACES: Place[] = [
     description:
       'Artist Hassan Hajjaj’s pop-art café, gallery, and concept store. Local women cook the lunch, and Thursday is rfissa day. Closed Sundays.',
     image: placeImg('jajjah.jpg'),
+    imageFocus: 'center 7%',
     rating: 4.6,
     priceRange: '$$',
     tags: ['cafe', 'gallery', 'design', 'lunch'],
@@ -587,6 +598,7 @@ export const PLACES: Place[] = [
     description:
       'Gourmet shop and café: coffee roasted in front of you, iced teas, chocolate, and dates. A good pit stop between design showrooms.',
     image: placeImg('marrakech-fine-food.jpg'),
+    imageFocus: 'center 40%',
     rating: 4.4,
     priceRange: '$$',
     tags: ['coffee', 'gourmet', 'shop'],
@@ -602,7 +614,7 @@ export const PLACES: Place[] = [
     description:
       'Industrial zone turned design district: 100+ showrooms for ceramics, textiles, lighting, and fashion at fixed prices. Less touristy, with good cafés. Many close on Sundays.',
     image: placeImg('sidi-ghanem.jpg'),
-    imageFocus: 'center 60%',
+    imageFocus: 'center 46%',
     imageCredit: 'Ideophagous, CC BY-SA 4.0',
     rating: 4.4,
     priceRange: '$$',
@@ -620,7 +632,7 @@ export const PLACES: Place[] = [
     description:
       'Second-hand and antiques market by the Bab el Khemis gate. Old doors, lamps, vinyl, and random treasures. Niche, local, and haggle-friendly.',
     image: placeImg('bab-el-khemis.jpg'),
-    imageFocus: 'center 60%',
+    imageFocus: 'center 46%',
     imageCredit: 'Robert Prazeres, CC BY-SA 4.0',
     rating: 4.2,
     priceRange: '$',
@@ -658,7 +670,7 @@ export const PLACES: Place[] = [
     description:
       'Casablanca classic inspired by the film. Cocktails, live piano, and Atlantic evenings.',
     image: placeImg('rick-cafe.jpg'),
-    imageFocus: 'center 40%',
+    imageFocus: 'center 30%',
     rating: 4.4,
     priceRange: '$$$',
     tags: ['dinner', 'cocktails', 'iconic', 'instagram'],
@@ -674,6 +686,7 @@ export const PLACES: Place[] = [
     description:
       'Garden restaurant inside an old fortress. Excellent breakfast and traditional lunch.',
     image: placeImg('la-sqala.jpg'),
+    imageFocus: 'center 74%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['garden', 'breakfast', 'local', 'instagram'],
@@ -689,6 +702,7 @@ export const PLACES: Place[] = [
     description:
       'Cliffside seafood & cocktails over the Atlantic. Heavy on TikTok sunsets and dressy dinners.',
     image: placeImg('cabestan.jpg'),
+    imageFocus: 'center 61%',
     rating: 4.5,
     priceRange: '$$$$',
     tags: ['seafood', 'sunset', 'tiktok', 'instagram'],
@@ -707,6 +721,7 @@ export const PLACES: Place[] = [
     description:
       'Trendy Gauthier spot for sharing plates and late dinners. Always in Casa food reels.',
     image: placeImg('rick-cafe.jpg'),
+    imageFocus: 'center 30%',
     rating: 4.4,
     priceRange: '$$$',
     tags: ['gauthier', 'dinner', 'tiktok'],
@@ -721,6 +736,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Maarif',
     description: 'Cult Casa nightlife address. Loud, late, and packed on weekends.',
     image: placeImg('casablanca-skyline.jpg'),
+    imageFocus: 'center 63%',
     rating: 4.2,
     priceRange: '$$$',
     tags: ['club', 'party', 'tiktok'],
@@ -736,6 +752,7 @@ export const PLACES: Place[] = [
     description:
       'Sky-high lounge with city views, cocktails, and a dressy late crowd.',
     image: placeImg('sky-28.jpg'),
+    imageFocus: 'center 50%',
     rating: 4.4,
     priceRange: '$$$$',
     tags: ['rooftop', 'cocktails', 'views', 'instagram'],
@@ -754,6 +771,7 @@ export const PLACES: Place[] = [
     description:
       'Corniche club energy. Bottle service, guest DJs, dress code nights.',
     image: placeImg('casablanca-skyline.jpg'),
+    imageFocus: 'center 63%',
     rating: 4.1,
     priceRange: '$$$$',
     tags: ['club', 'corniche', 'party'],
@@ -769,6 +787,7 @@ export const PLACES: Place[] = [
     description:
       'Walk the tree-lined streets for specialty coffee, matcha, and pastry spots blowing up on IG.',
     image: placeImg('corniche-ain-diab.jpg'),
+    imageFocus: 'center 33%',
     rating: 4.3,
     priceRange: '$$',
     tags: ['cafe', 'brunch', 'instagram', 'tiktok'],
@@ -784,6 +803,7 @@ export const PLACES: Place[] = [
     description:
       'Oceanfront mall with fashion, cinema, and terrace dining. Easy half-day hang.',
     image: placeImg('anfa-place.jpg'),
+    imageFocus: 'center 55%',
     rating: 4.2,
     priceRange: '$$$',
     tags: ['mall', 'corniche', 'family'],
@@ -799,6 +819,7 @@ export const PLACES: Place[] = [
     description:
       'Huge coastal mall with global brands, an aquarium, and seaside dining.',
     image: placeImg('morocco-mall.jpg'),
+    imageFocus: 'center 50%',
     rating: 4.3,
     priceRange: '$$$',
     tags: ['mall', 'shopping', 'family'],
@@ -813,6 +834,7 @@ export const PLACES: Place[] = [
     neighborhood: 'Maarif',
     description: 'Maarif’s shopping spine. Boutiques, cafés, and evening strolls.',
     image: placeImg('twin-center.jpg'),
+    imageFocus: 'center 50%',
     rating: 4.2,
     priceRange: '$$',
     tags: ['boutiques', 'cafes', 'urban', 'instagram'],
@@ -828,6 +850,7 @@ export const PLACES: Place[] = [
     description:
       'Neo-traditional souk for spices, babouches, and olives. Photogenic arches everywhere.',
     image: placeImg('habous-quarter.jpg'),
+    imageFocus: 'center 69%',
     rating: 4.6,
     priceRange: '$$',
     tags: ['souk', 'crafts', 'instagram'],
@@ -843,6 +866,7 @@ export const PLACES: Place[] = [
     description:
       'One of the world’s largest mosques, built over the Atlantic. Timed interior tours available.',
     image: placeImg('hassan-ii.jpg'),
+    imageFocus: 'center 79%',
     rating: 4.9,
     priceRange: '$$',
     tags: ['mosque', 'landmark', 'must-see', 'instagram'],
@@ -858,6 +882,7 @@ export const PLACES: Place[] = [
     description:
       'Beach promenade for sunset rides, ice cream, and beach-club energy. Casa’s social strip.',
     image: placeImg('corniche-ain-diab.jpg'),
+    imageFocus: 'center 33%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['beach', 'sunset', 'tiktok', 'walk'],
@@ -877,6 +902,7 @@ export const PLACES: Place[] = [
     description:
       'Mint tea with ocean views inside the blue-and-white kasbah. Rabat’s most posted terrace.',
     image: placeImg('cafe-maure-oudayas.jpg'),
+    imageFocus: 'center 54%',
     rating: 4.7,
     priceRange: '$',
     tags: ['tea', 'kasbah', 'instagram', 'tiktok'],
@@ -895,6 +921,7 @@ export const PLACES: Place[] = [
     description:
       'Traditional Moroccan feast in a restored riad. Live music some nights.',
     image: placeImg('kasbah-oudayas.jpg'),
+    imageFocus: 'center 54%',
     rating: 4.5,
     priceRange: '$$$',
     tags: ['riad', 'dinner', 'traditional'],
@@ -910,6 +937,7 @@ export const PLACES: Place[] = [
     description:
       'Dinner on a wooden boat at the marina. Lights on the water, very reel-friendly.',
     image: placeImg('le-dhow-rabat.jpg'),
+    imageFocus: 'center 66%',
     rating: 4.4,
     priceRange: '$$$',
     tags: ['marina', 'dinner', 'instagram'],
@@ -928,6 +956,7 @@ export const PLACES: Place[] = [
     description:
       'Modern Rabat shopping. Malls, boutiques, and café culture away from the medina.',
     image: placeImg('agdal-shopping.jpg'),
+    imageFocus: 'center 60%',
     rating: 4.2,
     priceRange: '$$',
     tags: ['mall', 'boutiques', 'urban'],
@@ -943,6 +972,7 @@ export const PLACES: Place[] = [
     description:
       'Andalusian-style kasbah gates, blue alleys, and Atlantic overlooks.',
     image: placeImg('kasbah-oudayas.jpg'),
+    imageFocus: 'center 54%',
     rating: 4.8,
     priceRange: '$',
     tags: ['kasbah', 'photo', 'must-see', 'instagram'],
@@ -958,6 +988,7 @@ export const PLACES: Place[] = [
     description:
       'Iconic unfinished minaret paired with the Mohammed V mausoleum. Guard ceremony photo ops.',
     image: placeImg('hassan-tower.jpg'),
+    imageFocus: 'center 40%',
     rating: 4.7,
     priceRange: '$',
     tags: ['landmark', 'history', 'instagram'],
@@ -973,6 +1004,7 @@ export const PLACES: Place[] = [
     description:
       'Roman + Merinid ruins with stork nests and gardens. Quiet golden-hour walks.',
     image: placeImg('chellah-rabat.jpg'),
+    imageFocus: 'center 62%',
     rating: 4.6,
     priceRange: '$',
     tags: ['ruins', 'garden', 'photo'],
@@ -988,6 +1020,7 @@ export const PLACES: Place[] = [
     description:
       'Waterfront bars and restaurants with soft nightlife. Less chaotic than Casa clubs.',
     image: placeImg('bouregreg-marina.jpg'),
+    imageFocus: 'center 66%',
     rating: 4.3,
     priceRange: '$$$',
     tags: ['marina', 'drinks', 'evening'],
@@ -1007,7 +1040,7 @@ export const PLACES: Place[] = [
     description:
       'Legendary cliff café overlooking the Strait. Mint tea, sunset, and endless TikToks.',
     image: placeImg('cafe-hafa.jpg'),
-    imageFocus: 'center 35%',
+    imageFocus: 'center 60%',
     rating: 4.8,
     priceRange: '$',
     tags: ['tea', 'sunset', 'tiktok', 'instagram', 'iconic'],
@@ -1026,6 +1059,7 @@ export const PLACES: Place[] = [
     description:
       'Historic square for people-watching. Gran Café de Paris energy and medina buzz.',
     image: placeImg('petit-socco.jpg'),
+    imageFocus: 'center 75%',
     rating: 4.4,
     priceRange: '$$',
     tags: ['medina', 'cafe', 'instagram'],
@@ -1041,6 +1075,7 @@ export const PLACES: Place[] = [
     description:
       'Classic Tangier Moroccan kitchen. Couscous, pastilla, and old-school hospitality.',
     image: placeImg('petit-socco.jpg'),
+    imageFocus: 'center 75%',
     rating: 4.3,
     priceRange: '$$',
     tags: ['traditional', 'dinner', 'local'],
@@ -1056,6 +1091,7 @@ export const PLACES: Place[] = [
     description:
       'Where Atlantic meets Mediterranean. Lighthouse views and the Africa-shaped cave.',
     image: placeImg('cap-spartel.jpg'),
+    imageFocus: 'center 76%',
     rating: 4.7,
     priceRange: '$$',
     tags: ['viewpoint', 'nature', 'tiktok', 'must-see'],
@@ -1074,6 +1110,7 @@ export const PLACES: Place[] = [
     description:
       'Whitewashed alleys, palace museum, and rooftop viewpoints over the port.',
     image: placeImg('tangier-kasbah.jpg'),
+    imageFocus: 'center 46%',
     imageCredit: 'Travel4Brews, CC BY 2.0',
     rating: 4.6,
     priceRange: '$',
@@ -1090,6 +1127,7 @@ export const PLACES: Place[] = [
     description:
       'Beach clubs, evening walks, and summer nightlife along the bay.',
     image: placeImg('tangier-beach.jpg'),
+    imageFocus: 'center 76%',
     rating: 4.3,
     priceRange: '$$$',
     tags: ['beach', 'clubs', 'summer', 'tiktok'],
@@ -1105,6 +1143,7 @@ export const PLACES: Place[] = [
     description:
       'Spices, textiles, and vintage finds between Grand Socco and the old town lanes.',
     image: placeImg('grand-socco-souk.jpg'),
+    imageFocus: 'center 70%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['souk', 'crafts', 'shopping'],
@@ -1120,6 +1159,7 @@ export const PLACES: Place[] = [
     description:
       'Iconic art-house cinema café on the square. Film, books, and creative crowd.',
     image: placeImg('cinema-rif.jpg'),
+    imageFocus: 'center 21%',
     rating: 4.5,
     priceRange: '$$',
     tags: ['cinema', 'culture', 'instagram'],
@@ -1225,6 +1265,7 @@ export const EXPERIENCES: Experience[] = [
     location: 'Amal Targa Center · 20 min from center',
     city: 'Marrakech',
     image: placeImg('amal-womens-center.jpg'),
+    imageFocus: 'center 35%',
     price: 'From 400 MAD',
     duration: '3.5 hours · Mon-Fri 9:30-13:00',
     description:
